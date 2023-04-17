@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../auth_screens/mainlogin_screen.dart';
-import '../extention_function/extension_function_padding.dart';
-import '../utils/color_constants.dart';
-import '../widgets/buttons.dart';
-import '../controllers/auth_controller.dart';
+import 'login_screen.dart';
+import '../../extention_function/extension_function_padding.dart';
+import '../../utils/color_constants.dart';
+import '../../widgets/buttons.dart';
+import '../../controllers/auth_controller.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
-  var email = TextEditingController();
-  var password = TextEditingController();
-  var name = TextEditingController();
-  var username = TextEditingController();
-  AuthController authController = AuthController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final name = TextEditingController();
+  final username = TextEditingController();
+  final authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,10 @@ class SignUp extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 50, left: 50, bottom: 50),
-            child: Lottie.asset("images/107800-login-leady.json"),
+            child: Lottie.asset("assets/images/107800-login-leady.json"),
           ),
           CustomTextField(
-            Secure: false,
+            secure: false,
             controller: name,
             label: "Name",
             hintText: "Enter your Name",
@@ -40,7 +40,7 @@ class SignUp extends StatelessWidget {
             action: TextInputAction.next,
           ),
           CustomTextField(
-            Secure: false,
+            secure: false,
             controller: username,
             label: "Username",
             hintText: "Enter your Username",
@@ -48,7 +48,7 @@ class SignUp extends StatelessWidget {
             action: TextInputAction.next,
           ),
           CustomTextField(
-            Secure: false,
+            secure: false,
             controller: email,
             label: "Email",
             hintText: "Enter your Email",
@@ -56,7 +56,7 @@ class SignUp extends StatelessWidget {
             action: TextInputAction.next,
           ),
           CustomTextField(
-            Secure: true,
+            secure: true,
             controller: password,
             label: "Password",
             hintText: "Enter your Password",
@@ -64,23 +64,23 @@ class SignUp extends StatelessWidget {
             action: TextInputAction.done,
             secondIcon: Icons.remove_red_eye_outlined,
           ),
-          Custom_Button(
+          CustomButton(
               label: "Signup",
-              backgroundcolor: ColorConstants.MainColor,
+              backgroundcolor: ColorConstants.mainColor,
               textcolor: Colors.white,
               function: () {
-                AuthController.instance.Register(
+                AuthController.instance.register(
                     email.text.toString(),
                     password.text.toString(),
                     name.text.toString(),
                     username.text.toString());
               }),
-          Custom_Button(
+          CustomButton(
               label: "Login",
-              backgroundcolor: ColorConstants.MainColor,
+              backgroundcolor: ColorConstants.mainColor,
               textcolor: Colors.white,
               function: () {
-                Get.to(const MainLogin());
+                Get.to(LoginScreen());
               }),
         ],
       ).extendPadding(),
@@ -89,7 +89,7 @@ class SignUp extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
+  const CustomTextField(
       {Key? key,
       required this.controller,
       required this.label,
@@ -97,16 +97,16 @@ class CustomTextField extends StatelessWidget {
       required this.icon,
       required this.action,
       this.secondIcon,
-      required this.Secure})
+      required this.secure})
       : super(key: key);
 
-  String label;
-  String hintText;
-  IconData icon;
-  IconData? secondIcon;
-  TextEditingController controller;
-  TextInputAction action;
-  bool Secure;
+  final String label;
+  final String hintText;
+  final IconData icon;
+  final IconData? secondIcon;
+  final TextEditingController controller;
+  final TextInputAction action;
+  final bool secure;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -120,11 +120,11 @@ class CustomTextField extends StatelessWidget {
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            color: ColorConstants.TextFieldsColor,
+            color: ColorConstants.textFieldsColor,
             child: TextFormField(
               textInputAction: action,
               controller: controller,
-              obscureText: Secure,
+              obscureText: secure,
               decoration: InputDecoration(
                 labelText: label,
                 hintText: hintText,

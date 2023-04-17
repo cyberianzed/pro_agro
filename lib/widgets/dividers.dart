@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../utils/color_constants.dart';
-
 class Dividers extends StatelessWidget {
   const Dividers({Key? key}) : super(key: key);
 

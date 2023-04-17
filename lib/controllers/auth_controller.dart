@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../auth_screens/home_screen.dart';
-import '../boarding/boarding_screen.dart';
+import '../modules/pages/home_screen.dart';
+import '../modules/pages/boarding_screen.dart';
 
 class AuthController extends GetxController {
   // Singleton instance of the AuthController
@@ -30,19 +30,19 @@ class AuthController extends GetxController {
     if (user == null) {
       // If no user, navigate to login page
       print("Login Page");
-      Get.offAll(const BoardingScreen());
+      Get.offAll(() => const BoardingScreen());
     } else {
       // If user is logged in, navigate to home screen
       print("Login Success");
-      Get.offAll(HomeScreen(
-        email: user.email ?? "email null",
-      ));
+      Get.offAll(() => HomeScreen(
+            email: user.email ?? "email null",
+          ));
       print('email = ${user.email}');
     }
   }
 
   // Function to handle registration
-  void Register(
+  void register(
       String email, String password, String name, String username) async {
     try {
       // Create user with email and password
@@ -67,7 +67,7 @@ class AuthController extends GetxController {
   }
 
   // Function to handle login
-  void Login(String email, String password) async {
+  void login(String email, String password) async {
     try {
       // Sign in with email and password
       await auth.signInWithEmailAndPassword(email: email, password: password);
@@ -80,7 +80,7 @@ class AuthController extends GetxController {
   }
 
   // Function to handle logout
-  void LogOut() async {
+  void logOut() async {
     await auth.signOut();
   }
 }

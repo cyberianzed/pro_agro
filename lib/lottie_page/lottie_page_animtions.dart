@@ -6,6 +6,6 @@ class LotiiePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Lottie.asset("images/119276-sign-up.json");
+    return  Lottie.asset("assets/images/119276-sign-up.json");
   }
 }

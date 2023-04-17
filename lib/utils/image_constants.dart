@@ -1,9 +1,7 @@
 // import 'package:flutter/material.dart';
-class ImageConstants{
-  static const String SplashScreenLogo = "images/splash_screen_logo.svg";
-  static const String BoardingScreen = "images/BoardingScreen.svg";
-  static const String DashboardPic = "images/DashboardPic.png";
-  static const String LoginPagePic = "images/LoginScreen.svg";
-
-
+class ImageConstants {
+  static const String splashScreenLogo = "assets/images/splash_screen_logo.svg";
+  static const String boardingScreen = "assets/images/BoardingScreen.svg";
+  static const String dashboardPic = "assets/images/DashboardPic.png";
+  static const String loginPagePic = "assets/images/LoginScreen.svg";
 }

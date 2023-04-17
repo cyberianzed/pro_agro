@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './controllers/auth_controller.dart';
-import 'boarding/boarding_screen.dart';
+import 'modules/pages/boarding_screen.dart';
 
 // This code is initializing the Firebase
 // app and ensuring that the WidgetsFlutterBinding is initialized.

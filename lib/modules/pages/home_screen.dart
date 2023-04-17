@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../controllers/auth_controller.dart';
-import '../utils/color_constants.dart';
-import '../widgets/buttons.dart';
+import '../../controllers/auth_controller.dart';
+import '../../utils/color_constants.dart';
+import '../../widgets/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../lottie_page/lottie_page_animtions.dart';
+import '../../lottie_page/lottie_page_animtions.dart';
 
 // HomeScreen widget displays the email passed as a parameter and a signout button
 class HomeScreen extends StatefulWidget {
@@ -50,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             // Signout button using Custom_Button widget
-            Custom_Button(
+            CustomButton(
                 label: "Signout",
-                backgroundcolor: ColorConstants.MainColor,
+                backgroundcolor: ColorConstants.mainColor,
                 textcolor: Colors.white,
                 function: () {
                   // Call LogOut function of AuthController to sign out
-                  AuthController.instance.LogOut();
+                  AuthController.instance.logOut();
                 })
           ],
         ),

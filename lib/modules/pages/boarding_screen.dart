@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../auth_screens/mainlogin_screen.dart';
-import '../utils/color_constants.dart';
-import '../utils/image_constants.dart';
+import 'login_screen.dart';
+import '../../utils/color_constants.dart';
+import '../../utils/image_constants.dart';
 
 class BoardingScreen extends StatelessWidget {
   const BoardingScreen({Key? key}) : super(key: key);
@@ -35,17 +35,17 @@ class BoardingScreen extends StatelessWidget {
             const SizedBox(
               height: 45,
             ),
-            SvgPicture.asset(ImageConstants.BoardingScreen),
+            SvgPicture.asset(ImageConstants.boardingScreen),
             const SizedBox(
               height: 48,
             ),
-            Boarding_Buttons(
+            BoardingButtons(
                 textColor: Colors.white,
                 label: "Firebase Login",
                 function: () {
-                  Get.to(const MainLogin());
+                  Get.to(LoginScreen());
                 },
-                backgroundColor: ColorConstants.MainColor),
+                backgroundColor: ColorConstants.mainColor),
           ],
         ),
       ),
@@ -53,8 +53,8 @@ class BoardingScreen extends StatelessWidget {
   }
 }
 
-class Boarding_Buttons extends StatelessWidget {
-  Boarding_Buttons(
+class BoardingButtons extends StatelessWidget {
+  const BoardingButtons(
       {Key? key,
       required this.textColor,
       required this.label,
@@ -62,10 +62,10 @@ class Boarding_Buttons extends StatelessWidget {
       required this.backgroundColor})
       : super(key: key);
 
-  String label;
-  Color backgroundColor;
-  Color textColor;
-  VoidCallback function;
+  final String label;
+  final Color backgroundColor;
+  final Color textColor;
+  final VoidCallback function;
 
   @override
   Widget build(BuildContext context) {
