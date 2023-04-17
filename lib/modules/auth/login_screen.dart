@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../utils/image_constants.dart';
 import 'package:get/get.dart';
-import '../pages/signup_screen.dart';
+import '../auth/signup_screen.dart';
 import '../../controllers/auth_controller.dart';
 import '../../utils/color_constants.dart';
 import '../../widgets/buttons.dart';

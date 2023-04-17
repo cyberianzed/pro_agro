@@ -3,7 +3,6 @@ import '../../controllers/auth_controller.dart';
 import '../../utils/color_constants.dart';
 import '../../widgets/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../lottie_page/lottie_page_animtions.dart';
 
 // HomeScreen widget displays the email passed as a parameter and a signout button
@@ -12,7 +11,6 @@ class HomeScreen extends StatefulWidget {
   final String email;
 
   const HomeScreen({Key? key, required this.email}) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

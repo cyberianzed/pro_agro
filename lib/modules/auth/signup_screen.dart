@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'login_screen.dart';
-import '../../extention_function/extension_function_padding.dart';
 import '../../utils/color_constants.dart';
 import '../../widgets/buttons.dart';
 import '../../controllers/auth_controller.dart';
@@ -84,6 +83,17 @@ class SignUp extends StatelessWidget {
               }),
         ],
       ).extendPadding(),
+    );
+  }
+}
+
+extension EPadding on Widget {
+  Widget extendPadding() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: this,
+      ),
     );
   }
 }

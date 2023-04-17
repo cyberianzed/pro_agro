@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../modules/pages/home_screen.dart';
-import '../modules/pages/boarding_screen.dart';
+import 'package:get_storage/get_storage.dart';
+import '../modules/auth/home_screen.dart';
+import '../modules/auth/boarding_screen.dart';
 
 class AuthController extends GetxController {
   // Singleton instance of the AuthController
@@ -13,6 +14,7 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
   // FirebaseAuth instance to handle authentication
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? get user => _user.value;
 
   @override
   void onReady() {
@@ -23,6 +25,19 @@ class AuthController extends GetxController {
     _user.bindStream(auth.userChanges());
     // Watch for changes in _user and call _initialPage
     ever(_user, _initialPage);
+
+    // Initialize GetStorage
+    GetStorage.init().then((_) {
+      // Check for logged in user
+      final box = GetStorage();
+      final isLoggedIn = box.read('isLoggedIn') ?? false;
+      if (isLoggedIn) {
+        final email = box.read('email');
+        Get.offAll(() => HomeScreen(email: email));
+      } else {
+        // Get.offAll(() => const BoardingScreen());
+      }
+    });
   }
 
   // Function to handle routing based on user status
@@ -30,7 +45,7 @@ class AuthController extends GetxController {
     if (user == null) {
       // If no user, navigate to login page
       print("Login Page");
-      Get.offAll(() => const BoardingScreen());
+      // Get.offAll(() => const BoardingScreen());
     } else {
       // If user is logged in, navigate to home screen
       print("Login Success");
@@ -38,6 +53,11 @@ class AuthController extends GetxController {
             email: user.email ?? "email null",
           ));
       print('email = ${user.email}');
+
+      // Save user information for persistence
+      final box = GetStorage();
+      box.write('isLoggedIn', true);
+      box.write('email', user.email);
     }
   }
 
@@ -82,5 +102,9 @@ class AuthController extends GetxController {
   // Function to handle logout
   void logOut() async {
     await auth.signOut();
+
+    // Remove user information for persistence
+    final box = GetStorage();
+    box.remove('isLoggedIn');
   }
 }
