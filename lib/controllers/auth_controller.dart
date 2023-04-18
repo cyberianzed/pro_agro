@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../modules/auth/home_screen.dart';
-import '../modules/auth/boarding_screen.dart';
+
+import '../modules/auth/bottom_screens.dart';
 
 class AuthController extends GetxController {
   // Singleton instance of the AuthController
@@ -33,7 +33,7 @@ class AuthController extends GetxController {
       final isLoggedIn = box.read('isLoggedIn') ?? false;
       if (isLoggedIn) {
         final email = box.read('email');
-        Get.offAll(() => HomeScreen(email: email));
+        Get.offAll(() => PersistentBottomView());
       } else {
         // Get.offAll(() => const BoardingScreen());
       }
@@ -49,9 +49,9 @@ class AuthController extends GetxController {
     } else {
       // If user is logged in, navigate to home screen
       print("Login Success");
-      Get.offAll(() => HomeScreen(
-            email: user.email ?? "email null",
-          ));
+      // Get.offAll(() => HomeScreen(
+      //       email: user.email ?? "email null",
+      // ));
       print('email = ${user.email}');
 
       // Save user information for persistence

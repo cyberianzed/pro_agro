@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro_agro/modules/auth/bottom_screens.dart';
 import './controllers/auth_controller.dart';
 import 'controllers/splash_controller.dart';
-import 'modules/auth/boarding_screen.dart';
 import 'modules/auth/splash_screen.dart';
 
 // This code is initializing the Firebase
@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'My App',
-      initialRoute: '/splash',
+      initialRoute: '/home',
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/home', page: () => const BoardingScreen()),
+        GetPage(name: '/home', page: () => PersistentBottomView()),
       ],
     );
   }
