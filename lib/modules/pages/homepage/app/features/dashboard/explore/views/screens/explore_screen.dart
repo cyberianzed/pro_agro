@@ -22,13 +22,12 @@ part '../components/product_content.dart';
 part '../components/tab_bar_content.dart';
 
 class ExploreScreen extends GetView<ExploreController> {
-   ExploreScreen({Key? key}) : super(key: key);
+  ExploreScreen({Key? key}) : super(key: key);
+  @override
   final ExploreController controller = Get.put(ExploreController());
-
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: NestedScrollView(
         physics: const BouncingScrollPhysics(),
@@ -57,9 +56,9 @@ class ExploreScreen extends GetView<ExploreController> {
         body: _TabBarContent(
           tabs: const [
             Text("All"),
-            Text("Fashion"),
-            Text("Electronic"),
-            Text("Toys & Hobbies"),
+            Text("Agro Produce"),
+            Text("Livestock"),
+            Text("Farm Machinery"),
             Text("Art"),
             Text("Sporting Goods"),
             Text("Home & Garden"),

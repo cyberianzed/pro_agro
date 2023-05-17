@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import '../../utils/color_constants.dart';
 import '../pages/booking_page.dart';
 import '../pages/community_page.dart';
 import '../pages/events_page.dart';
@@ -51,7 +53,7 @@ class PersistentBottomView extends StatelessWidget {
 
 List<Widget> _buildScreens() {
   return [
-     ExploreScreen(),
+    ExploreScreen(),
     const EventsPage(),
     const BookingPage(),
     const CommunityPage(),
@@ -62,36 +64,41 @@ List<Widget> _buildScreens() {
 List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.home),
+      icon: const Icon(
+        FontAwesomeIcons.house,
+      ),
       title: ("Home"),
-      activeColorPrimary: Colors.blueAccent,
+      activeColorPrimary: ColorConstants.green,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.settings),
+      icon: const Icon(Icons.calendar_view_day_rounded),
       title: ("Events"),
-      activeColorPrimary: Colors.blueAccent,
+      activeColorPrimary: ColorConstants.green,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(
-        Icons.add,
-        color: Colors.white,
+        FontAwesomeIcons.moneyBillWheat,
+        color: Color.fromARGB(255, 11, 104, 59),
       ),
       title: ("Booking"),
-      activeColorPrimary: const Color.fromARGB(255, 175, 183, 198),
+      // activeColorPrimary: ColorConstants.green,
+      activeColorPrimary: Colors.grey,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.settings),
+      icon: const Icon(FontAwesomeIcons.handHoldingHand),
       title: ("Community"),
-      activeColorPrimary: Colors.blueAccent,
+      activeColorPrimary: ColorConstants.green,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.settings),
+      icon: const Icon(
+        FontAwesomeIcons.solidUser,
+      ),
       title: ("Profile"),
-      activeColorPrimary: Colors.blueAccent,
+      activeColorPrimary: ColorConstants.green,
       inactiveColorPrimary: Colors.grey,
     ),
   ];

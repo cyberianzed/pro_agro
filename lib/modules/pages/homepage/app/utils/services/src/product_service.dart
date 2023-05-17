@@ -93,9 +93,8 @@ class ProductService extends RestApiServices {
     id: "23455",
     idUser: "fwg345",
     images: [AssetImage(ImageRasterPath.orangeBlouse)],
-    name:
-        "Womens Loose Fit Short Sleeve T-Shirt V-Neck Casual Basic Tunic Top Long Blouse ",
-    price: 5.9,
+    name: "Product ",
+    price: 100,
     isFavorite: false,
     description:
         "Lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
@@ -123,7 +122,7 @@ class ProductService extends RestApiServices {
     idUser: "fwg345",
     images: [AssetImage(ImageRasterPath.shoes)],
     name: "DC Shoes Pure Men's Leather Low Top Classic Skateboarding Sneakers",
-    price: 12.0,
+    price: 1200.0,
     isFavorite: false,
     description:
         "Lorem ipsum At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
@@ -152,7 +151,7 @@ class ProductService extends RestApiServices {
     idUser: "fwg123",
     images: [AssetImage(ImageRasterPath.vr)],
     // images: [AssetImage('assets/images/raster/vr.png')],
-    name: "Oculus Quest All-in-One VR Gaming System 64GB (301-00174-01)",
+    name: "Product ",
     price: 200,
     isFavorite: false,
     description:

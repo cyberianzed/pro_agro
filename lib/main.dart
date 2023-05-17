@@ -5,6 +5,7 @@ import 'package:pro_agro/modules/auth/bottom_screens.dart';
 import './controllers/auth_controller.dart';
 import 'controllers/splash_controller.dart';
 import 'modules/auth/splash_screen.dart';
+import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 
 // This code is initializing the Firebase
 // app and ensuring that the WidgetsFlutterBinding is initialized.
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+       theme: AppTheme.basic,
       title: 'My App',
       initialRoute: '/home',
       getPages: [

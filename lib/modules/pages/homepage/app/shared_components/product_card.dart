@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../constans/app_constants.dart';
 import '../utils/ui/ui_utils.dart';
 
-
 class ProductCardData {
   final ImageProvider image;
   final double price;
@@ -66,7 +65,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: kSpacing),
+        const SizedBox(height: kSpacing),
         _buildPriceText(data.price),
         _buildNameProduct(data.name),
       ],
@@ -92,10 +91,10 @@ class ProductCard extends StatelessWidget {
     return Obx(
       () => Material(
         color: isFavorite.value ? activeColor : passiveColor,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(kBorderRadius),
         ),
-        child: Container(
+        child: SizedBox(
           height: 40,
           width: 40,
           child: InkWell(
@@ -103,7 +102,7 @@ class ProductCard extends StatelessWidget {
               isFavorite.toggle();
               onTap(isFavorite.value);
             },
-            child: Icon(
+            child: const Icon(
               FontAwesomeIcons.solidStar,
               color: Colors.white,
               size: 20,
@@ -118,13 +117,13 @@ class ProductCard extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          FontAwesomeIcons.dollarSign,
+          FontAwesomeIcons.indianRupeeSign,
           size: 14,
           color: kFontColorPallets[0],
         ),
         Expanded(
           child: Text(
-            "$price",
+            " $price",
             style: TextStyle(
               color: kFontColorPallets[0],
               fontWeight: FontWeight.bold,
