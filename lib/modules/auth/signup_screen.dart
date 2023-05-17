@@ -18,10 +18,10 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Text("Signup"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.grey,
+      //   title: const Text("Signup"),
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
