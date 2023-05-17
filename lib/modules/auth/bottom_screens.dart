@@ -3,7 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../pages/booking_page.dart';
 import '../pages/community_page.dart';
 import '../pages/events_page.dart';
-import '../pages/home_page.dart';
+import '../pages/homepage/app/features/dashboard/explore/views/screens/explore_screen.dart';
 import '../pages/profile_page.dart';
 
 class PersistentBottomView extends StatelessWidget {
@@ -51,7 +51,7 @@ class PersistentBottomView extends StatelessWidget {
 
 List<Widget> _buildScreens() {
   return [
-    const HomePage(),
+     ExploreScreen(),
     const EventsPage(),
     const BookingPage(),
     const CommunityPage(),
