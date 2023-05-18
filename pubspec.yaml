@@ -26,20 +26,28 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   flutter_staggered_grid_view: ^0.4.0
   tab_indicator_styler: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+  table_calendar: ^3.0.9
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+flutter_launcher_icons:
+  image_path: "assets/icon.png"
+  android: true
+  adaptive_icon_background: "#2A6049"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/icon.png"
+    background_color: "#2A6049"
+    theme_color: "#2A6049"

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class BookingPage extends StatelessWidget {
   const BookingPage({super.key});
 
@@ -8,7 +7,7 @@ class BookingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('settings'),
+        child: Text('Booking'),
       ),
     );
   }

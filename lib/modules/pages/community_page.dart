@@ -9,7 +9,7 @@ class CommunityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('settings'),
+        child: Text('Community'),
       ),
     );
   }

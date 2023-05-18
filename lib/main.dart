@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/modules/auth/login_screen.dart';
-import 'package:pro_agro/modules/auth/signup_screen.dart';
 import './controllers/auth_controller.dart';
 import 'controllers/splash_controller.dart';
 import 'modules/auth/splash_screen.dart';

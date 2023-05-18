@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:pro_agro/modules/auth/login_screen.dart';
 import '../modules/auth/bottom_screens.dart';
 
 class AuthController extends GetxController {
@@ -32,7 +32,7 @@ class AuthController extends GetxController {
       final box = GetStorage();
       final isLoggedIn = box.read('isLoggedIn') ?? false;
       if (isLoggedIn) {
-        final email = box.read('email');
+        // final email = box.read('email');
         Get.offAll(() => PersistentBottomView());
       } else {
         // Get.offAll(() => const BoardingScreen());
@@ -49,9 +49,9 @@ class AuthController extends GetxController {
     } else {
       // If user is logged in, navigate to home screen
       print("Login Success");
-      // Get.offAll(() => HomeScreen(
-      //       email: user.email ?? "email null",
-      // ));
+      Get.offAll(() => PersistentBottomView(
+          // email: user.email ?? "email null",
+          ));
       print('email = ${user.email}');
 
       // Save user information for persistence
@@ -106,5 +106,6 @@ class AuthController extends GetxController {
     // Remove user information for persistence
     final box = GetStorage();
     box.remove('isLoggedIn');
+    Get.offAll(() => LoginScreen());
   }
 }
