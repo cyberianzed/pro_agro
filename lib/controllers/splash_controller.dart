@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../modules/auth/bottom_screens.dart';
+import '../modules/auth/login_screen.dart';
 import 'auth_controller.dart';
 
 class SplashController extends GetxController {
@@ -8,7 +9,7 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       // Check the user's authentication state
       if (authController.auth.currentUser != null) {
         // If the user is logged in, navigate to the home screen
@@ -17,7 +18,7 @@ class SplashController extends GetxController {
             ));
       } else {
         // If the user is not logged in, navigate to the boarding screen
-        // Get.offAll(() => const BoardingScreen());
+        Get.offAll(() => LoginScreen());
       }
     });
   }

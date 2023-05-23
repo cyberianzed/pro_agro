@@ -57,7 +57,7 @@ List<Widget> _buildScreens() {
     const EventsPage(),
     const BookingPage(),
     const CommunityPage(),
-    const ProfilePage()
+    ProfilePage()
   ];
 }
 

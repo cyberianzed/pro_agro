@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pro_agro/modules/auth/login_screen.dart';
 import './controllers/auth_controller.dart';
 import 'controllers/splash_controller.dart';
+import 'modules/auth/bottom_screens.dart';
 import 'modules/auth/splash_screen.dart';
 import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 
@@ -28,11 +28,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: AppTheme.basic,
       title: 'My App',
-      initialRoute: '/home',
+      initialRoute: '/splash',
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
-        // GetPage(name: '/home', page: () => PersistentBottomView()),
-        GetPage(name: '/home', page: () => LoginScreen()),
+        GetPage(name: '/home', page: () => PersistentBottomView()),
       ],
     );
   }

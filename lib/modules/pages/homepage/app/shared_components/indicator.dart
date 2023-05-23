@@ -32,7 +32,7 @@ class Indicator extends StatelessWidget {
   Widget _dot(bool isActive, Color color) {
     return AnimatedContainer(
       margin: const EdgeInsets.all(5),
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       height: 10,
       width: isActive ? 25 : 10,
       decoration: BoxDecoration(

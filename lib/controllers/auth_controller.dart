@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pro_agro/model/user_profile.dart';
 import 'package:pro_agro/modules/auth/login_screen.dart';
 import '../modules/auth/bottom_screens.dart';
 
@@ -14,7 +15,8 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
   // FirebaseAuth instance to handle authentication
   FirebaseAuth auth = FirebaseAuth.instance;
-  User? get user => _user.value;
+
+  UserDetail? userdet;
 
   @override
   void onReady() {
@@ -31,6 +33,7 @@ class AuthController extends GetxController {
       // Check for logged in user
       final box = GetStorage();
       final isLoggedIn = box.read('isLoggedIn') ?? false;
+
       if (isLoggedIn) {
         // final email = box.read('email');
         Get.offAll(() => PersistentBottomView());
@@ -39,7 +42,6 @@ class AuthController extends GetxController {
       }
     });
   }
-
   // Function to handle routing based on user status
   _initialPage(User? user) {
     if (user == null) {
@@ -61,36 +63,46 @@ class AuthController extends GetxController {
     }
   }
 
-  // Function to handle registration
-  void register(
-      String email, String password, String name, String username) async {
-    try {
-      // Create user with email and password
-      await auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        // Add user to Firestore database
-        FirebaseFirestore.instance.collection('User').add({
-          "Name": name,
-          "Username": username,
-          "Email": email,
-          "Password": password,
-        });
+// Function to handle registration
+void register(String email, String password, String name, String username) async {
+  try {
+    // Create user with email and password
+    final userCredential = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // Get the newly created user's UID
+    final uid = userCredential.user?.uid;
+
+    if (uid != null) {
+      // Create a reference to the 'User' collection and set the user details with the UID as the document ID
+      final userRef = FirebaseFirestore.instance.collection('User').doc(uid);
+      await userRef.set({
+        'Name': name,
+        'Username': username,
+        'Email': email,
+        'Password': password,
       });
-    } catch (e) {
-      // Show snackbar with error message
-      print('fasf$e');
-      Get.snackbar("title", "message",
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: const Text("Login Again"));
     }
+  } catch (e) {
+    // Show snackbar with error message
+    print('Error during registration: $e');
+    Get.snackbar(
+      'Registration Error',
+      'An error occurred during registration.',
+      snackPosition: SnackPosition.BOTTOM,
+      titleText: const Text('Registration Error'),
+    );
   }
+}
 
   // Function to handle login
   void login(String email, String password) async {
     try {
       // Sign in with email and password
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      // _user.value = auth.currentUser;
     } catch (e) {
       // Show snackbar with error message
       Get.snackbar("Login ", "Login Failed",
@@ -98,6 +110,34 @@ class AuthController extends GetxController {
           titleText: const Text("Login Failed"));
     }
   }
+  String getCurrentUserUid() {
+    final user = _user.value;
+    if (user != null) {
+      return user.uid;
+    }
+    return '';
+  }
+  
+Future<String> getCurrentUserDocId() async {
+  final currentUserUid = getCurrentUserUid();
+
+  if (currentUserUid.isNotEmpty) {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('User')
+        .where('Uid', isEqualTo: currentUserUid)
+        .limit(1)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      final userDocId = snapshot.docs[0].id;
+      return userDocId;
+    }
+  }
+
+  return '';
+}
+
+
 
   // Function to handle logout
   void logOut() async {
