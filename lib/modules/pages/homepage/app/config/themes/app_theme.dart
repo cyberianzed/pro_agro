@@ -7,13 +7,14 @@ class AppTheme {
         primaryColor: Colors.redAccent,
         primarySwatch: Colors.red,
         canvasColor: Colors.white,
-        appBarTheme: AppBarTheme(backgroundColor: Colors.white),
-        inputDecorationTheme: InputDecorationTheme(
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+        inputDecorationTheme: const InputDecorationTheme(
           fillColor: Color.fromRGBO(246, 246, 246, 1),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color.fromRGBO(187, 193, 202, 1),
         ),
+        
       );
 
   // you can add other custom theme in this class like  light theme, dark theme ,etc.

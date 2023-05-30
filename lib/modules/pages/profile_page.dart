@@ -11,6 +11,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        elevation: 1.5,
       ),
       body: FutureBuilder<UserDetail?>(
         future: _fetchUserDetail(),

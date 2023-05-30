@@ -4,7 +4,6 @@ import '../../controllers/splash_controller.dart';
 
 class SplashScreen extends GetView<SplashController> {
   const SplashScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +14,7 @@ class SplashScreen extends GetView<SplashController> {
           children: [
             Image.asset('assets/icon.png'),
             const SizedBox(height: 30),
-            const CircularProgressIndicator(),
+            // const CircularProgressIndicator(),
           ],
         ),
       ),
