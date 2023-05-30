@@ -55,7 +55,7 @@ List<Widget> _buildScreens() {
   return [
     ExploreScreen(),
     const EventsPage(),
-    const BookingPage(),
+    BookingPage(),
     CommunityPage(),
     ProfilePage()
   ];
