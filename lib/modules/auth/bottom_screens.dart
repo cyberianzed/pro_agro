@@ -5,7 +5,7 @@ import '../../utils/color_constants.dart';
 import '../pages/bookingpage/booking_page.dart';
 import '../pages/communitypage/community_page.dart';
 import '../pages/events_page.dart';
-import '../pages/homepage/app/features/dashboard/explore/views/screens/explore_screen.dart';
+import '../pages/homepage/app/features/explore/views/screens/explore_screen.dart';
 import '../pages/profile_page.dart';
 
 class PersistentBottomView extends StatelessWidget {
@@ -53,7 +53,7 @@ class PersistentBottomView extends StatelessWidget {
 
 List<Widget> _buildScreens() {
   return [
-    ExploreScreen(),
+    const ExploreScreen(),
     const EventsPage(),
     BookingPage(),
     CommunityPage(),

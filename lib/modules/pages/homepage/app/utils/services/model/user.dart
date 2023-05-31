@@ -1,4 +1,5 @@
-part of rest_api_service;
+
+import 'package:flutter/cupertino.dart';
 
 class User {
   final String id;

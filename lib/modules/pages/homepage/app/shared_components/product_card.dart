@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../constans/app_constants.dart';
-import '../utils/ui/ui_utils.dart';
+import '../utils/ui/app_snackbar.dart';
 
 class ProductCardData {
   final ImageProvider image;
@@ -117,13 +117,13 @@ class ProductCard extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          FontAwesomeIcons.indianRupeeSign,
+          FontAwesomeIcons.dollarSign,
           size: 14,
           color: kFontColorPallets[0],
         ),
         Expanded(
           child: Text(
-            " $price",
+            "$price",
             style: TextStyle(
               color: kFontColorPallets[0],
               fontWeight: FontWeight.bold,

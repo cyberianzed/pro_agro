@@ -1,9 +1,12 @@
-part of rest_api_service;
+import 'package:flutter/material.dart';
+
+import '../../../constans/app_constants.dart';
+import '../model/user.dart';
 
 /// FAKE USER SERVICE
 // put all custom setup in RestApiService (duration timeout, exception handling , etc..)
 // and extend restApiService, if you need custom service provider
-class UserService extends RestApiServices {
+class UserService {
   static final UserService _singleton = UserService._internal();
 
   factory UserService() {

@@ -1,4 +1,7 @@
-part of ui_utils;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../constans/app_constants.dart';
 
 /// contains all snackbar templates
 class AppSnackbar {

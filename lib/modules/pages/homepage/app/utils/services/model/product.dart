@@ -1,4 +1,5 @@
-part of rest_api_service;
+
+import 'package:flutter/material.dart';
 
 class Product {
   final String id;

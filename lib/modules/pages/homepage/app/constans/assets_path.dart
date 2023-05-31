@@ -15,7 +15,7 @@ class ImageAnimationPath {
 }
 
 class ImageRasterPath {
-  static const _folderPath = "assets/images";
+  static const _folderPath = "assets/images/raster";
 
   static const bag = "$_folderPath/bag.png";
   static const blueMidiDress = "$_folderPath/blue-midi-dress.png";

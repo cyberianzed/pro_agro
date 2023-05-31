@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../../../../../constans/app_constants.dart';
-import '../../../../../shared_components/custom_icon_button.dart';
-import '../../../../../shared_components/indicator.dart';
-import '../../../../../utils/services/rest_api_services.dart';
-import '../../../../../utils/ui/ui_utils.dart';
-
+import '../../../../constans/app_constants.dart';
+import '../../../../shared_components/custom_icon_button.dart';
+import '../../../../shared_components/indicator.dart';
+import '../../../../utils/services/model/product.dart';
+import '../../../../utils/services/model/user.dart';
+import '../../../../utils/services/src/product_service.dart';
+import '../../../../utils/services/src/user_service.dart';
+import '../../../../utils/ui/app_snackbar.dart';
 // binding
 part '../../bindings/product_detail_binding.dart';
 
@@ -115,7 +116,8 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                                 CircleAvatar(backgroundImage: user.profilImage),
                             title: Text(user.name),
                             subtitle: Text("${user.country} (${user.city})"),
-                            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+                            trailing:
+                                const Icon(Icons.keyboard_arrow_right_rounded),
                             onTap: () {},
                           ),
                         )

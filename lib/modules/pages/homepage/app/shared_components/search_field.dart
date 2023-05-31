@@ -17,7 +17,7 @@ class SearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: BorderSide.none,
         ),
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: const Icon(Icons.search),
         hintText: "what are you looking for",
       ),
       onEditingComplete: () {

@@ -5,9 +5,9 @@ class Dividers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
+      children: [
         Expanded(
             child: Divider(
           color: Colors.black26,

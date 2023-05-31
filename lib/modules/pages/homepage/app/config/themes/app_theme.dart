@@ -14,7 +14,6 @@ class AppTheme {
         iconTheme: const IconThemeData(
           color: Color.fromRGBO(187, 193, 202, 1),
         ),
-        
       );
 
   // you can add other custom theme in this class like  light theme, dark theme ,etc.
