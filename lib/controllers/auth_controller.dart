@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/model/user_profile.dart';
 import 'package:pro_agro/modules/auth/login_screen.dart';
-import '../modules/auth/bottom_screens.dart';
+import '../modules/pages/botomscreen/bottom_screens.dart';
 
 class AuthController extends GetxController {
   // Singleton instance of the AuthController

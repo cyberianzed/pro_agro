@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import '../../../../../../../../routes/app_routes.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/filter_button.dart';
 import '../../../../shared_components/product_card.dart';
@@ -12,7 +13,7 @@ import '../../../../utils/services/model/product.dart';
 import '../../controllers/explore_controller.dart';
 
 // binding
-part '../../bindings/explore_binding.dart';
+// part '../../bindings/explore_binding.dart';
 
 // component
 part '../components/product_content.dart';
@@ -23,6 +24,10 @@ class ExploreScreen extends GetView<ExploreController> {
 
   @override
   Widget build(BuildContext context) {
+    void goToDetailProduct(Product product) {
+      Get.toNamed("${Routes.product}/${product.id}");
+    }
+
     return SafeArea(
       child: Scaffold(
         body: NestedScrollView(
@@ -52,9 +57,9 @@ class ExploreScreen extends GetView<ExploreController> {
           body: _TabBarContent(
             tabs: const [
               Text("All"),
-              Text("Fashion"),
-              Text("Electronic"),
-              Text("Toys & Hobbies"),
+              Text("Agro Produce"),
+              Text("Livestock"),
+              Text("Farm Machinery"),
               Text("Art"),
               Text("Sporting Goods"),
               Text("Home & Garden"),
@@ -62,17 +67,17 @@ class ExploreScreen extends GetView<ExploreController> {
             children: [
               _ProductContent(
                 controller.getAllProduct(),
-                onPressed: (product) => controller.goToDetailProduct(product),
+                onPressed: (product) => goToDetailProduct(product),
               ),
               _ProductContent(
                 controller.getFashionProduct(),
-                onPressed: (product) => controller.goToDetailProduct(product),
+                onPressed: (product) => goToDetailProduct(product),
               ),
-              const Center(child: Text("Electronic")),
-              const Center(child: Text("Toys & Hobbies")),
-              const Center(child: Text("Art")),
-              const Center(child: Text("Sporting Goods")),
-              const Center(child: Text("Home & Garden")),
+              const Center(child: Text("Agro Produce")),
+              const Center(child: Text("Agro Produce")),
+              const Center(child: Text("Agro Produce")),
+              const Center(child: Text("Agro Produce")),
+              const Center(child: Text("Agro Produce")),
             ],
           ),
         ),

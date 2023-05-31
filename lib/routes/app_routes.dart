@@ -1,16 +1,29 @@
 import 'package:get/get.dart';
-import '../modules/auth/bottom_screens.dart';
-import '../modules/auth/splash_screen.dart';
+import 'package:pro_agro/modules/splash/splash_binding.dart';
+import '../modules/pages/bookingpage/booking_binding.dart';
+import '../modules/pages/botomscreen/bottom_screens.dart';
+import '../modules/pages/homepage/app/features/explore/bindings/explore_binding.dart';
+import '../modules/splash/splash_screen.dart';
+import '../modules/pages/botomscreen/bottomview_binding.dart';
 import '../modules/pages/homepage/app/features/explore/views/screens/explore_screen.dart';
 import '../modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
 
 class AppRoutes {
   static final routes = [
-    GetPage(name: '/splash', page: () => const SplashScreen()),
     GetPage(
-        name: '/home',
-        page: () => PersistentBottomView(),
-        binding: ExploreBinding()),
+      name: '/splash',
+      page: () => const SplashScreen(),
+      bindings: [
+        SplashBinding(),
+        BottomViewBinding(),
+        ExploreBinding(),
+        BookingPageBinding(),
+      ],
+    ),
+    GetPage(
+      name: '/home',
+      page: () => const PersistentBottomView(),
+    ),
     GetPage(
       name: '/explore',
       page: () => const ExploreScreen(),

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import '../modules/auth/bottom_screens.dart';
-import '../modules/auth/login_screen.dart';
-import 'auth_controller.dart';
+import '../pages/botomscreen/bottom_screens.dart';
+import '../auth/login_screen.dart';
+import '../../controllers/auth_controller.dart';
 
 class SplashController extends GetxController {
   final AuthController authController = Get.find();
@@ -13,7 +13,7 @@ class SplashController extends GetxController {
       // Check the user's authentication state
       if (authController.auth.currentUser != null) {
         // If the user is logged in, navigate to the home screen
-        Get.offAll(() => PersistentBottomView(
+        Get.offAll(() => const PersistentBottomView(
             // email: authController.auth.currentUser!.email ?? "email null",
             ));
       } else {

@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro_agro/modules/splash/splash_binding.dart';
 import 'package:pro_agro/routes/app_routes.dart';
 import 'controllers/auth_controller.dart';
-import 'controllers/splash_controller.dart';
+import 'modules/splash/splash_controller.dart';
 import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 
 void main() async {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: AppTheme.basic,
       title: 'Pro Agro',
+      initialBinding: SplashBinding(),
       initialRoute: '/splash',
       getPages: AppRoutes.routes,
     );
