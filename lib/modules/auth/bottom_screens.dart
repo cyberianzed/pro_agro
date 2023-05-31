@@ -54,7 +54,7 @@ class PersistentBottomView extends StatelessWidget {
 List<Widget> _buildScreens() {
   return [
     ExploreScreen(),
-     EventsPage(),
+    const EventsPage(),
     BookingPage(),
     CommunityPage(),
     ProfilePage()
@@ -83,7 +83,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
         color: Color.fromARGB(255, 11, 104, 59),
       ),
       title: ("Booking"),
-      activeColorPrimary: ColorConstants.green,
+      activeColorPrimary: Colors.red.withOpacity(.25),
       // activeColorPrimary: Colors.white,
       inactiveColorPrimary: Colors.black,
     ),

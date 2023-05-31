@@ -10,11 +10,11 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: "${_Paths.product}/:id",
+      // ignore: prefer_interpolation_to_compose_strings
+      name: _Paths.product + "/:id",
       page: () => const ProductDetailScreen(),
       binding: ProductDetailBinding(),
       transition: Transition.downToUp,
     ),
-
   ];
 }
