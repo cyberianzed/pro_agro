@@ -5,6 +5,7 @@ import './controllers/auth_controller.dart';
 import 'controllers/splash_controller.dart';
 import 'modules/auth/bottom_screens.dart';
 import 'modules/auth/splash_screen.dart';
+import 'modules/pages/events_page.dart';
 import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 
 // This code is initializing the Firebase

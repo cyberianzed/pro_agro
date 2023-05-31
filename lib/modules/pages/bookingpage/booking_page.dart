@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'booking_controller.dart';
+import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
+
 
 class BookingPage extends StatelessWidget {
   final ProduceController produceController = Get.put(ProduceController());

@@ -14,6 +14,7 @@ class AppPages {
       page: () => const ProductDetailScreen(),
       binding: ProductDetailBinding(),
       transition: Transition.downToUp,
-    )
+    ),
+
   ];
 }

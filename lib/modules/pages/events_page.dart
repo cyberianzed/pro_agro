@@ -1,119 +1,18 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:get/get.dart';
 
-class EventsPage extends StatefulWidget {
-  const EventsPage({super.key});
+class EventsPage extends StatelessWidget {
+  final Rx<DateTime> _focusedDay = DateTime.now().obs;
+  final Rx<DateTime?> _selectedDate = Rx<DateTime?>(null);
+  final Rx<Map<String, List<dynamic>>?> _mySelectedEvents =
+      Rx<Map<String, List<dynamic>>?>(null);
 
-  @override
-  State<EventsPage> createState() => _EventsPageState();
-}
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descpController = TextEditingController();
 
-class _EventsPageState extends State<EventsPage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDate;
-  Map<String, List> mySelectedEvents = {};
-  final titleController = TextEditingController();
-  final descpController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDate = _focusedDay;
-  }
-
-  List _listOfDayEvents(DateTime dateTime) {
-    if (mySelectedEvents[DateFormat('yyyy-MM-dd').format(dateTime)] != null) {
-      return mySelectedEvents[DateFormat('yyyy-MM-dd').format(dateTime)]!;
-    } else {
-      return [];
-    }
-  }
-
-  _showAddEventDialog() async {
-    await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text(
-          'Add New Event',
-          textAlign: TextAlign.center,
-        ),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: titleController,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                labelText: 'Title',
-              ),
-            ),
-            TextField(
-              controller: descpController,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(labelText: 'Description'),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            child: const Text('Add Event'),
-            onPressed: () {
-              if (titleController.text.isEmpty &&
-                  descpController.text.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Required title and description'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-                //Navigator.pop(context);
-                return;
-              } else {
-                print(titleController.text);
-                print(descpController.text);
-
-                setState(() {
-                  if (mySelectedEvents[
-                          DateFormat('yyyy-MM-dd').format(_selectedDate!)] !=
-                      null) {
-                    mySelectedEvents[
-                            DateFormat('yyyy-MM-dd').format(_selectedDate!)]
-                        ?.add({
-                      "eventTitle": titleController.text,
-                      "eventDescp": descpController.text,
-                    });
-                  } else {
-                    mySelectedEvents[
-                        DateFormat('yyyy-MM-dd').format(_selectedDate!)] = [
-                      {
-                        "eventTitle": titleController.text,
-                        "eventDescp": descpController.text,
-                      }
-                    ];
-                  }
-                });
-
-                print(
-                    "New Event for backend developer ${json.encode(mySelectedEvents)}");
-                titleController.clear();
-                descpController.clear();
-                Navigator.pop(context);
-                return;
-              }
-            },
-          )
-        ],
-      ),
-    );
-  }
+  EventsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,54 +23,156 @@ class _EventsPageState extends State<EventsPage> {
       ),
       body: Column(
         children: [
-          TableCalendar(
-            focusedDay: _focusedDay,
-            firstDay: DateTime(2023),
-            lastDay: DateTime(2099),
-            calendarFormat: _calendarFormat,
-            onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectedDate, selectedDay)) {
-                setState(() {
-                  _selectedDate = selectedDay;
-                  _focusedDay = focusedDay;
-                });
-              }
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDate, day);
-            },
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                // Call `setState()` when updating calendar format
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
-            eventLoader: _listOfDayEvents,
-          ),
-          ..._listOfDayEvents(_selectedDate!).map(
-            (myEvents) => ListTile(
-              leading: const Icon(
-                Icons.done,
-                color: Colors.teal,
-              ),
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text('Event Title:   ${myEvents['eventTitle']}'),
-              ),
-              subtitle: Text('Description:   ${myEvents['eventDescp']}'),
-            ),
+          Obx(() => TableCalendar(
+                focusedDay: _focusedDay.value,
+                firstDay: DateTime(2023),
+                lastDay: DateTime(2099),
+                calendarFormat: CalendarFormat.month,
+                selectedDayPredicate: (day) =>
+                    _isSameDay(_selectedDate.value, day),
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDate.value, selectedDay)) {
+                    _selectedDate.value = selectedDay;
+                  }
+                  _focusedDay.value = focusedDay;
+                },
+                onPageChanged: (focusedDay) {
+                  _focusedDay.value = focusedDay;
+                },
+                eventLoader: (day) => _listOfDayEvents(day),
+                calendarStyle: CalendarStyle(
+                  selectedDecoration: const BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedTextStyle: const TextStyle(color: Colors.white),
+                  todayDecoration: BoxDecoration(
+                    color: Colors.green.withOpacity(
+                        .7), // Use a fade color for the current day
+                    shape: BoxShape.circle,
+                  ),
+                  todayTextStyle: const TextStyle(color: Colors.black),
+                  holidayDecoration: const BoxDecoration(
+                    color: Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              )),
+          Expanded(
+            child: Obx(() {
+              final selectedEvents = _listOfDayEvents(_selectedDate.value);
+              return ListView.builder(
+                itemCount: selectedEvents.length,
+                itemBuilder: (context, index) {
+                  final event = selectedEvents[index];
+                  return ListTile(
+                    leading: const Icon(
+                      Icons.done,
+                      color: Colors.teal,
+                    ),
+                    title: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text('Event Title: ${event['eventTitle']}'),
+                    ),
+                    subtitle: Text('Description: ${event['eventDescp']}'),
+                  );
+                },
+              );
+            }),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddEventDialog(),
+        onPressed: _showAddEventDialog,
         label: const Text('Add Event'),
       ),
     );
+  }
+
+  List<dynamic> _listOfDayEvents(DateTime? dateTime) {
+    if (_mySelectedEvents.value != null && dateTime != null) {
+      return _mySelectedEvents.value![dateTime] ?? [];
+    }
+    return [];
+  }
+
+  bool _isSameDay(DateTime? dateA, DateTime? dateB) {
+    if (dateA == null || dateB == null) return false;
+    return dateA.year == dateB.year &&
+        dateA.month == dateB.month &&
+        dateA.day == dateB.day;
+  }
+
+  void _showAddEventDialog() {
+    Get.defaultDialog(
+      title: 'Add New Event',
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: titleController,
+            textCapitalization: TextCapitalization.words,
+            decoration: const InputDecoration(
+              labelText: 'Title',
+            ),
+          ),
+          TextField(
+            controller: descpController,
+            textCapitalization: TextCapitalization.words,
+            decoration: const InputDecoration(labelText: 'Description'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            _addEvent();
+            Get.back();
+          },
+          child: const Text('Save'),
+        ),
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: const Text('Cancel'),
+        ),
+      ],
+    );
+  }
+
+  void _addEvent() {
+    final eventTitle = titleController.text;
+    final eventDescp = descpController.text;
+    final selectedDate = _selectedDate.value;
+
+    if (eventTitle.isNotEmpty &&
+        eventDescp.isNotEmpty &&
+        selectedDate != null) {
+      final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+      final event = {
+        'eventTitle': eventTitle,
+        'eventDescp': eventDescp,
+      };
+
+      if (_mySelectedEvents.value == null) {
+        _mySelectedEvents.value = {
+          formattedDate: [event]
+        };
+      } else {
+        if (_mySelectedEvents.value!.containsKey(formattedDate)) {
+          _mySelectedEvents.value![formattedDate]!.add(event);
+        } else {
+          _mySelectedEvents.value![formattedDate] = [event];
+        }
+      }
+
+      // Refresh the calendar view
+      _focusedDay.refresh();
+
+      titleController.clear();
+      descpController.clear();
+    }
   }
 }
