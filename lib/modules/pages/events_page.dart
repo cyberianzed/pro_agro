@@ -3,7 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
 
-class EventsPage extends StatelessWidget {
+class EventsPage extends StatefulWidget {
+  const EventsPage({super.key});
+
+  @override
+  _EventsPageState createState() => _EventsPageState();
+}
+
+class _EventsPageState extends State<EventsPage> {
   final Rx<DateTime> _focusedDay = DateTime.now().obs;
   final Rx<DateTime?> _selectedDate = Rx<DateTime?>(null);
   final Rx<Map<String, List<dynamic>>?> _mySelectedEvents =
@@ -12,7 +19,23 @@ class EventsPage extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descpController = TextEditingController();
 
-  EventsPage({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _initializeEvents();
+  }
+
+  void _initializeEvents() {
+    _mySelectedEvents.value = {
+      // Initialize the map with your desired events
+      '2023-05-31': [
+        {'eventTitle': 'Event 1', 'eventDescp': 'Description for Event 1'}
+      ],
+      '2023-06-01': [
+        {'eventTitle': 'Event 2', 'eventDescp': 'Description for Event 2'}
+      ],
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +52,12 @@ class EventsPage extends StatelessWidget {
                 lastDay: DateTime(2099),
                 calendarFormat: CalendarFormat.month,
                 selectedDayPredicate: (day) =>
-                    _isSameDay(_selectedDate.value, day),
+                    isSameDay(_selectedDate.value, day),
                 onDaySelected: (selectedDay, focusedDay) {
                   if (!isSameDay(_selectedDate.value, selectedDay)) {
                     _selectedDate.value = selectedDay;
+                    _focusedDay.value = focusedDay;
                   }
-                  _focusedDay.value = focusedDay;
                 },
                 onPageChanged: (focusedDay) {
                   _focusedDay.value = focusedDay;
@@ -68,7 +91,7 @@ class EventsPage extends StatelessWidget {
                   return ListTile(
                     leading: const Icon(
                       Icons.done,
-                      color: Colors.teal,
+                      color: Colors.green,
                     ),
                     title: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
@@ -91,16 +114,10 @@ class EventsPage extends StatelessWidget {
 
   List<dynamic> _listOfDayEvents(DateTime? dateTime) {
     if (_mySelectedEvents.value != null && dateTime != null) {
-      return _mySelectedEvents.value![dateTime] ?? [];
+      final formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
+      return _mySelectedEvents.value![formattedDate] ?? [];
     }
     return [];
-  }
-
-  bool _isSameDay(DateTime? dateA, DateTime? dateB) {
-    if (dateA == null || dateB == null) return false;
-    return dateA.year == dateB.year &&
-        dateA.month == dateB.month &&
-        dateA.day == dateB.day;
   }
 
   void _showAddEventDialog() {
@@ -167,9 +184,6 @@ class EventsPage extends StatelessWidget {
           _mySelectedEvents.value![formattedDate] = [event];
         }
       }
-
-      // Refresh the calendar view
-      _focusedDay.refresh();
 
       titleController.clear();
       descpController.clear();
