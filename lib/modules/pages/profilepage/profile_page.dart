@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../controllers/auth_controller.dart';
-import '../../model/user_profile.dart';
+import 'package:get/get.dart';
+import 'package:pro_agro/modules/pages/profilepage/update_profile_screen.dart';
+import '../../../controllers/auth_controller.dart';
+import '../../../model/user_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserDetailRepository _userDetailRepository = UserDetailRepository();
@@ -63,7 +65,9 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(
                       width: 200,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const UpdateProfileScreen());
+                        },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

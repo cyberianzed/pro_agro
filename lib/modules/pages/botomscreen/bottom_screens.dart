@@ -8,7 +8,7 @@ import '../bookingpage/booking_page.dart';
 import '../communitypage/community_page.dart';
 import '../events_page.dart';
 import '../homepage/app/features/explore/views/screens/explore_screen.dart';
-import '../profile_page.dart';
+import '../profilepage/profile_page.dart';
 
 class PersistentBottomView extends GetView<BottomViewController> {
   PersistentBottomView({super.key});
@@ -54,7 +54,7 @@ class PersistentBottomView extends GetView<BottomViewController> {
 
 List<Widget> _buildScreens() {
   return [
-     ExploreScreen(),
+    ExploreScreen(),
     const EventsPage(),
     BookingPage(),
     CommunityPage(),

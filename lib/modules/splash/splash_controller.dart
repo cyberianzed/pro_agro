@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import '../auth/boarding_screen.dart';
 import '../pages/botomscreen/bottom_screens.dart';
-import '../auth/login_screen.dart';
 import '../../controllers/auth_controller.dart';
 
 class SplashController extends GetxController {
@@ -18,7 +18,7 @@ class SplashController extends GetxController {
             ));
       } else {
         // If the user is not logged in, navigate to the boarding screen
-        Get.offAll(() => LoginScreen());
+        Get.offAll(() => const BoardingScreen());
       }
     });
   }

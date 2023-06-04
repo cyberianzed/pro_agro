@@ -19,18 +19,22 @@ class BoardingScreen extends StatelessWidget {
           children: [
             const Text(
               "Lets Get Started",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w800,
+                color: ColorConstants.mainColor,
+              ),
             ),
             const SizedBox(
               height: 12,
             ),
             const Text(
-              "Create account and login to see what is happening near you!",
+              "Create account and login to explore the farmer in you !",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.grey,
+                  color: Color.fromARGB(255, 116, 111, 111),
                   fontSize: 15,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               height: 45,
@@ -41,7 +45,7 @@ class BoardingScreen extends StatelessWidget {
             ),
             BoardingButtons(
                 textColor: Colors.white,
-                label: "Firebase Login",
+                label: "Login",
                 function: () {
                   Get.to(LoginScreen());
                 },
@@ -74,19 +78,26 @@ class BoardingButtons extends StatelessWidget {
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: backgroundColor,
-                minimumSize: const Size(252, 47),
-                maximumSize: const Size(252, 47),
+                minimumSize: const Size(210, 47),
+                maximumSize: const Size(210, 47),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)))),
             onPressed: function,
-            child: Text(
-              label,
-              style: TextStyle(
-                  color: textColor, fontSize: 18, fontWeight: FontWeight.w500),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                      color: textColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(width: 20),
+                const Icon(Icons.arrow_forward_ios_rounded)
+              ],
             )),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
       ],
     );
   }
