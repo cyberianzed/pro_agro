@@ -13,7 +13,7 @@ class ImageAnimationPath {
 
 class ImageRasterPath {
   static const _folderPath = "assets/images/raster";
-  
+
   static const organicFertilizer = "$_folderPath/organicFertilizer.jpg";
   static const pestControlSpray = "$_folderPath/pestControlSpray.jpg";
   static const fruitSeeds = "$_folderPath/fruitSeeds.jpg";

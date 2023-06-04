@@ -19,8 +19,8 @@ class ProductService {
 
   List<Product> getAll() {
     return [
-      _organicFertilizer,
       _pestControlSpray,
+      _organicFertilizer,
       _fruitSeeds,
       _vegetableSeeds,
       _gardeningTools,
@@ -30,12 +30,10 @@ class ProductService {
 
   List<Product> getAgroProduce() {
     return [
-      _organicFertilizer,
-      _pestControlSpray,
+      _plantPots,
       _fruitSeeds,
       _vegetableSeeds,
       _gardeningTools,
-      _plantPots,
     ];
   }
 
@@ -46,7 +44,7 @@ class ProductService {
       AssetImage(ImageRasterPath.organicFertilizer),
     ],
     name: "Organic Fertilizer",
-    price: 15.99,
+    price: 599.00, // Updated price for India (in INR)
     isFavorite: false,
     description:
         "Improve the quality of your crops with our organic fertilizer. It is made from natural ingredients and enhances soil fertility, promoting healthy plant growth. Suitable for all types of crops.",
@@ -62,7 +60,7 @@ class ProductService {
       AssetImage(ImageRasterPath.pestControlSpray),
     ],
     name: "Pest Control Spray",
-    price: 12.99,
+    price: 899.00, // Updated price for India (in INR)
     isFavorite: true,
     description:
         "Protect your plants from pests and diseases with our effective pest control spray. It eliminates a wide range of insects and provides long-lasting protection for your crops. Safe for both indoor and outdoor use.",
@@ -78,7 +76,7 @@ class ProductService {
       AssetImage(ImageRasterPath.fruitSeeds),
     ],
     name: "Fruit Seeds Pack",
-    price: 9.99,
+    price: 399.00, // Updated price for India (in INR)
     isFavorite: false,
     description:
         "Start your own fruit garden with our high-quality fruit seeds pack. It includes a variety of fruit seeds suitable for different climates. Enjoy fresh and delicious fruits grown in your own backyard.",
@@ -94,7 +92,7 @@ class ProductService {
       AssetImage(ImageRasterPath.vegetableSeeds),
     ],
     name: "Vegetable Seeds Pack",
-    price: 8.99,
+    price: 349.00, // Updated price for India (in INR)
     isFavorite: true,
     description:
         "Grow your own vegetables with our vegetable seeds pack. It contains a selection of popular vegetable seeds that are easy to grow and maintain. Enjoy fresh and nutritious vegetables straight from your garden.",
@@ -110,7 +108,7 @@ class ProductService {
       AssetImage(ImageRasterPath.gardeningTools),
     ],
     name: "Gardening Tools Set",
-    price: 24.99,
+    price: 1999.00, // Updated price for India (in INR)
     isFavorite: true,
     description:
         "Equip yourself with our gardening tools set for all your gardening needs. The set includes essential tools like a shovel, rake, pruning shears, and more. Made from durable materials for long-lasting use.",
@@ -126,7 +124,7 @@ class ProductService {
       AssetImage(ImageRasterPath.plantPots),
     ],
     name: "Plant Pots Assortment",
-    price: 6.99,
+    price: 499.00, // Updated price for India (in INR)
     isFavorite: false,
     description:
         "Enhance the beauty of your plants with our assortment of plant pots. They come in different sizes, styles, and colors to suit your preferences. Made from high-quality materials for durability.",
