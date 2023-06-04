@@ -153,8 +153,8 @@ class ProductService {
   final _vr = const Product(
     id: "99010",
     idUser: "fwg123",
-    // images: [AssetImage(ImageRasterPath.vr)],
-    images: [AssetImage('assets/images/raster/vr.png')],
+    images: [AssetImage(ImageRasterPath.vr)],
+    // images: [AssetImage('assets/images/raster/vr.png')],
     name: "Oculus Quest All-in-One VR Gaming System 64GB (301-00174-01)",
     price: 200,
     isFavorite: false,

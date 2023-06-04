@@ -13,7 +13,7 @@ class SplashController extends GetxController {
       // Check the user's authentication state
       if (authController.auth.currentUser != null) {
         // If the user is logged in, navigate to the home screen
-        Get.offAll(() => const PersistentBottomView(
+        Get.offAll(() => PersistentBottomView(
             // email: authController.auth.currentUser!.email ?? "email null",
             ));
       } else {

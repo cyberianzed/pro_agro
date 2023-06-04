@@ -10,15 +10,15 @@ import '../events_page.dart';
 import '../homepage/app/features/explore/views/screens/explore_screen.dart';
 import '../profile_page.dart';
 
-
 class PersistentBottomView extends GetView<BottomViewController> {
-  const PersistentBottomView({super.key});
-  
+  PersistentBottomView({super.key});
+  final BottomViewController _controller = Get.put(BottomViewController());
+
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      controller: controller.persistentTab,
+      controller: _controller.persistentTab,
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -54,7 +54,7 @@ class PersistentBottomView extends GetView<BottomViewController> {
 
 List<Widget> _buildScreens() {
   return [
-    const ExploreScreen(),
+     ExploreScreen(),
     const EventsPage(),
     BookingPage(),
     CommunityPage(),

@@ -22,11 +22,11 @@ class AppRoutes {
     ),
     GetPage(
       name: '/home',
-      page: () => const PersistentBottomView(),
+      page: () =>  PersistentBottomView(),
     ),
     GetPage(
       name: '/explore',
-      page: () => const ExploreScreen(),
+      page: () =>  ExploreScreen(),
       binding: ExploreBinding(),
     ),
     GetPage(

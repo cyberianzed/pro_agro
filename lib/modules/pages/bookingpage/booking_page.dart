@@ -31,12 +31,10 @@ class BookingPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () => produceController.selectFilterOption(1),
             style: ButtonStyle(
-              backgroundColor: Get.find<ProduceController>()
-                          .selectedFilterOptionIndex
-                          .value ==
-                      1
-                  ? MaterialStateProperty.all<Color>(Colors.green)
-                  : null,
+              backgroundColor:
+                  produceController.selectedFilterOptionIndex.value == 1
+                      ? MaterialStateProperty.all<Color>(Colors.green)
+                      : null,
             ),
             child: const Text('March'),
           ),
@@ -44,12 +42,10 @@ class BookingPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () => produceController.selectFilterOption(2),
             style: ButtonStyle(
-              backgroundColor: Get.find<ProduceController>()
-                          .selectedFilterOptionIndex
-                          .value ==
-                      2
-                  ? MaterialStateProperty.all<Color>(Colors.green)
-                  : null,
+              backgroundColor:
+                  produceController.selectedFilterOptionIndex.value == 2
+                      ? MaterialStateProperty.all<Color>(Colors.green)
+                      : null,
             ),
             child: const Text('April'),
           ),
@@ -57,12 +53,10 @@ class BookingPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () => produceController.selectFilterOption(3),
             style: ButtonStyle(
-              backgroundColor: Get.find<ProduceController>()
-                          .selectedFilterOptionIndex
-                          .value ==
-                      3
-                  ? MaterialStateProperty.all<Color>(Colors.green)
-                  : null,
+              backgroundColor:
+                  produceController.selectedFilterOptionIndex.value == 3
+                      ? MaterialStateProperty.all<Color>(Colors.green)
+                      : null,
             ),
             child: const Text('May'),
           ),

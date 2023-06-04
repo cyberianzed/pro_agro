@@ -117,7 +117,7 @@ class ProductCard extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          FontAwesomeIcons.dollarSign,
+          FontAwesomeIcons.indianRupeeSign,
           size: 14,
           color: kFontColorPallets[0],
         ),

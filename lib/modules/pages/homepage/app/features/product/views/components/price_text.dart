@@ -9,7 +9,7 @@ class _PriceText extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          FontAwesomeIcons.dollarSign,
+          FontAwesomeIcons.indianRupeeSign,
           color: Theme.of(context).primaryColor,
           size: 25,
         ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
-import '../../../../../../../../routes/app_routes.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/filter_button.dart';
 import '../../../../shared_components/product_card.dart';
@@ -20,14 +19,11 @@ part '../components/product_content.dart';
 part '../components/tab_bar_content.dart';
 
 class ExploreScreen extends GetView<ExploreController> {
-  const ExploreScreen({Key? key}) : super(key: key);
+  ExploreScreen({Key? key}) : super(key: key);
+  final ExploreController _controller = Get.put(ExploreController());
 
   @override
   Widget build(BuildContext context) {
-    void goToDetailProduct(Product product) {
-      Get.toNamed("${Routes.product}/${product.id}");
-    }
-
     return SafeArea(
       child: Scaffold(
         body: NestedScrollView(
@@ -66,12 +62,12 @@ class ExploreScreen extends GetView<ExploreController> {
             ],
             children: [
               _ProductContent(
-                controller.getAllProduct(),
-                onPressed: (product) => goToDetailProduct(product),
+                _controller.getAllProduct(),
+                onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               _ProductContent(
-                controller.getFashionProduct(),
-                onPressed: (product) => goToDetailProduct(product),
+                _controller.getFashionProduct(),
+                onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               const Center(child: Text("Agro Produce")),
               const Center(child: Text("Agro Produce")),
