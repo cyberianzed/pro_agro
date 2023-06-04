@@ -39,7 +39,7 @@ class ProductService {
     ];
   }
 
-  final _organicFertilizer = Product(
+  final _organicFertilizer = const Product(
     id: "12345",
     idUser: "fwg123",
     images: [
@@ -55,7 +55,7 @@ class ProductService {
     rating: 4.5,
   );
 
-  final _pestControlSpray = Product(
+  final _pestControlSpray = const Product(
     id: "23456",
     idUser: "fwg345",
     images: [
@@ -71,7 +71,7 @@ class ProductService {
     rating: 4.2,
   );
 
-  final _fruitSeeds = Product(
+  final _fruitSeeds = const Product(
     id: "34567",
     idUser: "fwg123",
     images: [
@@ -87,7 +87,7 @@ class ProductService {
     rating: 4.8,
   );
 
-  final _vegetableSeeds = Product(
+  final _vegetableSeeds = const Product(
     id: "45678",
     idUser: "fwg345",
     images: [
@@ -103,7 +103,7 @@ class ProductService {
     rating: 4.6,
   );
 
-  final _gardeningTools = Product(
+  final _gardeningTools = const Product(
     id: "56789",
     idUser: "fwg123",
     images: [
@@ -119,7 +119,7 @@ class ProductService {
     rating: 4.9,
   );
 
-  final _plantPots = Product(
+  final _plantPots = const Product(
     id: "67890",
     idUser: "fwg345",
     images: [
