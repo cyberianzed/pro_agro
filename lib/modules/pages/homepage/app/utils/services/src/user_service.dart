@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../constans/app_constants.dart';
 import '../model/user.dart';
 
@@ -24,17 +23,17 @@ class UserService {
 
   final _userA = const User(
     id: "fwg123",
-    name: "Gia Store",
-    country: "Indonesia",
-    city: "Bandung",
+    name: "Anand Stores",
+    country: "India",
+    city: "Kottayam",
     profilImage: AssetImage(ImageRasterPath.market),
   );
 
   final _userB = const User(
     id: "fwg345",
     profilImage: AssetImage(ImageRasterPath.market2),
-    name: "Fashion Store",
-    country: "USA",
-    city: "New York",
+    name: "Agro Store",
+    country: "India",
+    city: "Ernakulam",
   );
 }

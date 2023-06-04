@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pro_agro/modules/splash/splash_binding.dart';
-import '../modules/pages/bookingpage/booking_binding.dart';
 import '../modules/pages/botomscreen/bottom_screens.dart';
-import '../modules/pages/homepage/app/features/explore/bindings/explore_binding.dart';
 import '../modules/splash/splash_screen.dart';
-import '../modules/pages/botomscreen/bottomview_binding.dart';
 import '../modules/pages/homepage/app/features/explore/views/screens/explore_screen.dart';
 import '../modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
 
@@ -13,27 +9,20 @@ class AppRoutes {
     GetPage(
       name: '/splash',
       page: () => const SplashScreen(),
-      bindings: [
-        SplashBinding(),
-        BottomViewBinding(),
-        ExploreBinding(),
-        BookingPageBinding(),
-      ],
+      bindings: const [],
     ),
     GetPage(
       name: '/home',
-      page: () =>  PersistentBottomView(),
+      page: () => PersistentBottomView(),
     ),
     GetPage(
       name: '/explore',
-      page: () =>  ExploreScreen(),
-      binding: ExploreBinding(),
+      page: () => ExploreScreen(),
     ),
     GetPage(
       // ignore: prefer_interpolation_to_compose_strings
       name: Routes.product + "/:id",
-      page: () => const ProductDetailScreen(),
-      binding: ProductDetailBinding(),
+      page: () => ProductDetailScreen(),
       transition: Transition.downToUp,
     ),
   ];

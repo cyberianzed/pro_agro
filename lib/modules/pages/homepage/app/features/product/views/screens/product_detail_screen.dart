@@ -34,18 +34,20 @@ part '../components/share_button.dart';
 part '../components/views_text.dart';
 
 class ProductDetailScreen extends GetView<ProductDetailController> {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+   ProductDetailScreen({Key? key}) : super(key: key);
+    final ProductDetailController _controller = Get.put(ProductDetailController());
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
         () =>
-            (controller.data.value == null || controller.dataUser.value == null)
+            (_controller.data.value == null || _controller.dataUser.value == null)
                 ? const Center(child: Text("Product or User Not Found"))
                 : _buildProductDetail(
-                    product: controller.data.value!,
-                    user: controller.dataUser.value!,
+                    product: _controller.data.value!,
+                    user: _controller.dataUser.value!,
                   ),
       ),
       bottomNavigationBar: Padding(
@@ -68,7 +70,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
       children: [
         // DETAIL CONTENT
         SingleChildScrollView(
-          controller: controller.scroll,
+          controller: _controller.scroll,
           child: Column(
             children: [
               Stack(
@@ -133,11 +135,11 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
         // HEADER BUTTON
         Obx(
           () => AnimatedOpacity(
-            opacity: controller.opacityActionButton.value,
+            opacity: _controller.opacityActionButton.value,
             duration: const Duration(milliseconds: 200),
-            onEnd: () => controller.onEndAnimationActionButton(),
+            onEnd: () => _controller.onEndAnimationActionButton(),
             child: Visibility(
-              visible: controller.isVisibleActionButton.value,
+              visible: _controller.isVisibleActionButton.value,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
@@ -145,12 +147,12 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                 ),
                 child: Row(
                   children: [
-                    _BackButton(onPressed: () => controller.back()),
+                    _BackButton(onPressed: () => _controller.back()),
                     const Spacer(),
                     _FavoriteButton(
                       initial: product.isFavorite,
                       onChanged: (favorite) {
-                        controller.changeFavoriteProduct(product, favorite);
+                        _controller.changeFavoriteProduct(product, favorite);
                       },
                     ),
                     const SizedBox(width: 15),
