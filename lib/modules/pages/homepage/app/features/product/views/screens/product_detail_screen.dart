@@ -5,8 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/explore/controllers/explore_controller.dart';
-import 'package:pro_agro/modules/pages/homepage/app/features/explore/views/screens/cart_screen.dart';
-import '../../../../../../../../utils/color_constants.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/custom_icon_button.dart';
 import '../../../../shared_components/indicator.dart';
@@ -15,6 +13,7 @@ import '../../../../utils/services/model/user.dart';
 import '../../../../utils/services/src/product_service.dart';
 import '../../../../utils/services/src/user_service.dart';
 import '../../../../utils/ui/app_snackbar.dart';
+import '../../../explore/screens/cart_screen.dart';
 // binding
 part '../../bindings/product_detail_binding.dart';
 

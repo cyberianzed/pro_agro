@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/services/model/product.dart';
-import '../../controllers/explore_controller.dart';
+import '../../../utils/services/model/product.dart';
+import '../controllers/explore_controller.dart';
+
 
 class CartPage extends GetView<ExploreController> {
   const CartPage({super.key});

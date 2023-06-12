@@ -3,19 +3,16 @@ library explore;
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD:lib/modules/pages/homepage/app/features/explore/views/screens/explore_screen.dart
-import 'package:pro_agro/modules/pages/homepage/app/features/explore/views/screens/cart_screen.dart';
-import 'package:pro_agro/modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
-=======
 import 'package:pro_agro/modules/pages/homepage/app/features/filter/ProductFilterPage.dart';
->>>>>>> 98375e3691437ad579dab76521335cb83c5b6cf4:lib/modules/pages/homepage/app/features/explore/screens/explore_screen.dart
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../../../constans/app_constants.dart';
 import '../../../shared_components/filter_button.dart';
 import '../../../shared_components/product_card.dart';
 import '../../../shared_components/search_field.dart';
 import '../../../utils/services/model/product.dart';
+import '../../product/views/screens/product_detail_screen.dart';
 import '../controllers/explore_controller.dart';
+import 'cart_screen.dart';
 
 // binding
 // part '../../bindings/explore_binding.dart';
@@ -54,6 +51,7 @@ class ExploreScreen extends GetView<ExploreController> {
                       },
                     ),
                     CartButton(onPressed: () {
+                      // ignore: prefer_const_constructors
                       Get.to(() => CartPage());
                     }),
                   ],

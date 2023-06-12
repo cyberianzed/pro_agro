@@ -27,9 +27,6 @@ class AppSnackbar {
     );
   }
 
-<<<<<<< HEAD
-
-=======
   static void showSuccess(String message) {
     Get.snackbar(
       'Success',
@@ -41,5 +38,4 @@ class AppSnackbar {
       duration: Duration(seconds: 2),
     );
   }
->>>>>>> 879bc9d92280dec7d5c478e48afdd7381bb42bfc
 }
