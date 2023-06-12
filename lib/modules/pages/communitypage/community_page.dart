@@ -10,6 +10,7 @@ class CommunityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text('Community Page'),
       ),
@@ -181,6 +182,7 @@ void _showAddArticleBottomSheet(BuildContext context) {
 
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(16.0),
@@ -265,6 +267,7 @@ void _showAddArticleBottomSheet(BuildContext context) {
                 },
                 child: const Text('Submit'),
               ),
+              SizedBox(height: MediaQuery.of(context).size.height / 4),
             ],
           ),
         ),

@@ -26,4 +26,6 @@ class AppSnackbar {
       backgroundColor: Colors.white,
     );
   }
+
+
 }
