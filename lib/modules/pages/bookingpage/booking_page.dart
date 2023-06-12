@@ -5,7 +5,7 @@ import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
 class BookingPage extends StatelessWidget {
   final ProduceController produceController = Get.put(ProduceController());
 
-  BookingPage({super.key});
+  BookingPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,12 @@ class BookingPage extends StatelessWidget {
           Obx(() => _buildFilterButtons()),
           Expanded(child: Obx(() => _buildProduceList())),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _createBooking(context);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -75,12 +81,86 @@ class BookingPage extends StatelessWidget {
       },
     );
   }
+
+  void _createBooking(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        String name = '';
+        String community = '';
+        String sowingMonth = '';
+        String harvestingMonth = '';
+        String harvestingProduceWeight = '';
+
+        return AlertDialog(
+          title: const Text('Create Booking'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                onChanged: (value) => name = value,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
+              ),
+              TextField(
+                onChanged: (value) => community = value,
+                decoration: const InputDecoration(
+                  labelText: 'Community',
+                ),
+              ),
+              TextField(
+                onChanged: (value) => sowingMonth = value,
+                decoration: const InputDecoration(
+                  labelText: 'Sowing Month',
+                ),
+              ),
+              TextField(
+                onChanged: (value) => harvestingMonth = value,
+                decoration: const InputDecoration(
+                  labelText: 'Harvesting Month',
+                ),
+              ),
+              TextField(
+                onChanged: (value) => harvestingProduceWeight = value,
+                decoration: const InputDecoration(
+                  labelText: 'Harvesting Produce Weight',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                final produce = Produce(
+                  name: name,
+                  community: community,
+                  sowingMonth: sowingMonth,
+                  harvestingMonth: harvestingMonth,
+                  harvestingProduceWeight: harvestingProduceWeight,
+                );
+                produceController.addProduce(produce);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Create'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 class ProduceCard extends StatelessWidget {
   final Produce produce;
 
-  const ProduceCard({super.key, required this.produce});
+  const ProduceCard({Key? key, required this.produce});
 
   @override
   Widget build(BuildContext context) {
