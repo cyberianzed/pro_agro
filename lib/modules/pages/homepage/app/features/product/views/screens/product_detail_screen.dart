@@ -63,7 +63,10 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
             _AddCartButton(onPressed: () {
               _explorecontroller.addToCart(_pdetailcontroller
                   .data.value!); // Call addToCart method in the controller
-              AppSnackbar.showSuccess('Added to Cart');
+              AppSnackbar.showSuccessProduct(
+                productImage: _explorecontroller.cartProducts[0].images[0],
+                productName: _explorecontroller.cartProducts[0].name,
+              );
             }),
             const SizedBox(width: kSpacing / 2),
           ],
@@ -165,7 +168,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     ),
                     const SizedBox(width: 15),
                     CartButton(onPressed: () {
-                      Get.to(() => CartPage());
+                      Get.to(() => const CartPage());
                     }),
                   ],
                 ),

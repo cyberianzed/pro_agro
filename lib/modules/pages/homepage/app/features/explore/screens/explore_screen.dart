@@ -2,6 +2,7 @@ library explore;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/filter/ProductFilterPage.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -10,7 +11,6 @@ import '../../../shared_components/filter_button.dart';
 import '../../../shared_components/product_card.dart';
 import '../../../shared_components/search_field.dart';
 import '../../../utils/services/model/product.dart';
-import '../../product/views/screens/product_detail_screen.dart';
 import '../controllers/explore_controller.dart';
 import 'cart_screen.dart';
 
@@ -45,15 +45,18 @@ class ExploreScreen extends GetView<ExploreController> {
                       ),
                     ),
                     const SizedBox(width: kSpacing),
-                    FilterButton(
+                    FilterSizeButton(
+                      icon: FontAwesomeIcons.slidersH,
                       onPressed: () {
                         Get.to(() => ProductFilterPage());
                       },
                     ),
-                    CartButton(onPressed: () {
-                      // ignore: prefer_const_constructors
-                      Get.to(() => CartPage());
-                    }),
+                    FilterSizeButton(
+                      onPressed: () {
+                        Get.to(() => const CartPage());
+                      },
+                      icon: FontAwesomeIcons.cartShopping,
+                    ),
                   ],
                 ),
               )

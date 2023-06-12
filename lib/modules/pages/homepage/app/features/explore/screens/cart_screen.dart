@@ -3,15 +3,14 @@ import 'package:get/get.dart';
 import '../../../utils/services/model/product.dart';
 import '../controllers/explore_controller.dart';
 
-
 class CartPage extends GetView<ExploreController> {
-  const CartPage({super.key});
+  const CartPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        title: const Text('Cart'),
       ),
       body: Obx(
         () => ListView.builder(
@@ -19,10 +18,11 @@ class CartPage extends GetView<ExploreController> {
           itemBuilder: (context, index) {
             final Product product = controller.cartProducts[index];
             final int quantity = controller.cartQuantities[index];
-            final double totalPrice = product.price * quantity;
+            final double totalPrice =
+                controller.cartProducts[index].price * quantity;
 
             return ListTile(
-              leading: Container(
+              leading: SizedBox(
                 width: 50,
                 height: 50,
                 child: Image(
@@ -31,26 +31,27 @@ class CartPage extends GetView<ExploreController> {
               ),
               title: Text(
                 product.name,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.remove),
+                    icon: const Icon(Icons.remove),
                     onPressed: () => controller.decrementQuantity(index),
                   ),
-                  Text(quantity.toString()),
+                  Obx(() => Text(controller.cartQuantities[index].toString())),
                   IconButton(
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     onPressed: () => controller.incrementQuantity(index),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Text(
-                    '\$${totalPrice.toStringAsFixed(2)}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    '₹ ${totalPrice.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () => controller.removeFromCart(index),
                   ),
                 ],
@@ -61,11 +62,11 @@ class CartPage extends GetView<ExploreController> {
       ),
       bottomNavigationBar: Obx(
         () => Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           color: Colors.grey[300],
           child: Text(
-            'Total: \$${controller.totalPrice.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            'Total: ₹ ${controller.totalPrice.toStringAsFixed(2)}',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
       ),

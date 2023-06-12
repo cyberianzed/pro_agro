@@ -29,21 +29,27 @@ class ExploreController extends GetxController {
       cartProducts.add(product);
       cartQuantities.add(1);
     }
+
+    refresh();
   }
 
   void removeFromCart(int index) {
     cartProducts.removeAt(index);
     cartQuantities.removeAt(index);
+
+    refresh();
   }
 
   void incrementQuantity(int index) {
     cartQuantities[index]++;
+    refresh();
   }
 
   void decrementQuantity(int index) {
     if (cartQuantities[index] > 1) {
       cartQuantities[index]--;
     }
+    refresh();
   }
 
   void goToDetailProduct(Product product) {
