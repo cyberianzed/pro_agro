@@ -7,7 +7,7 @@ import '../../../utils/color_constants.dart';
 import '../bookingpage/booking_page.dart';
 import '../communitypage/community_page.dart';
 import '../events_page.dart';
-import '../homepage/app/features/explore/views/screens/explore_screen.dart';
+import '../homepage/app/features/explore/screens/explore_screen.dart';
 import '../profilepage/profile_page.dart';
 
 class PersistentBottomView extends GetView<BottomViewController> {

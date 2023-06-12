@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../modules/pages/botomscreen/bottom_screens.dart';
 import '../modules/splash/splash_screen.dart';
-import '../modules/pages/homepage/app/features/explore/views/screens/explore_screen.dart';
+import '../modules/pages/homepage/app/features/explore/screens/explore_screen.dart';
 import '../modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
 
 class AppRoutes {
