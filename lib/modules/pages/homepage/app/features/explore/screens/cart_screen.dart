@@ -17,10 +17,6 @@ class CartPage extends GetView<ExploreController> {
           itemCount: controller.cartProducts.length,
           itemBuilder: (context, index) {
             final Product product = controller.cartProducts[index];
-            final int quantity = controller.cartQuantities[index];
-            final double totalPrice =
-                controller.cartProducts[index].price * quantity;
-
             return ListTile(
               leading: SizedBox(
                 width: 50,
@@ -45,11 +41,10 @@ class CartPage extends GetView<ExploreController> {
                     onPressed: () => controller.incrementQuantity(index),
                   ),
                   const SizedBox(width: 16),
-                  Text(
-                    '₹ ${totalPrice.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
+                  Obx(() => Text(
+                        '₹ ${controller.cartProducts[index].price * controller.cartQuantities[index]}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      )),
                   IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () => controller.removeFromCart(index),
