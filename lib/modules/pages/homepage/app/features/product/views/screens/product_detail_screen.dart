@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/explore/controllers/explore_controller.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/explore/views/screens/cart_screen.dart';
+import '../../../../../../../../utils/color_constants.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/custom_icon_button.dart';
 import '../../../../shared_components/indicator.dart';
@@ -34,21 +37,22 @@ part '../components/share_button.dart';
 part '../components/views_text.dart';
 
 class ProductDetailScreen extends GetView<ProductDetailController> {
-   ProductDetailScreen({Key? key}) : super(key: key);
-    final ProductDetailController _controller = Get.put(ProductDetailController());
-
+  ProductDetailScreen({Key? key}) : super(key: key);
+  final ProductDetailController _pdetailcontroller =
+      Get.put(ProductDetailController());
+  final ExploreController _explorecontroller = Get.put(ExploreController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () =>
-            (_controller.data.value == null || _controller.dataUser.value == null)
-                ? const Center(child: Text("Product or User Not Found"))
-                : _buildProductDetail(
-                    product: _controller.data.value!,
-                    user: _controller.dataUser.value!,
-                  ),
+        () => (_pdetailcontroller.data.value == null ||
+                _pdetailcontroller.dataUser.value == null)
+            ? const Center(child: Text("Product or User Not Found"))
+            : _buildProductDetail(
+                product: _pdetailcontroller.data.value!,
+                user: _pdetailcontroller.dataUser.value!,
+              ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(kSpacing / 2),
@@ -57,7 +61,11 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
             const SizedBox(width: kSpacing / 2),
             _ChatButton(onPressed: () {}),
             const SizedBox(width: kSpacing),
-            _BuyButton(onPressed: () {}),
+            _AddCartButton(onPressed: () {
+              _explorecontroller.addToCart(_pdetailcontroller
+                  .data.value!); // Call addToCart method in the controller
+              AppSnackbar.showSuccess('Added to Cart');
+            }),
             const SizedBox(width: kSpacing / 2),
           ],
         ),
@@ -70,7 +78,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
       children: [
         // DETAIL CONTENT
         SingleChildScrollView(
-          controller: _controller.scroll,
+          controller: _pdetailcontroller.scroll,
           child: Column(
             children: [
               Stack(
@@ -135,11 +143,11 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
         // HEADER BUTTON
         Obx(
           () => AnimatedOpacity(
-            opacity: _controller.opacityActionButton.value,
+            opacity: _pdetailcontroller.opacityActionButton.value,
             duration: const Duration(milliseconds: 200),
-            onEnd: () => _controller.onEndAnimationActionButton(),
+            onEnd: () => _pdetailcontroller.onEndAnimationActionButton(),
             child: Visibility(
-              visible: _controller.isVisibleActionButton.value,
+              visible: _pdetailcontroller.isVisibleActionButton.value,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
@@ -147,16 +155,19 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                 ),
                 child: Row(
                   children: [
-                    _BackButton(onPressed: () => _controller.back()),
+                    _BackButton(onPressed: () => _pdetailcontroller.back()),
                     const Spacer(),
                     _FavoriteButton(
                       initial: product.isFavorite,
                       onChanged: (favorite) {
-                        _controller.changeFavoriteProduct(product, favorite);
+                        _pdetailcontroller.changeFavoriteProduct(
+                            product, favorite);
                       },
                     ),
                     const SizedBox(width: 15),
-                    _ShareButton(onPressed: () {}),
+                    CartButton(onPressed: () {
+                      Get.to(() => CartPage());
+                    }),
                   ],
                 ),
               ),

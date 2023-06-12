@@ -26,4 +26,16 @@ class AppSnackbar {
       backgroundColor: Colors.white,
     );
   }
+
+  static void showSuccess(String message) {
+    Get.snackbar(
+      'Success',
+      message,
+      icon: Icon(Icons.check_circle, color: Colors.white),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+      duration: Duration(seconds: 2),
+    );
+  }
 }
