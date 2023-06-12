@@ -3,22 +3,26 @@ library explore;
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD:lib/modules/pages/homepage/app/features/explore/views/screens/explore_screen.dart
 import 'package:pro_agro/modules/pages/homepage/app/features/explore/views/screens/cart_screen.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
+=======
+import 'package:pro_agro/modules/pages/homepage/app/features/filter/ProductFilterPage.dart';
+>>>>>>> 98375e3691437ad579dab76521335cb83c5b6cf4:lib/modules/pages/homepage/app/features/explore/screens/explore_screen.dart
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
-import '../../../../constans/app_constants.dart';
-import '../../../../shared_components/filter_button.dart';
-import '../../../../shared_components/product_card.dart';
-import '../../../../shared_components/search_field.dart';
-import '../../../../utils/services/model/product.dart';
-import '../../controllers/explore_controller.dart';
+import '../../../constans/app_constants.dart';
+import '../../../shared_components/filter_button.dart';
+import '../../../shared_components/product_card.dart';
+import '../../../shared_components/search_field.dart';
+import '../../../utils/services/model/product.dart';
+import '../controllers/explore_controller.dart';
 
 // binding
 // part '../../bindings/explore_binding.dart';
 
 // component
-part '../components/product_content.dart';
-part '../components/tab_bar_content.dart';
+part '../views/components/product_content.dart';
+part '../views/components/tab_bar_content.dart';
 
 class ExploreScreen extends GetView<ExploreController> {
   ExploreScreen({Key? key}) : super(key: key);
@@ -45,7 +49,9 @@ class ExploreScreen extends GetView<ExploreController> {
                     ),
                     const SizedBox(width: kSpacing),
                     FilterButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => ProductFilterPage());
+                      },
                     ),
                     CartButton(onPressed: () {
                       Get.to(() => CartPage());

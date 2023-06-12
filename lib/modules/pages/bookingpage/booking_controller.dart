@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 class ProduceController extends GetxController {
   final produceList = <Produce>[].obs;
   final selectedFilterOptionIndex = 0.obs;
@@ -46,17 +45,11 @@ class ProduceController extends GetxController {
     // Filter produce based on the selected option
     switch (filterOption) {
       case 1:
-        return produceList
-            .where((produce) => produce.harvestingMonth == 'March')
-            .toList();
+        return produceList.where((produce) => produce.harvestingMonth == 'March').toList();
       case 2:
-        return produceList
-            .where((produce) => produce.harvestingMonth == 'April')
-            .toList();
+        return produceList.where((produce) => produce.harvestingMonth == 'April').toList();
       case 3:
-        return produceList
-            .where((produce) => produce.harvestingMonth == 'May')
-            .toList();
+        return produceList.where((produce) => produce.harvestingMonth == 'May').toList();
       default:
         return produceList;
     }
@@ -64,6 +57,10 @@ class ProduceController extends GetxController {
 
   void selectFilterOption(int index) {
     selectedFilterOptionIndex.value = index;
+  }
+
+  void addProduce(Produce produce) {
+    produceList.add(produce);
   }
 }
 
