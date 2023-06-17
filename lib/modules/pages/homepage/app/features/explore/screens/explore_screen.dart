@@ -12,6 +12,7 @@ import '../../../shared_components/product_card.dart';
 import '../../../shared_components/search_field.dart';
 import '../../../utils/services/model/product.dart';
 import '../controllers/explore_controller.dart';
+import 'addproduct_screen.dart';
 import 'cart_screen.dart';
 
 // binding
@@ -92,6 +93,13 @@ class ExploreScreen extends GetView<ExploreController> {
               const Center(child: Text("Agro Produce")),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Get.to(() => AddProductPage());
+          },
+          label: const Text('Post'),
+          icon: const Icon(Icons.edit),
         ),
       ),
     );

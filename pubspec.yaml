@@ -28,8 +28,8 @@ dependencies:
   tab_indicator_styler: ^2.0.0
   table_calendar: ^3.0.9
   intl: ^0.18.1
-  firebase_storage: ^11.2.1
-  image_picker: ^0.8.7+5
+  firebase_storage: ^11.2.3
+  image_picker: ^0.8.9
 
 dev_dependencies:
   flutter_test:

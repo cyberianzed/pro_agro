@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                           AuthController.instance.login(
                               email.text.toString(), password.text.toString());
                         }),
-
+      
                     const Dividers(),
 // Signup button that navigates to the SignUp page
                     SignUpText(function: () {

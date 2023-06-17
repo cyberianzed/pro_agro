@@ -67,6 +67,7 @@ class ProductService {
     idUser: "fwg345",
     images: [
       AssetImage(ImageRasterPath.pestControlSpray),
+      AssetImage(ImageRasterPath.pestControlSpray),
     ],
     name: "Pest Control Spray",
     price: 899.00, // Updated price for India (in INR)

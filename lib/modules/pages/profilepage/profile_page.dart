@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro_agro/controllers/auth_controller.dart';
+import 'package:pro_agro/model/user_data.dart';
 import 'package:pro_agro/modules/pages/profilepage/update_profile_screen.dart';
-import '../../../controllers/auth_controller.dart';
-import '../../../model/user_profile.dart';
 
 class ProfilePage extends StatelessWidget {
-  final UserDetailRepository _userDetailRepository = UserDetailRepository();
+  final UserDetailController _userDetailController = Get.put(UserDetailController());
+
+
   ProfilePage({Key? key}) : super(key: key);
 
   @override
@@ -189,8 +191,8 @@ class ProfilePage extends StatelessWidget {
   }
 
   Future<UserDetail?> _fetchUserDetail() async {
-    final currentUser = await _userDetailRepository.getCurrentUser();
-    final userDetail = await _userDetailRepository.getUserDetail(currentUser);
+    final currentUser = await _userDetailController.getCurrentUser();
+    final userDetail = await _userDetailController.getUserDetail(currentUser);
     return userDetail;
   }
 }

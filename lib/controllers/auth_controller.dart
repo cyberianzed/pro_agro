@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:pro_agro/model/user_profile.dart';
+import 'package:pro_agro/model/user_data.dart';
 import 'package:pro_agro/modules/auth/login_screen.dart';
 import '../modules/pages/botomscreen/bottom_screens.dart';
 
@@ -118,25 +118,6 @@ class AuthController extends GetxController {
     if (user != null) {
       return user.uid;
     }
-    return '';
-  }
-
-  Future<String> getCurrentUserDocId() async {
-    final currentUserUid = getCurrentUserUid();
-
-    if (currentUserUid.isNotEmpty) {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('User')
-          .where('Uid', isEqualTo: currentUserUid)
-          .limit(1)
-          .get();
-
-      if (snapshot.docs.isNotEmpty) {
-        final userDocId = snapshot.docs[0].id;
-        return userDocId;
-      }
-    }
-
     return '';
   }
 
