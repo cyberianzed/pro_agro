@@ -12,23 +12,20 @@ class ProductDetailController extends GetxController {
   final Rx<User?> dataUser = Rx(null);
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    data.value = _getProduct();
+    data.value = await _getProduct();
     dataUser.value = _getUser();
-
+    
     scroll.addListener(onScroll);
   }
 
-  Product? _getProduct() {
+  Future<Product?> _getProduct() async {
     String? id = Get.parameters['id'];
-
     Product? product;
-
     if (id != null) {
-      product = productService.getProductByID(id);
+      product = await productService.getProductByID(id);
     }
-
     return product;
   }
 

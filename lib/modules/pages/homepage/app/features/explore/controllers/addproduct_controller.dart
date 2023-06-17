@@ -60,6 +60,7 @@ class AddProductController extends GetxController {
       'username': userName,
       'images': imageUrllist,
       'description': description,
+      'isFavorite': false
     });
 
     // Clear the text fields and selected images

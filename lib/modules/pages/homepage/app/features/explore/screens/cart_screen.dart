@@ -57,9 +57,10 @@ class CartPage extends GetView<ExploreController> {
                       icon: const Icon(Icons.remove),
                       onPressed: () => controller.decrementQuantity(index),
                     ),
-                    Obx(() => CircleAvatar(
-                          child:
-                              Text(controller.cartQuantities[index].toString()),
+                    Obx(() => Text(
+                          controller.cartQuantities[index].toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17),
                         )),
                     IconButton(
                       icon: const Icon(Icons.add),
