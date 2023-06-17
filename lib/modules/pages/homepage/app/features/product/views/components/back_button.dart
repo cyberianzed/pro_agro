@@ -1,7 +1,7 @@
 part of product_detail;
 
-class _BackButton extends StatelessWidget {
-  const _BackButton({required this.onPressed, Key? key}) : super(key: key);
+class CustomBackButton extends StatelessWidget {
+  const CustomBackButton({required this.onPressed, Key? key}) : super(key: key);
 
   final Function() onPressed;
 

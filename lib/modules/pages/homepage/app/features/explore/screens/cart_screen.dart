@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/services/model/product.dart';
+import '../../product/views/screens/product_detail_screen.dart';
 import '../controllers/explore_controller.dart';
 
 class CartPage extends GetView<ExploreController> {
@@ -11,26 +12,29 @@ class CartPage extends GetView<ExploreController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart'),
-        iconTheme: IconThemeData(color: Colors.black), // Set the icon color to black
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        elevation: 0,
+        // backgroundColor: Colors.black,
+        leadingWidth: 150,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            CustomBackButton(onPressed: () => controller.back()),
+          ],
+        ),
       ),
       body: Obx(
         () => ListView.builder(
           itemCount: controller.cartProducts.length,
           itemBuilder: (context, index) {
             final Product product = controller.cartProducts[index];
-            final int itemId = Random().nextInt(100000); // Generate a random item ID
-
+            final int itemId =
+                Random().nextInt(100000); // Generate a random item ID
             return Card(
-              margin: const EdgeInsets.all(8),
               child: ListTile(
-                leading: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image(
-                    image: controller.cartProducts[index].images[0],
-                  ),
+                leading: Image(
+                  image: controller.cartProducts[index].images[0],
                 ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +45,9 @@ class CartPage extends GetView<ExploreController> {
                     ),
                     Text(
                       'item ID: $itemId', // Display the random item ID
-                      style: TextStyle(fontSize: 12, color: Colors.grey), // Adjust the font size
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey), // Adjust the font size
                     ),
                   ],
                 ),
@@ -52,23 +58,27 @@ class CartPage extends GetView<ExploreController> {
                       onPressed: () => controller.decrementQuantity(index),
                     ),
                     Obx(() => CircleAvatar(
-                      child: Text(controller.cartQuantities[index].toString()),
-                    )),
+                          child:
+                              Text(controller.cartQuantities[index].toString()),
+                        )),
                     IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () => controller.incrementQuantity(index),
                     ),
-                    const SizedBox(width: 16),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Colors.red, // Set the delete button color to red
+                      onPressed: () => controller.removeFromCart(index),
+                    ),
+                    const Expanded(child: SizedBox()),
                     Obx(() => Text(
-                      '₹ ${controller.cartProducts[index].price * controller.cartQuantities[index]}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    )),
+                          '₹ ${controller.cartProducts[index].price * controller.cartQuantities[index]}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
+                        )),
                   ],
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  color: Colors.red, // Set the delete button color to red
-                  onPressed: () => controller.removeFromCart(index),
                 ),
               ),
             );
@@ -84,15 +94,18 @@ class CartPage extends GetView<ExploreController> {
             children: [
               Text(
                 'Total: ₹ ${controller.totalPrice.toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               ElevatedButton(
                 onPressed: () {
                   // Add your buy button functionality here
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50), // Adjust button padding
-                  textStyle: const TextStyle(fontSize: 18), // Adjust button text size
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 50), // Adjust button padding
+                  textStyle:
+                      const TextStyle(fontSize: 18), // Adjust button text size
                 ),
                 child: const Text('Buy'),
               ),

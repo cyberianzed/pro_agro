@@ -37,6 +37,15 @@ class ProductService {
     ];
   }
 
+  List<Product> getHotDeals() {
+    return [
+      _vegetableSeeds,
+      _plantPots,
+      _organicFertilizer,
+      _fruitSeeds,
+    ];
+  }
+
   final _organicFertilizer = const Product(
     id: "12345",
     idUser: "fwg123",

@@ -44,13 +44,14 @@ class ExploreScreen extends GetView<ExploreController> {
                         },
                       ),
                     ),
-                    const SizedBox(width: kSpacing),
+                    const SizedBox(width: 5),
                     FilterSizeButton(
                       icon: FontAwesomeIcons.slidersH,
                       onPressed: () {
                         Get.to(() => ProductFilterPage());
                       },
                     ),
+                    const SizedBox(width: 5),
                     FilterSizeButton(
                       onPressed: () {
                         Get.to(() => const CartPage());
@@ -64,24 +65,27 @@ class ExploreScreen extends GetView<ExploreController> {
           },
           body: _TabBarContent(
             tabs: const [
+              Text("Hot Deals"),
               Text("All"),
               Text("Agro Produce"),
               Text("Livestock"),
               Text("Farm Machinery"),
-              Text("Art"),
               Text("Sporting Goods"),
               Text("Home & Garden"),
             ],
             children: [
               _ProductContent(
+                _controller.getHotDeals(),
+                onPressed: (product) => _controller.goToDetailProduct(product),
+              ),
+              _ProductContent(
                 _controller.getAllProduct(),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               _ProductContent(
-                _controller.getFashionProduct(),
+                _controller.getAgroProduce(),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
-              const Center(child: Text("Agro Produce")),
               const Center(child: Text("Agro Produce")),
               const Center(child: Text("Agro Produce")),
               const Center(child: Text("Agro Produce")),

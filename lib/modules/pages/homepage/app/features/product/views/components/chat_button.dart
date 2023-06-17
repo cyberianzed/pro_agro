@@ -1,7 +1,7 @@
 part of product_detail;
 
-class _ChatButton extends StatelessWidget {
-  const _ChatButton({required this.onPressed, Key? key}) : super(key: key);
+class _ViewCartButton extends StatelessWidget {
+  const _ViewCartButton({required this.onPressed, Key? key}) : super(key: key);
 
   final Function() onPressed;
 
@@ -9,7 +9,7 @@ class _ChatButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomIconButton(
       icon: Icon(
-        FontAwesomeIcons.commentAlt,
+        FontAwesomeIcons.cartShopping,
         color: Theme.of(context).primaryColor,
       ),
       onPressed: onPressed,

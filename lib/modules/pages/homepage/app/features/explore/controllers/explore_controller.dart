@@ -7,7 +7,9 @@ class ExploreController extends GetxController {
   final productService = ProductService();
 
   List<Product> getAllProduct() => productService.getAll();
-  List<Product> getFashionProduct() => productService.getAgroProduce();
+  List<Product> getAgroProduce() => productService.getAgroProduce();
+  List<Product> getHotDeals() => productService.getHotDeals();
+  void back() => Get.back();
 
   // Cart related functions
   RxList<Product> cartProducts = <Product>[].obs;

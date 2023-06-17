@@ -32,7 +32,6 @@ part '../components/price_text.dart';
 part '../components/product_image.dart';
 part '../components/rating.dart';
 part '../components/review_text.dart';
-part '../components/share_button.dart';
 part '../components/views_text.dart';
 
 class ProductDetailScreen extends GetView<ProductDetailController> {
@@ -58,7 +57,9 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
         child: Row(
           children: [
             const SizedBox(width: kSpacing / 2),
-            _ChatButton(onPressed: () {}),
+            _ViewCartButton(onPressed: () {
+              Get.to(() => const CartPage());
+            }),
             const SizedBox(width: kSpacing),
             _AddCartButton(onPressed: () {
               _explorecontroller.addToCart(_pdetailcontroller
@@ -157,7 +158,8 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                 ),
                 child: Row(
                   children: [
-                    _BackButton(onPressed: () => _pdetailcontroller.back()),
+                    CustomBackButton(
+                        onPressed: () => _pdetailcontroller.back()),
                     const Spacer(),
                     _FavoriteButton(
                       initial: product.isFavorite,
@@ -166,10 +168,6 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                             product, favorite);
                       },
                     ),
-                    const SizedBox(width: 15),
-                    CartButton(onPressed: () {
-                      Get.to(() => const CartPage());
-                    }),
                   ],
                 ),
               ),
