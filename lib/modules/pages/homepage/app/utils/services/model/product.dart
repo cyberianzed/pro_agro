@@ -1,13 +1,10 @@
-
-import 'package:flutter/material.dart';
-
 class Product {
   final String id;
   final String idUser;
   final String name;
   final double price;
   final String description;
-  final List<ImageProvider> images;
+  final List<String> images;
   final bool isFavorite;
   final int totalViews;
   final int totalReview;

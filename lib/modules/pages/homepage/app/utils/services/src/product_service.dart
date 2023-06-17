@@ -1,10 +1,8 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../constans/app_constants.dart';
 import '../model/product.dart';
 
 class ProductService {
@@ -25,14 +23,11 @@ class ProductService {
         final product = Product(
           id: id,
           idUser: 'fwg123',
-          images: [
-            const AssetImage(ImageRasterPath.organicFertilizer),
-          ], // Replace with actual image URLs from Firebase Storage
+          images: List<String>.from(data['images']),
           name: data['name'],
           price: data['price'].toDouble(),
           isFavorite: data['isFavorite'],
           description: data['description'],
-
           totalViews: Random().nextInt(100),
           totalReview: Random().nextInt(30),
           rating: (Random().nextDouble() * 5).toPrecision(1),
@@ -52,17 +47,14 @@ class ProductService {
       final product = Product(
         id: doc.id,
         idUser: 'fwg123',
-        images: [
-          const AssetImage(ImageRasterPath.organicFertilizer),
-        ], // Replace with actual image URLs from Firebase Storage
+        images: List<String>.from(data['images']),
         name: data['name'],
         price: data['price'].toDouble(),
         isFavorite: data['isFavorite'],
         description: data['description'],
-
         totalViews: Random().nextInt(100),
         totalReview: Random().nextInt(30),
-        rating: Random().nextDouble() * 5,
+        rating: (Random().nextDouble() * 5).toPrecision(1),
       );
       products.add(product);
     }

@@ -55,7 +55,7 @@ class ExploreScreen extends GetView<ExploreController> {
                     const SizedBox(width: 5),
                     FilterSizeButton(
                       onPressed: () {
-                        Get.to(() => const CartPage());
+                        Get.to(() => CartPage());
                       },
                       icon: FontAwesomeIcons.cartShopping,
                     ),

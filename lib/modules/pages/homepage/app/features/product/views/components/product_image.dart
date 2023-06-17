@@ -3,7 +3,7 @@ part of product_detail;
 class _ProductImage extends StatelessWidget {
   _ProductImage(this.images, {Key? key}) : super(key: key);
 
-  final List<ImageProvider> images;
+  final List<String> images;
   final _index = 0.obs;
 
   @override
@@ -16,8 +16,8 @@ class _ProductImage extends StatelessWidget {
           child: PageView.builder(
             itemCount: images.length,
             itemBuilder: (context, index) {
-              return Image(
-                image: images[index],
+              return Image.network(
+                images[index],
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.topCenter,
               );

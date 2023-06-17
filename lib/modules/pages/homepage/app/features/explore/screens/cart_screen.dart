@@ -6,7 +6,8 @@ import '../../product/views/screens/product_detail_screen.dart';
 import '../controllers/explore_controller.dart';
 
 class CartPage extends GetView<ExploreController> {
-  const CartPage({Key? key}) : super(key: key);
+  CartPage({Key? key}) : super(key: key);
+  final ExploreController _explorecontroller = Get.put(ExploreController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +21,21 @@ class CartPage extends GetView<ExploreController> {
             const SizedBox(
               width: 20,
             ),
-            CustomBackButton(onPressed: () => controller.back()),
+            CustomBackButton(onPressed: () => _explorecontroller.back()),
           ],
         ),
       ),
       body: Obx(
         () => ListView.builder(
-          itemCount: controller.cartProducts.length,
+          itemCount: _explorecontroller.cartProducts.length,
           itemBuilder: (context, index) {
-            final Product product = controller.cartProducts[index];
+            final Product product = _explorecontroller.cartProducts[index];
             final int itemId =
                 Random().nextInt(100000); // Generate a random item ID
             return Card(
               child: ListTile(
-                leading: Image(
-                  image: controller.cartProducts[index].images[0],
+                leading: Image.network(
+                  _explorecontroller.cartProducts[index].images[0],
                 ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,25 +56,27 @@ class CartPage extends GetView<ExploreController> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: () => controller.decrementQuantity(index),
+                      onPressed: () =>
+                          _explorecontroller.decrementQuantity(index),
                     ),
                     Obx(() => Text(
-                          controller.cartQuantities[index].toString(),
+                          _explorecontroller.cartQuantities[index].toString(),
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17),
                         )),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: () => controller.incrementQuantity(index),
+                      onPressed: () =>
+                          _explorecontroller.incrementQuantity(index),
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
                       color: Colors.red, // Set the delete button color to red
-                      onPressed: () => controller.removeFromCart(index),
+                      onPressed: () => _explorecontroller.removeFromCart(index),
                     ),
                     const Expanded(child: SizedBox()),
                     Obx(() => Text(
-                          '₹ ${controller.cartProducts[index].price * controller.cartQuantities[index]}',
+                          '₹ ${_explorecontroller.cartProducts[index].price * _explorecontroller.cartQuantities[index]}',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -94,7 +97,7 @@ class CartPage extends GetView<ExploreController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total: ₹ ${controller.totalPrice.toStringAsFixed(2)}',
+                'Total: ₹ ${_explorecontroller.totalPrice.toStringAsFixed(2)}',
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),

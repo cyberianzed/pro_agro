@@ -23,7 +23,7 @@ class _ProductContent extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => ProductCard(
                 heroTag: data[index].id,
                 data: ProductCardData(
-                  image: data[index].images[0],
+                  imageurl: data[index].images[0],
                   initialFavorite: data[index].isFavorite,
                   name: data[index].name,
                   price: data[index].price,

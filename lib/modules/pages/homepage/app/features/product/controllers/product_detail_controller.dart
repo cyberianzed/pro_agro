@@ -60,7 +60,7 @@ class ProductDetailController extends GetxController {
 
   void changeFavoriteProduct(Product product, bool favorite) {
     AppSnackbar.showStatusFavoriteProduct(
-      productImage: product.images[0],
+      imageurl: product.images[0],
       productName: product.name,
       isFavorite: favorite,
     );
