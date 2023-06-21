@@ -13,8 +13,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
   url_launcher: ^6.0.17
-
   get: any
   firebase_auth: any
   firebase_core: any
