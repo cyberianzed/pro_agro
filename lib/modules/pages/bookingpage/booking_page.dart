@@ -253,15 +253,15 @@ class ProduceCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
-                  GetStorage().read('isadmin')==true
-                  ?IconButton(
-                    onPressed: onDelete,
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.grey,
-                    ),
-                  ):SizedBox(),
+                  GetStorage().read('isadmin') == true
+                      ? IconButton(
+                          onPressed: onDelete,
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.grey,
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
               const SizedBox(height: 8.0),
