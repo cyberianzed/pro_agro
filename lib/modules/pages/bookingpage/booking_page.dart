@@ -1,9 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
+import 'package:pro_agro/model/user_data.dart';
+import 'package:pro_agro/controllers/auth_controller.dart';
+import 'detailed_booking.dart';
 
 class BookingPage extends StatelessWidget {
   final ProduceController produceController = Get.put(ProduceController());
+  final String localAdmin = '82837473292';
 
   BookingPage({Key? key});
 
@@ -11,11 +17,25 @@ class BookingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Booking Page'),
-      ),
+          backgroundColor: Colors.grey,
+          elevation: 0,
+          leadingWidth: 250,
+          leading: Padding(
+            padding: const EdgeInsets.only(
+              top: 20,
+              left: 20,
+            ),
+            child: Text(
+              'BOOKINGS',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 69, 51, 51),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            ),
+          )),
       body: Column(
         children: [
-          Obx(() => _buildFilterButtons()),
+          _monthFilterButtons(),
           Expanded(child: Obx(() => _buildProduceList())),
         ],
       ),
@@ -28,45 +48,54 @@ class BookingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterButtons() {
+  Widget _monthFilterButtons() {
+    const List<String> monthNames = [
+      'All',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          ElevatedButton(
-            onPressed: () => produceController.selectFilterOption(1),
-            style: ButtonStyle(
-              backgroundColor:
-                  produceController.selectedFilterOptionIndex.value == 1
-                      ? MaterialStateProperty.all<Color>(Colors.green)
-                      : null,
-            ),
-            child: const Text('March'),
+          TextButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: Get.context!,
+                builder: (context) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children:
+                          List<Widget>.generate(monthNames.length, (index) {
+                        final monthName = monthNames[index];
+                        return ListTile(
+                          title: Text(monthName),
+                          onTap: () {
+                            produceController.selectFilterOption(index);
+                            Get.back();
+                          },
+                        );
+                      }),
+                    ),
+                  );
+                },
+              );
+            },
+            child:
+                Text('Filter by Month', style: TextStyle(color: Colors.blue)),
           ),
-          const SizedBox(width: 5.0),
-          ElevatedButton(
-            onPressed: () => produceController.selectFilterOption(2),
-            style: ButtonStyle(
-              backgroundColor:
-                  produceController.selectedFilterOptionIndex.value == 2
-                      ? MaterialStateProperty.all<Color>(Colors.green)
-                      : null,
-            ),
-            child: const Text('April'),
-          ),
-          const SizedBox(width: 5.0),
-          ElevatedButton(
-            onPressed: () => produceController.selectFilterOption(3),
-            style: ButtonStyle(
-              backgroundColor:
-                  produceController.selectedFilterOptionIndex.value == 3
-                      ? MaterialStateProperty.all<Color>(Colors.green)
-                      : null,
-            ),
-            child: const Text('May'),
-          ),
-          // Add more filter buttons for other months
         ],
       ),
     );
@@ -77,7 +106,12 @@ class BookingPage extends StatelessWidget {
       itemCount: produceController.filteredProduces.length,
       itemBuilder: (context, index) {
         final produce = produceController.filteredProduces[index];
-        return ProduceCard(produce: produce);
+        return ProduceCard(
+          produce: produce,
+          onDelete: () {
+            produceController.removeProduce(produce);
+          },
+        );
       },
     );
   }
@@ -91,6 +125,8 @@ class BookingPage extends StatelessWidget {
         String sowingMonth = '';
         String harvestingMonth = '';
         String harvestingProduceWeight = '';
+        String contactNo = '';
+        String description = '';
 
         return AlertDialog(
           title: const Text('Create Booking'),
@@ -127,18 +163,37 @@ class BookingPage extends StatelessWidget {
                   labelText: 'Harvesting Produce Weight',
                 ),
               ),
+              TextField(
+                onChanged: (value) => contactNo = value,
+                decoration: const InputDecoration(
+                  labelText: 'Contact Number ',
+                ),
+              ),
+              TextField(
+                onChanged: (value) => description = value,
+                decoration: const InputDecoration(
+                  labelText: 'Description of the Product',
+                ),
+              ),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () {
+                var userDetail;
                 final produce = Produce(
-                  name: name,
-                  community: community,
-                  sowingMonth: sowingMonth,
-                  harvestingMonth: harvestingMonth,
-                  harvestingProduceWeight: harvestingProduceWeight,
-                );
+                    name: name,
+                    rating: (Random().nextDouble() * 5).toPrecision(1),
+                    community: community,
+                    sowingMonth: sowingMonth,
+                    harvestingMonth: harvestingMonth,
+                    harvestingProduceWeight: harvestingProduceWeight,
+                    adminContact: localAdmin,
+                    //TODO USERDETAIL
+                    // farmerName: userDetail.username,
+                    farmerName: 'Farmer 0',
+                    farmerContact: contactNo,
+                    description: description);
                 produceController.addProduce(produce);
                 Navigator.of(context).pop();
               },
@@ -159,55 +214,78 @@ class BookingPage extends StatelessWidget {
 
 class ProduceCard extends StatelessWidget {
   final Produce produce;
+  final VoidCallback onDelete;
 
-  const ProduceCard({Key? key, required this.produce});
+  const ProduceCard({Key? key, required this.produce, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              produce.name,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailedBookingPage(produce: produce),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 2.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    produce.name,
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: onDelete,
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              'Community: ${produce.community}',
-              style: const TextStyle(
-                fontSize: 16.0,
+              const SizedBox(height: 8.0),
+              Text(
+                'Community: ${produce.community}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              'Sowing Month: ${produce.sowingMonth}',
-              style: const TextStyle(
-                fontSize: 16.0,
+              const SizedBox(height: 8.0),
+              Text(
+                'Sowing Month: ${produce.sowingMonth}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-            Text(
-              'Harvesting Month: ${produce.harvestingMonth}',
-              style: const TextStyle(
-                fontSize: 16.0,
+              Text(
+                'Harvesting Month: ${produce.harvestingMonth}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-            Text(
-              'Harvesting Produce Weight: ${produce.harvestingProduceWeight}',
-              style: const TextStyle(
-                fontSize: 16.0,
+              Text(
+                'Harvesting Produce Weight: ${produce.harvestingProduceWeight}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
