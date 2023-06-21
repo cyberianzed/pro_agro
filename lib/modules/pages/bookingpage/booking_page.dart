@@ -1,16 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
-import 'package:pro_agro/model/user_data.dart';
-import 'package:pro_agro/controllers/auth_controller.dart';
 import 'booking_details.dart';
 
 class BookingPage extends StatelessWidget {
   final ProduceController produceController = Get.put(ProduceController());
   final String localAdmin = '82837473292';
 
-  BookingPage({Key? key});
+  BookingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +17,12 @@ class BookingPage extends StatelessWidget {
       child: Scaffold(
         // backgroundColor: Color(0xfff0f4f7),
         appBar: AppBar(
-            backgroundColor: Color(0xfff0f4f7),
+            backgroundColor: const Color(0xfff0f4f7),
             elevation: 0,
             leadingWidth: 250,
             actions: [Center(child: _monthFilterButtons())],
-            leading: Padding(
-              padding: const EdgeInsets.only(
+            leading: const Padding(
+              padding: EdgeInsets.only(
                 top: 20,
                 left: 15,
               ),
@@ -93,7 +92,8 @@ class BookingPage extends StatelessWidget {
               },
             );
           },
-          child: Text('Filter by Month', style: TextStyle(color: Colors.blue)),
+          child: const Text('Filter by Month',
+              style: TextStyle(color: Colors.blue)),
         ),
       ],
     );
@@ -178,7 +178,6 @@ class BookingPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                var userDetail;
                 final produce = Produce(
                     name: name,
                     rating: (Random().nextDouble() * 5).toPrecision(1),
@@ -187,9 +186,7 @@ class BookingPage extends StatelessWidget {
                     harvestingMonth: harvestingMonth,
                     harvestingProduceWeight: harvestingProduceWeight,
                     adminContact: localAdmin,
-                    //TODO USERDETAIL
-                    // farmerName: userDetail.username,
-                    farmerName: 'Farmer 0',
+                    farmerName: GetStorage().read('username'),
                     farmerContact: contactNo,
                     description: description);
                 produceController.addProduce(produce);
@@ -214,7 +211,7 @@ class ProduceCard extends StatelessWidget {
   final Produce produce;
   final VoidCallback onDelete;
 
-  const ProduceCard({Key? key, required this.produce, required this.onDelete});
+  const ProduceCard({super.key, required this.produce, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +246,7 @@ class ProduceCard extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: onDelete,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete,
                       color: Colors.grey,
                     ),

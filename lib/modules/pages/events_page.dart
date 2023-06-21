@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
@@ -40,76 +41,77 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Event Calendar'),
-      ),
-      body: Column(
-        children: [
-          Obx(() => TableCalendar(
-                focusedDay: _focusedDay.value,
-                firstDay: DateTime(2023),
-                lastDay: DateTime(2099),
-                calendarFormat: CalendarFormat.month,
-                selectedDayPredicate: (day) =>
-                    isSameDay(_selectedDate.value, day),
-                onDaySelected: (selectedDay, focusedDay) {
-                  if (!isSameDay(_selectedDate.value, selectedDay)) {
-                    _selectedDate.value = selectedDay;
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Event Calendar'),
+        ),
+        body: Column(
+          children: [
+            Obx(() => TableCalendar(
+                  focusedDay: _focusedDay.value,
+                  firstDay: DateTime(2023),
+                  lastDay: DateTime(2099),
+                  calendarFormat: CalendarFormat.month,
+                  selectedDayPredicate: (day) =>
+                      isSameDay(_selectedDate.value, day),
+                  onDaySelected: (selectedDay, focusedDay) {
+                    if (!isSameDay(_selectedDate.value, selectedDay)) {
+                      _selectedDate.value = selectedDay;
+                      _focusedDay.value = focusedDay;
+                    }
+                  },
+                  onPageChanged: (focusedDay) {
                     _focusedDay.value = focusedDay;
-                  }
-                },
-                onPageChanged: (focusedDay) {
-                  _focusedDay.value = focusedDay;
-                },
-                eventLoader: (day) => _listOfDayEvents(day),
-                calendarStyle: CalendarStyle(
-                  selectedDecoration: const BoxDecoration(
-                    color: Colors.green,
-                    shape: BoxShape.circle,
-                  ),
-                  selectedTextStyle: const TextStyle(color: Colors.white),
-                  todayDecoration: BoxDecoration(
-                    color: Colors.green.withOpacity(
-                        .7), // Use a fade color for the current day
-                    shape: BoxShape.circle,
-                  ),
-                  todayTextStyle: const TextStyle(color: Colors.black),
-                  holidayDecoration: const BoxDecoration(
-                    color: Colors.transparent,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              )),
-          Expanded(
-            child: Obx(() {
-              final selectedEvents = _listOfDayEvents(_selectedDate.value);
-              return ListView.builder(
-                itemCount: selectedEvents.length,
-                itemBuilder: (context, index) {
-                  final event = selectedEvents[index];
-                  return ListTile(
-                    leading: const Icon(
-                      Icons.done,
+                  },
+                  eventLoader: (day) => _listOfDayEvents(day),
+                  calendarStyle: CalendarStyle(
+                    selectedDecoration: const BoxDecoration(
                       color: Colors.green,
+                      shape: BoxShape.circle,
                     ),
-                    title: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text('Event Title: ${event['eventTitle']}'),
+                    selectedTextStyle: const TextStyle(color: Colors.white),
+                    todayDecoration: BoxDecoration(
+                      color: Colors.green.withOpacity(
+                          .7), // Use a fade color for the current day
+                      shape: BoxShape.circle,
                     ),
-                    subtitle: Text('Description: ${event['eventDescp']}'),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _showAddEventDialog,
-        label: const Text('Add Event'),
-      ),
-    );
+                    todayTextStyle: const TextStyle(color: Colors.black),
+                    holidayDecoration: const BoxDecoration(
+                      color: Colors.transparent,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                )),
+            Expanded(
+              child: Obx(() {
+                final selectedEvents = _listOfDayEvents(_selectedDate.value);
+                return ListView.builder(
+                  itemCount: selectedEvents.length,
+                  itemBuilder: (context, index) {
+                    final event = selectedEvents[index];
+                    return ListTile(
+                      leading: const Icon(
+                        Icons.done,
+                        color: Colors.green,
+                      ),
+                      title: Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text('Event Title: ${event['eventTitle']}'),
+                      ),
+                      subtitle: Text('Description: ${event['eventDescp']}'),
+                    );
+                  },
+                );
+              }),
+            ),
+          ],
+        ),
+        floatingActionButton: GetStorage().read('isadmin') == true
+            ? FloatingActionButton.extended(
+                onPressed: _showAddEventDialog,
+                label: const Text('Add Event'),
+              )
+            : const SizedBox());
   }
 
   List<dynamic> _listOfDayEvents(DateTime? dateTime) {

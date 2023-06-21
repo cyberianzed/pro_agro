@@ -102,6 +102,7 @@ class CartPage extends GetView<ExploreController> {
                                   fontSize: 20,
                                 ),
                               ),
+                              const SizedBox(height: 10),
                               Text(
                                 'Item ID: $itemId', // Display the random item ID
                                 style: const TextStyle(
@@ -113,7 +114,6 @@ class CartPage extends GetView<ExploreController> {
                           ),
                           const SizedBox(height: 8),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.remove),
@@ -132,13 +132,19 @@ class CartPage extends GetView<ExploreController> {
                                 onPressed: () =>
                                     _explorecontroller.incrementQuantity(index),
                               ),
+                              const Spacer(),
                               IconButton(
                                 icon: const Icon(Icons.delete),
-                                color: Colors.red,
+                                color: Colors.grey,
                                 onPressed: () =>
                                     _explorecontroller.removeFromCart(index),
                               ),
-                              const Expanded(child: SizedBox()),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Spacer(),
                               Obx(() => Text(
                                     '₹${_explorecontroller.cartProducts[index].price * _explorecontroller.cartQuantities[index]}',
                                     style: const TextStyle(

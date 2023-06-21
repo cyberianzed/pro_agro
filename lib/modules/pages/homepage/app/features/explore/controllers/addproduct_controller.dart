@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -12,7 +13,6 @@ class AddProductController extends GetxController {
   final TextEditingController descriptionController = TextEditingController();
 
   TextEditingController expiryController = TextEditingController(); // Added
-  TextEditingController uploadDateController = TextEditingController(); // Added
   final RxList<File> selectedImages = <File>[].obs;
   RxString selectedCategory = ''.obs;
 
@@ -56,7 +56,6 @@ class AddProductController extends GetxController {
         colorText: Colors.white,
         backgroundColor: Colors.brown,
       );
-
       return;
     }
 
@@ -72,16 +71,19 @@ class AddProductController extends GetxController {
 
     await productsCollection.add({
       'name': name,
+      'username': GetStorage().read('username'),
       'price': price,
       'images': imageUrllist,
       'description': description,
       'isFavorite': false,
+      'expiry': expiryController.text,
     });
 
     nameController.clear();
     priceController.clear();
     descriptionController.clear();
     selectedImages.clear();
+    expiryController.clear();
 
     Get.defaultDialog(
       title: 'Success',

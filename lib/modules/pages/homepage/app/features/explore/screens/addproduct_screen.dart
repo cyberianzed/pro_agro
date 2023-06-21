@@ -41,7 +41,7 @@ class AddProductPage extends GetView<AddProductController> {
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     size: 40.0,
                     color: Colors.green,
@@ -72,7 +72,7 @@ class AddProductPage extends GetView<AddProductController> {
             const SizedBox(height: 16.0),
             TextField(
               controller: _controller.nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Product Name',
                 border: OutlineInputBorder(),
               ),
@@ -81,7 +81,7 @@ class AddProductPage extends GetView<AddProductController> {
             TextField(
               controller: _controller.priceController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Price',
                 border: OutlineInputBorder(),
               ),
@@ -90,7 +90,7 @@ class AddProductPage extends GetView<AddProductController> {
             TextField(
               controller: _controller.descriptionController,
               maxLines: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Description',
                 border: OutlineInputBorder(),
               ),
@@ -100,13 +100,13 @@ class AddProductPage extends GetView<AddProductController> {
               controller: _controller.expiryController,
               decoration: InputDecoration(
                 labelText: 'Expiry Date',
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black87, // Adjust the color of the outline
                     width: 2.0,
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color:
                         Colors.red, // Adjust the color of the focused outline
@@ -114,7 +114,7 @@ class AddProductPage extends GetView<AddProductController> {
                   ),
                 ),
                 suffixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.calendar_today,
                     color:
                         Colors.green, // Adjust the color of the calendar icon

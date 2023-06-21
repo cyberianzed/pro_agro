@@ -93,7 +93,7 @@ class AuthController extends GetxController {
           });
         } else {
           // Handle case when user ID is null
-          print('No user ID available');
+          debugPrint('No user ID available');
         }
       });
 
