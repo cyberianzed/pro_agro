@@ -14,6 +14,7 @@ import '../../../../utils/services/src/product_service.dart';
 import '../../../../utils/services/src/user_service.dart';
 import '../../../../utils/ui/app_snackbar.dart';
 import '../../../explore/screens/cart_screen.dart';
+import '../../../explore/screens/favorites_screen.dart';
 // binding
 part '../../bindings/product_detail_binding.dart';
 
@@ -164,8 +165,14 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     _FavoriteButton(
                       initial: product.isFavorite,
                       onChanged: (favorite) {
-                        _pdetailcontroller.changeFavoriteProduct(
-                            product, favorite);
+                        Get.find<FavoritesController>().changeFavoriteProduct(
+                          FavoriteProduct(
+                            imageurl: product.images[0],
+                            price: product.price,
+                            name: product.name,
+                          ),
+                          favorite,
+                        );
                       },
                     ),
                   ],

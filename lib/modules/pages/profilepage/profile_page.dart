@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/controllers/auth_controller.dart';
 import 'package:pro_agro/model/user_data.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/explore/screens/favorites_screen.dart';
 import 'package:pro_agro/modules/pages/profilepage/update_profile_screen.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -106,6 +107,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     ListTile(
+                      onTap: ()=>Get.to(Favorites()),
                       leading: Container(
                         width: 40,
                         height: 40,
@@ -114,12 +116,14 @@ class ProfilePage extends StatelessWidget {
                           color: Colors.green.withOpacity(0.3),
                         ),
                         child: const Icon(
-                          Icons.credit_card,
-                          color: Colors.green, // Set the icon color to green
+                         
+                          Icons.favorite_outline_outlined,
+                          color: Colors.green,
+                           // Set the icon color to green
                         ),
                       ),
                       title: const Text(
-                        'Billing Details',
+                        'Favorites',
                         style: TextStyle(
                           fontSize: 19.0,
                           fontWeight: FontWeight.bold,
