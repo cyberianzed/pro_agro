@@ -10,7 +10,11 @@ class AddProductController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+
+  TextEditingController expiryController = TextEditingController(); // Added
+  TextEditingController uploadDateController = TextEditingController(); // Added
   final RxList<File> selectedImages = <File>[].obs;
+  RxString selectedCategory = ''.obs;
 
   Future<void> pickImages(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
@@ -71,7 +75,7 @@ class AddProductController extends GetxController {
       'price': price,
       'images': imageUrllist,
       'description': description,
-      'isFavorite': false,
+      'isorite': false,
     });
 
     nameController.clear();
