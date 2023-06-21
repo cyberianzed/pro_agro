@@ -1,4 +1,4 @@
-  import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/routes/app_routes.dart';
@@ -12,7 +12,7 @@ void main() async {
   // Get.put(AuthController());
   Get.put(SplashController());
   runApp(const MyApp());
-} 
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.basic,
       title: 'Pro Agro',
-
       initialRoute: '/splash',
       getPages: AppRoutes.routes,
     );

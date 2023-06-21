@@ -13,7 +13,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+    
+  url_launcher: ^6.0.17
   get: any
   firebase_auth: any
   firebase_core: any
@@ -30,6 +31,7 @@ dependencies:
   intl: ^0.18.1
   firebase_storage: ^11.2.3
   image_picker: ^0.8.9
+  share_plus: ^7.0.2
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +45,6 @@ flutter:
     - assets/images/
     - assets/images/raster/
     - assets/
+    - assets/images/google_pay.png
+    - assets/images/visa.png
+    - assets/images/qr_code.png

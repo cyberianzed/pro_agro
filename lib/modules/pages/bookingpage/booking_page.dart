@@ -44,8 +44,15 @@ class BookingPage extends StatelessWidget {
           onPressed: () {
             _createBooking(context);
           },
-          child: const Icon(Icons.add),
+          child: Icon(Icons.add),
         ),
+        // floatingActionButton: GetStorage().read('isadmin') == true
+        //     ? FloatingActionButton(
+        //         onPressed: () {
+        //           _createBooking(context);
+        //         },
+        //         child: const Icon(Icons.add))
+        //     : SizedBox()
       ),
     );
   }
@@ -244,13 +251,15 @@ class ProduceCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  IconButton(
-                    onPressed: onDelete,
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.grey,
-                    ),
-                  ),
+                  GetStorage().read('isadmin') == true
+                      ? IconButton(
+                          onPressed: onDelete,
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.grey,
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
               const SizedBox(height: 8.0),

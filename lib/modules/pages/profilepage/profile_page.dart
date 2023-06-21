@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        elevation: 1.5,
+        elevation:0,
       ),
       body: SingleChildScrollView(
         child: Container(

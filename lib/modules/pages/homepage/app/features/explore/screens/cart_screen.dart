@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../utils/services/model/product.dart';
 import '../../product/views/screens/product_detail_screen.dart';
 import '../controllers/explore_controller.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/explore/screens/checkout_page.dart';
 
 class CartPage extends GetView<ExploreController> {
   CartPage({Key? key}) : super(key: key);
@@ -42,7 +43,11 @@ class CartPage extends GetView<ExploreController> {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(20),
           ),
-          onPressed: _explorecontroller.cartProducts.isEmpty ? null : () {},
+          onPressed: _explorecontroller.cartProducts.isEmpty
+              ? null
+              : () {
+                  Get.to(() => CheckoutPage(totalPrice: '55'));
+                },
           child: const Text("Buy Now"),
         ),
       ),
