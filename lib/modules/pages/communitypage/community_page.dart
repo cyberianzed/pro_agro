@@ -122,7 +122,9 @@ class ArticleCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    article.content.split('.').first.trim(),
+                    article.content,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 14.0,
                     ),
@@ -140,9 +142,15 @@ class ArticleCard extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
-                              // Handle bookmark action
+                              article.isBookmarked
+                                  .toggle(); // Toggle the bookmark status
                             },
-                            icon: const Icon(Icons.bookmark),
+                            icon: Obx(() => Icon(
+                                  Icons.bookmark,
+                                  color: article.isBookmarked.value
+                                      ? Colors.red
+                                      : null,
+                                )),
                           ),
                           IconButton(
                             onPressed: () {
@@ -152,13 +160,15 @@ class ArticleCard extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {
-                              // Handle delete action
+                              final articleController =
+                                  Get.find<ArticleController>();
+                              articleController.deleteArticle(article);
                             },
                             icon: const Icon(Icons.delete),
                           ),
                           IconButton(
                             onPressed: () {
-                              // Handle edit action
+                              // Handle share action
                             },
                             icon: const Icon(Icons.edit),
                           ),

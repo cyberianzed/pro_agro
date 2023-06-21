@@ -71,7 +71,7 @@ class AddProductController extends GetxController {
       'price': price,
       'images': imageUrllist,
       'description': description,
-      'isFavorite': false,
+      'isorite': false,
     });
 
     nameController.clear();
