@@ -12,7 +12,18 @@ class CommunityPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text('Community Page'),
+        title: Text(
+          'Articles',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 20, left: 10),
+          
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,9 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
-import 'package:pro_agro/model/user_data.dart';
-import 'package:pro_agro/controllers/auth_controller.dart';
 import 'booking_details.dart';
 
 class BookingPage extends StatelessWidget {
@@ -45,8 +44,15 @@ class BookingPage extends StatelessWidget {
           onPressed: () {
             _createBooking(context);
           },
-          child: const Icon(Icons.add),
+          child: Icon(Icons.add),
         ),
+        // floatingActionButton: GetStorage().read('isadmin') == true
+        //     ? FloatingActionButton(
+        //         onPressed: () {
+        //           _createBooking(context);
+        //         },
+        //         child: const Icon(Icons.add))
+        //     : SizedBox()
       ),
     );
   }
@@ -247,13 +253,15 @@ class ProduceCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  IconButton(
+
+                  GetStorage().read('isadmin')==true
+                  ?IconButton(
                     onPressed: onDelete,
                     icon: Icon(
                       Icons.delete,
                       color: Colors.grey,
                     ),
-                  ),
+                  ):SizedBox(),
                 ],
               ),
               const SizedBox(height: 8.0),
