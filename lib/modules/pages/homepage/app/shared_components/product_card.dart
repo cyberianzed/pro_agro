@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../constans/app_constants.dart';
+import '../features/explore/screens/favorites_screen.dart';
+import '../utils/services/model/product.dart';
 import '../utils/ui/app_snackbar.dart';
 
 class ProductCardData {
@@ -53,6 +55,15 @@ class ProductCard extends StatelessWidget {
                       if (onFavoriteChanged != null) {
                         onFavoriteChanged!(isFavorite);
                       }
+                      Get.put(FavoritesController()).changeFavoriteProduct(
+                        FavoriteProduct(
+                          imageurl: data.imageurl,
+                          price: data.price,
+                          name: data.name,
+                        ),
+                        isFavorite,
+                      );
+
                       AppSnackbar.showStatusFavoriteProduct(
                         isFavorite: isFavorite,
                         imageurl: data.imageurl,
@@ -74,8 +85,8 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildImage(String imageurl) {
     return Image.network(
-     imageurl,
-     fit: BoxFit.cover,
+      imageurl,
+      fit: BoxFit.cover,
     );
   }
 

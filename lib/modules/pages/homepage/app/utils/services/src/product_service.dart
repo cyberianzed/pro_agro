@@ -46,7 +46,7 @@ class ProductService {
       final data = doc.data();
       final product = Product(
         id: doc.id,
-        idUser: 'fwg123',
+        idUser: Random().nextBool() ? 'fwg123' : 'fwg345',
         images: List<String>.from(data['images']),
         name: data['name'],
         price: data['price'].toDouble(),

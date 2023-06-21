@@ -2,10 +2,15 @@ import 'package:get/get.dart';
 import '../../../../../../../routes/app_routes.dart';
 import '../../../utils/services/model/product.dart';
 import '../../../utils/services/src/product_service.dart';
+import '../../../utils/services/src/user_service.dart';
+import '../screens/favorites_screen.dart';
 
 class ExploreController extends GetxController {
   final ProductService productService = ProductService();
 
+  final UserService userService = UserService();
+  final FavoritesController favoritesController =
+      Get.put(FavoritesController());
   Future<List<Product>> getAllProduct() async {
     return productService.getAll();
   }
@@ -22,6 +27,13 @@ class ExploreController extends GetxController {
     Get.back();
   }
 
+  void addToFavorites(FavoriteProduct product) {
+    favoritesController.addFavoriteProduct(product);
+  }
+
+  void removeFromFavorites(FavoriteProduct product) {
+    favoritesController.removeFavoriteProduct(product);
+  }
 
   // Cart related functions
   RxList<Product> cartProducts = <Product>[].obs;

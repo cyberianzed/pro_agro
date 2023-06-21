@@ -8,13 +8,52 @@ import '../controllers/explore_controller.dart';
 class CartPage extends GetView<ExploreController> {
   CartPage({Key? key}) : super(key: key);
   final ExploreController _explorecontroller = Get.put(ExploreController());
+  Widget bottomBarTitle() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "Total",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+          ),
+          Obx(
+            () => Text(
+              "₹${_explorecontroller.totalPrice.toStringAsFixed(2)}",
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget bottomBarButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.all(20),
+          ),
+          onPressed: _explorecontroller.cartProducts.isEmpty ? null : () {},
+          child: const Text("Buy Now"),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: Colors.black,
         leadingWidth: 150,
         leading: Row(
           children: [
@@ -33,55 +72,86 @@ class CartPage extends GetView<ExploreController> {
             final int itemId =
                 Random().nextInt(100000); // Generate a random item ID
             return Card(
-              child: ListTile(
-                leading: Image.network(
-                  _explorecontroller.cartProducts[index].images[0],
-                ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: Row(
                   children: [
-                    Text(
-                      product.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: SizedBox(
+                        // height: 120,
+                        width: 120,
+                        child: Image.network(
+                          _explorecontroller.cartProducts[index].images[0],
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
-                    Text(
-                      'item ID: $itemId', // Display the random item ID
-                      style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey), // Adjust the font size
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                product.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'Item ID: $itemId', // Display the random item ID
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () =>
+                                    _explorecontroller.decrementQuantity(index),
+                              ),
+                              Obx(() => Text(
+                                    _explorecontroller.cartQuantities[index]
+                                        .toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () =>
+                                    _explorecontroller.incrementQuantity(index),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete),
+                                color: Colors.red,
+                                onPressed: () =>
+                                    _explorecontroller.removeFromCart(index),
+                              ),
+                              const Expanded(child: SizedBox()),
+                              Obx(() => Text(
+                                    '₹${_explorecontroller.cartProducts[index].price * _explorecontroller.cartQuantities[index]}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-                subtitle: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove),
-                      onPressed: () =>
-                          _explorecontroller.decrementQuantity(index),
-                    ),
-                    Obx(() => Text(
-                          _explorecontroller.cartQuantities[index].toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
-                        )),
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () =>
-                          _explorecontroller.incrementQuantity(index),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      color: Colors.red, // Set the delete button color to red
-                      onPressed: () => _explorecontroller.removeFromCart(index),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    Obx(() => Text(
-                          '₹ ${_explorecontroller.cartProducts[index].price * _explorecontroller.cartQuantities[index]}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
-                        )),
                   ],
                 ),
               ),
@@ -90,31 +160,12 @@ class CartPage extends GetView<ExploreController> {
         ),
       ),
       bottomNavigationBar: Obx(
-        () => Container(
-          padding: const EdgeInsets.all(16),
-          color: Colors.grey[300],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Total: ₹ ${_explorecontroller.totalPrice.toStringAsFixed(2)}',
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Add your buy button functionality here
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10, horizontal: 50), // Adjust button padding
-                  textStyle:
-                      const TextStyle(fontSize: 18), // Adjust button text size
-                ),
-                child: const Text('Buy'),
-              ),
-            ],
-          ),
+        () => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            bottomBarTitle(),
+            bottomBarButton(),
+          ],
         ),
       ),
     );
