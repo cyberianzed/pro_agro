@@ -1,31 +1,33 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddProductController extends GetxController {
-  final TextEditingController userNameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final RxList<File> selectedImages = <File>[].obs;
 
-  Future<void> pickImages() async {
+  Future<void> pickImages(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     final List<XFile> imageList = await picker.pickMultiImage(imageQuality: 85);
 
-    selectedImages.value =
-        imageList.map((XFile image) => File(image.path)).toList();
+    if (imageList.isNotEmpty) {
+      selectedImages.value =
+          imageList.map((XFile image) => File(image.path)).toList();
+    } else {
+      Get.snackbar('Add image', "no image added");
+    }
   }
 
   Future<String?> uploadImage(File image) async {
     final firebase_storage.Reference storageRef =
         firebase_storage.FirebaseStorage.instance.ref().child('images');
 
-    // Generate a unique filename for the image
     final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
     final originalFilename = image.path.split('/').last;
     final fileName = '${timestamp}_$originalFilename';
@@ -39,10 +41,20 @@ class AddProductController extends GetxController {
   }
 
   Future<void> addProduct() async {
-    final String userName = userNameController.text;
     final String name = nameController.text;
-    final double price = double.parse(priceController.text);
+    final double price = double.tryParse(priceController.text) ?? 0.0;
     final String description = descriptionController.text;
+
+    if (selectedImages.isEmpty) {
+      Get.snackbar(
+        'No Image',
+        "Please select at least one image",
+        colorText: Colors.white,
+        backgroundColor: Colors.brown,
+      );
+
+      return;
+    }
 
     List<String?> imageUrllist = [];
 
@@ -51,39 +63,32 @@ class AddProductController extends GetxController {
       imageUrllist.add(imageUrl);
     }
 
-    // Create a new product document
     final CollectionReference productsCollection =
         FirebaseFirestore.instance.collection('products');
+
     await productsCollection.add({
       'name': name,
       'price': price,
-      'username': userName,
       'images': imageUrllist,
       'description': description,
-      'isFavorite': false
+      'isFavorite': false,
     });
 
-    // Clear the text fields and selected images
-    userNameController.clear();
     nameController.clear();
     priceController.clear();
     descriptionController.clear();
     selectedImages.clear();
 
-    // Show a success message
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Success'),
-        content: const Text('Product added successfully!'),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-        ],
-      ),
+    Get.defaultDialog(
+      title: 'Success',
+      middleText: 'Product added successfully!',
+      textConfirm: 'OK',
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+        // Refresh ExploreScreen after adding the product
+        Get.offAndToNamed('/explore');
+      },
     );
   }
 }

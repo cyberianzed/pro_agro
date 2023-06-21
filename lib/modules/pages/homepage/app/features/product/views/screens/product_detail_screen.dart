@@ -113,7 +113,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                         const SizedBox(height: kSpacing),
                         Row(
                           children: [
-                            _Rating(product.rating),
+                            Rating(product.rating),
                             const SizedBox(width: kSpacing),
                             const CircleAvatar(
                                 radius: 3, backgroundColor: Colors.grey),

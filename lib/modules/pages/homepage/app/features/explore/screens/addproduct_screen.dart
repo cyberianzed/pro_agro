@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../controllers/addproduct_controller.dart';
 
 class AddProductPage extends GetView<AddProductController> {
-  AddProductPage({super.key});
+  AddProductPage({Key? key}) : super(key: key);
   final AddProductController _controller = Get.put(AddProductController());
 
   @override
@@ -19,7 +19,7 @@ class AddProductPage extends GetView<AddProductController> {
           children: [
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _controller.pickImages,
+              onPressed: () => _controller.pickImages(context),
               child: const Text('Select Images'),
             ),
             const SizedBox(height: 16.0),
@@ -37,12 +37,6 @@ class AddProductPage extends GetView<AddProductController> {
                   final File image = _controller.selectedImages[index];
                   return Image.file(image);
                 },
-              ),
-            ),
-            TextField(
-              controller: _controller.userNameController,
-              decoration: const InputDecoration(
-                labelText: 'User Name',
               ),
             ),
             const SizedBox(height: 16.0),

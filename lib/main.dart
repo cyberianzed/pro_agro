@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+  import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pro_agro/routes/app_routes.dart';
@@ -9,7 +9,7 @@ import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.put(AuthController());
+  // Get.put(AuthController());
   Get.put(SplashController());
   runApp(const MyApp());
 } 

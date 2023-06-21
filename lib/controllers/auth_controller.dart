@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/model/user_data.dart';
 import 'package:pro_agro/modules/auth/login_screen.dart';
-import '../modules/pages/botomscreen/bottom_screens.dart';
 
 class AuthController extends GetxController {
   // Singleton instance of the AuthController
@@ -17,6 +16,7 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   UserDetail? userdet;
+  UserDetailController userDetailController = Get.put(UserDetailController());
 
   @override
   void onReady() {
@@ -42,9 +42,29 @@ class AuthController extends GetxController {
       }
     });
   }
+  // _initialPage(User? user) {
+  //   if (user == null) {
+  //     // If no user, navigate to login page
+  //     print("Login Page");
+  //     // Get.offAll(() => const BoardingScreen());
+  //   } else {
+  //     // If user is logged in, navigate to home screen
+  //     print("Login Success");
+  //     // Get.offAll(() => PersistentBottomView(
+  //     //     // email: user.email ?? "email null",
+  //     //     ));
+  //     print('email = ${user.email}');
+  //     // Save user information for persistence
+  //     final box = GetStorage();
+  //     box.write('isLoggedIn', true);
+  //     box.write('email', user.email);
+  //   }
+  // }
 
   // Function to handle routing based on user status
-  _initialPage(User? user) {
+  _initialPage(User? user) async {
+    final box = GetStorage();
+
     if (user == null) {
       // If no user, navigate to login page
       print("Login Page");
@@ -52,19 +72,38 @@ class AuthController extends GetxController {
     } else {
       // If user is logged in, navigate to home screen
       print("Login Success");
-      Get.offAll(() => PersistentBottomView(
-          // email: user.email ?? "email null",
-          ));
-      print('email = ${user.email}');
+      await userDetailController.getCurrentUser().then((userId) {
+        if (userId != null) {
+          userDetailController.getUserDetail(userId).then((userDetail) {
+            if (userDetail != null) {
+              box.write('name', userDetail.name);
+              box.write('username', userDetail.username);
+              box.write('isadmin', userDetail.isAdmin);
+              if (userDetail.isAdmin) {
+                // Navigate to admin screen
+                debugPrint('adminnnnnnnnnnnnn');
+              } else {
+                debugPrint('noo admin');
+                // Navigate to user screen
+              }
+            } else {
+              // Handle case when user detail is null
+              debugPrint('User details not found');
+            }
+          });
+        } else {
+          // Handle case when user ID is null
+          print('No user ID available');
+        }
+      });
 
       // Save user information for persistence
-      final box = GetStorage();
       box.write('isLoggedIn', true);
       box.write('email', user.email);
     }
   }
 
-// Function to handle registration
+  // Function to handle registration
   void register(
       String email, String password, String name, String username) async {
     try {
@@ -85,6 +124,7 @@ class AuthController extends GetxController {
           'Username': username,
           'Email': email,
           'Password': password,
+          'admin': false,
         });
       }
     } catch (e) {
@@ -107,9 +147,12 @@ class AuthController extends GetxController {
       // _user.value = auth.currentUser;
     } catch (e) {
       // Show snackbar with error message
-      Get.snackbar("Login ", "Login Failed",
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: const Text("Login Failed"));
+      Get.snackbar(
+        'Login Failed',
+        'An error occurred during login.',
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: const Text('Login Failed'),
+      );
     }
   }
 

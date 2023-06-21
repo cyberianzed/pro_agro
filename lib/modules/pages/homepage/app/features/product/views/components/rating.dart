@@ -1,7 +1,7 @@
 part of product_detail;
 
-class _Rating extends StatelessWidget {
-  const _Rating(this.data, {Key? key}) : super(key: key);
+class Rating extends StatelessWidget {
+  const Rating(this.data, {Key? key}) : super(key: key);
 
   final double data;
 
