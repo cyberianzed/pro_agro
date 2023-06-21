@@ -15,35 +15,39 @@ class BookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.grey,
-          elevation: 0,
-          leadingWidth: 250,
-          leading: Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-            ),
-            child: Text(
-              'BOOKINGS',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 69, 51, 51),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25),
-            ),
-          )),
-      body: Column(
-        children: [
-          _monthFilterButtons(),
-          Expanded(child: Obx(() => _buildProduceList())),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _createBooking(context);
-        },
-        child: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        // backgroundColor: Color(0xfff0f4f7),
+        appBar: AppBar(
+            backgroundColor: Color(0xfff0f4f7),
+            elevation: 0,
+            leadingWidth: 250,
+            actions: [Center(child: _monthFilterButtons())],
+            leading: Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                left: 15,
+              ),
+              child: Text(
+                'Bookings',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 69, 51, 51),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+            )),
+        body: Column(
+          children: [
+            // _monthFilterButtons(),
+            Expanded(child: Obx(() => _buildProduceList())),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _createBooking(context);
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -65,39 +69,34 @@ class BookingPage extends StatelessWidget {
       'December'
     ];
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          TextButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: Get.context!,
-                builder: (context) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children:
-                          List<Widget>.generate(monthNames.length, (index) {
-                        final monthName = monthNames[index];
-                        return ListTile(
-                          title: Text(monthName),
-                          onTap: () {
-                            produceController.selectFilterOption(index);
-                            Get.back();
-                          },
-                        );
-                      }),
-                    ),
-                  );
-                },
-              );
-            },
-            child:
-                Text('Filter by Month', style: TextStyle(color: Colors.blue)),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        TextButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: Get.context!,
+              builder: (context) {
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List<Widget>.generate(monthNames.length, (index) {
+                      final monthName = monthNames[index];
+                      return ListTile(
+                        title: Text(monthName),
+                        onTap: () {
+                          produceController.selectFilterOption(index);
+                          Get.back();
+                        },
+                      );
+                    }),
+                  ),
+                );
+              },
+            );
+          },
+          child: Text('Filter by Month', style: TextStyle(color: Colors.blue)),
+        ),
+      ],
     );
   }
 

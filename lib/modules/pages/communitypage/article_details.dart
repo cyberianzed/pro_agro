@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
+import 'article_controller.dart';
+import 'community_page.dart';
+
+class ArticleDetailsPage extends StatelessWidget {
+  final Article article;
+
+  const ArticleDetailsPage({super.key, required this.article});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              article.genre,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              article.date,
+              style: const TextStyle(
+                fontSize: 14.0,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              article.content,
+              style: const TextStyle(
+                fontSize: 16.0,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              'Author: ${article.author}',
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

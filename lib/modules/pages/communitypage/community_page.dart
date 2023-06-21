@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pro_agro/modules/pages/communitypage/article_details.dart';
 import '../../../utils/color_constants.dart';
 import 'article_controller.dart';
 
 class CommunityPage extends StatelessWidget {
   final articleController = Get.put(ArticleController());
-  CommunityPage({Key? key}) : super(key: key);
-
+  CommunityPage({Key? key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,109 +68,98 @@ class CommunityPage extends StatelessWidget {
 }
 
 class ArticleCard extends StatelessWidget {
-  const ArticleCard({
-    super.key,
-    required this.article,
-  });
-
   final Article article;
-
+  const ArticleCard({Key? key, required this.article});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 2.0,
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ArticleDetailsPage(article: article),
+            ),
+          );
+        },
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 2.0,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
-                    Icons.bolt,
-                    color: Colors.redAccent,
-                    size: 17,
-                  ),
-                  Text(
-                    article.genre,
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  const Text('  | '),
-                  Text(
-                    article.date,
-                    style: const TextStyle(
-                      fontSize: 12.0,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                article.title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                article.content,
-                style: const TextStyle(
-                  fontSize: 14.0,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    article.author,
-                    style: const TextStyle(fontSize: 12.0, color: Colors.grey),
-                  ),
                   Row(
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          // Handle bookmark action
-                        },
-                        icon: const Icon(Icons.bookmark),
+                      const Icon(
+                        Icons.bolt,
+                        color: Colors.redAccent,
+                        size: 17,
                       ),
-                      IconButton(
-                        onPressed: () {
-                          // Handle share action
-                        },
-                        icon: const Icon(Icons.share),
+                      Text(
+                        article.genre,
+                        style: const TextStyle(
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      const Text('  | '),
+                      Text(
+                        article.date,
+                        style: const TextStyle(
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    article.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    article.content,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        article.author,
+                        style:
+                            const TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              // Handle bookmark action
+                            },
+                            icon: const Icon(Icons.bookmark),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // Handle share action
+                            },
+                            icon: const Icon(Icons.share),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
-}
-
-class Article {
-  final String date;
-  final String genre;
-  final String title;
-  final String author;
-  final String content;
-
-  Article({
-    required this.date,
-    required this.genre,
-    required this.title,
-    required this.author,
-    required this.content,
-  });
 }
 
 void _showAddArticleBottomSheet(BuildContext context) {
