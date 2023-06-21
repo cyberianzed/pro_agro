@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
 import 'package:pro_agro/model/user_data.dart';
 import 'package:pro_agro/controllers/auth_controller.dart';
-import 'detailed_booking.dart';
+import 'booking_details.dart';
 
 class BookingPage extends StatelessWidget {
   final ProduceController produceController = Get.put(ProduceController());

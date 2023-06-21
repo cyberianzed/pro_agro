@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
-
 import 'booking_controller.dart';
 
 class DetailedBookingPage extends StatelessWidget {
   final Produce produce;
 
-  const DetailedBookingPage({Key? key, required this.produce});
+  const DetailedBookingPage({super.key, required this.produce});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class DetailedBookingPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
