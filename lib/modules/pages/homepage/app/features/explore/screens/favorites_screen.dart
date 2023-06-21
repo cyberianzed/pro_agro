@@ -56,10 +56,19 @@ class Favorites extends GetView<FavoritesController> {
         leading: Row(
           children: [
             const SizedBox(
-              width: 20,
+              width: 10,
             ),
             CustomBackButton(onPressed: () => Get.back()),
-            Text('data')
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Favorites',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 19),
+            ),
           ],
         ),
       ),
