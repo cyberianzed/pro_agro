@@ -9,7 +9,7 @@ import 'modules/pages/homepage/app/config/themes/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.put(AuthController());
+  // Get.put(AuthController());
   Get.put(SplashController());
   runApp(const MyApp());
 } 

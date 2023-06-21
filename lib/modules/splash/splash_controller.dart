@@ -4,7 +4,7 @@ import '../pages/botomscreen/bottom_screens.dart';
 import '../../controllers/auth_controller.dart';
 
 class SplashController extends GetxController {
-  final AuthController authController = Get.find();
+  final AuthController authController = Get.put(AuthController());
 
   @override
   void onReady() {
