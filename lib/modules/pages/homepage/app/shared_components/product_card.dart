@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../constans/app_constants.dart';
 import '../features/explore/screens/favorites_screen.dart';
-import '../utils/services/model/product.dart';
 import '../utils/ui/app_snackbar.dart';
 
 class ProductCardData {

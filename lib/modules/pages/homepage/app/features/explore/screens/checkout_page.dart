@@ -11,36 +11,32 @@ class CheckoutPage extends StatelessWidget {
     }
   }
 
-  CheckoutPage({required this.totalPrice});
+  const CheckoutPage({super.key, required this.totalPrice});
 
   void handleVisaCardPressed() {
-    // Handle Visa card button pressed action
-    print('Visa card button pressed');
     // Add your desired functionality here
   }
 
   void handleGooglePayPressed() {
     // Handle Google Pay button pressed action
-    print('Google Pay button pressed');
-    // Add your desired functionality here
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: const Text('Checkout'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'Total Price: $totalPrice',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Container(
               width: 200,
               height: 200,
@@ -52,7 +48,7 @@ class CheckoutPage extends StatelessWidget {
                     color: Colors.black.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -61,15 +57,15 @@ class CheckoutPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Payment Methods',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 26, 111, 29)),
+                  color: Color.fromARGB(255, 26, 111, 29)),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -82,7 +78,7 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
@@ -93,7 +89,7 @@ class CheckoutPage extends StatelessWidget {
                           color: Colors.black.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -103,7 +99,7 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () {
                     const url = 'https://www.youtube.com/watch?v=xvFZjo5PgG0';
@@ -117,7 +113,7 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
@@ -128,7 +124,7 @@ class CheckoutPage extends StatelessWidget {
                           color: Colors.black.withOpacity(0.2),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),

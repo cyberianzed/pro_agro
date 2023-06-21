@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
 import 'article_controller.dart';
-import 'community_page.dart';
 
 class ArticleDetailsPage extends StatelessWidget {
   final Article article;

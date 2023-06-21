@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pro_agro/modules/pages/homepage/app/features/product/views/screens/product_detail_screen.dart';
 
 class ProduceController extends GetxController {
   final produceList = <Produce>[].obs;
@@ -126,9 +123,10 @@ class ProduceController extends GetxController {
   void addProduce(Produce produce) {
     produceList.add(produce);
   }
+
   void removeProduce(Produce produce) {
-  produceList.remove(produce);
-}
+    produceList.remove(produce);
+  }
 }
 
 class Produce {

@@ -6,13 +6,13 @@ import 'article_controller.dart';
 
 class CommunityPage extends StatelessWidget {
   final articleController = Get.put(ArticleController());
-  CommunityPage({Key? key});
+  CommunityPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Articles',
           style: TextStyle(
             color: Colors.black,
@@ -20,9 +20,8 @@ class CommunityPage extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 10),
-          
+        leading: const Padding(
+          padding: EdgeInsets.only(top: 20, left: 10),
         ),
       ),
       body: Column(
@@ -80,7 +79,7 @@ class CommunityPage extends StatelessWidget {
 
 class ArticleCard extends StatelessWidget {
   final Article article;
-  const ArticleCard({Key? key, required this.article});
+  const ArticleCard({super.key, required this.article});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

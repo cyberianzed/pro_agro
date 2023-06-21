@@ -5,7 +5,6 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pro_agro/modules/pages/botomscreen/bottomview_controller.dart';
 import '../../../utils/color_constants.dart';
 import '../bookingpage/booking_page.dart';
-import 'bottomview_controller.dart';
 import '../communitypage/community_page.dart';
 import '../events_page.dart';
 import '../homepage/app/features/explore/screens/explore_screen.dart';
