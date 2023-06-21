@@ -122,7 +122,7 @@ class ArticleCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    article.content,
+                    article.content.split('.').first.trim(),
                     style: const TextStyle(
                       fontSize: 14.0,
                     ),
@@ -149,6 +149,18 @@ class ArticleCard extends StatelessWidget {
                               // Handle share action
                             },
                             icon: const Icon(Icons.share),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // Handle delete action
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // Handle edit action
+                            },
+                            icon: const Icon(Icons.edit),
                           ),
                         ],
                       ),
