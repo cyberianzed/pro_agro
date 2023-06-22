@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/addproduct_controller.dart';
+import '../../controllers/addproduct_controller.dart';
 
 class AddProductPage extends GetView<AddProductController> {
-  AddProductPage({Key? key}) : super(key: key);
-  final AddProductController _controller = Get.put(AddProductController());
+  final String category;
+  final AddProductController _aproductcontroller =
+      Get.put(AddProductController());
+
+  AddProductPage({Key? key, required this.category}) : super(key: key);
 
   Future<void> _selectExpiryDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -15,12 +18,14 @@ class AddProductPage extends GetView<AddProductController> {
       lastDate: DateTime(2100),
     );
     if (pickedDate != null) {
-      _controller.expiryController.text = pickedDate.toString().split(' ')[0];
+      _aproductcontroller.expiryController.text =
+          pickedDate.toString().split(' ')[0];
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    _aproductcontroller.setSelectedCategory(category);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Product'),
@@ -33,7 +38,7 @@ class AddProductPage extends GetView<AddProductController> {
             Align(
               alignment: Alignment.topCenter,
               child: GestureDetector(
-                onTap: () => _controller.pickImages(context),
+                onTap: () => _aproductcontroller.pickImages(context),
                 child: Container(
                   width: 100.0,
                   height: 100.0,
@@ -59,9 +64,9 @@ class AddProductPage extends GetView<AddProductController> {
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 8.0,
                 ),
-                itemCount: _controller.selectedImages.length,
+                itemCount: _aproductcontroller.selectedImages.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final File image = _controller.selectedImages[index];
+                  final File image = _aproductcontroller.selectedImages[index];
                   return Image.file(
                     image,
                     fit: BoxFit.cover,
@@ -71,7 +76,7 @@ class AddProductPage extends GetView<AddProductController> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _controller.nameController,
+              controller: _aproductcontroller.nameController,
               decoration: const InputDecoration(
                 labelText: 'Product Name',
                 border: OutlineInputBorder(),
@@ -79,7 +84,7 @@ class AddProductPage extends GetView<AddProductController> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _controller.priceController,
+              controller: _aproductcontroller.priceController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 labelText: 'Price',
@@ -88,7 +93,7 @@ class AddProductPage extends GetView<AddProductController> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _controller.descriptionController,
+              controller: _aproductcontroller.descriptionController,
               maxLines: null,
               decoration: const InputDecoration(
                 labelText: 'Description',
@@ -97,7 +102,7 @@ class AddProductPage extends GetView<AddProductController> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _controller.expiryController,
+              controller: _aproductcontroller.expiryController,
               decoration: InputDecoration(
                 labelText: 'Expiry Date',
                 border: const OutlineInputBorder(
@@ -138,7 +143,7 @@ class AddProductPage extends GetView<AddProductController> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(20),
                 ),
-                onPressed: _controller.addProduct,
+                onPressed: _aproductcontroller.addProduct,
                 child: const Text("Add Product"),
               ),
             ),

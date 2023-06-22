@@ -13,7 +13,7 @@ import '../../../../utils/services/model/user.dart';
 import '../../../../utils/services/src/product_service.dart';
 import '../../../../utils/services/src/user_service.dart';
 import '../../../../utils/ui/app_snackbar.dart';
-import '../../../explore/screens/cart_screen.dart';
+import '../../../explore/screens/cartpages/cart_screen.dart';
 import '../../../explore/screens/favorites_screen.dart';
 // binding
 part '../../bindings/product_detail_binding.dart';

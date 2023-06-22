@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../utils/services/model/product.dart';
-import '../../product/views/screens/product_detail_screen.dart';
-import '../controllers/explore_controller.dart';
-import 'package:pro_agro/modules/pages/homepage/app/features/explore/screens/checkout_page.dart';
+import '../../../../utils/services/model/product.dart';
+import '../../../product/views/screens/product_detail_screen.dart';
+import '../../controllers/explore_controller.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/explore/screens/cartpages/checkout_page.dart';
 
 class CartPage extends GetView<ExploreController> {
   CartPage({Key? key}) : super(key: key);

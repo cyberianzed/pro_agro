@@ -12,8 +12,9 @@ import '../../../shared_components/product_card.dart';
 import '../../../shared_components/search_field.dart';
 import '../../../utils/services/model/product.dart';
 import '../controllers/explore_controller.dart';
-import 'addproduct_screen.dart';
-import 'cart_screen.dart';
+import 'cartpages/addproduct_screen.dart';
+import 'cartpages/cart_screen.dart';
+import 'cartpages/categoryselect_screen.dart';
 
 // binding
 // part '../../bindings/explore_binding.dart';
@@ -94,7 +95,7 @@ class ExploreScreen extends GetView<ExploreController> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Get.to(() => AddProductPage());
+            Get.to(() => const CategorySelectPage());
           },
           label: const Text('Post'),
           icon: const Icon(Icons.edit),

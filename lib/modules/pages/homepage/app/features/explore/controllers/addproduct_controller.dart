@@ -23,9 +23,7 @@ class AddProductController extends GetxController {
     if (imageList.isNotEmpty) {
       selectedImages.value =
           imageList.map((XFile image) => File(image.path)).toList();
-    } else {
-      
-    }
+    } else {}
   }
 
   Future<String?> uploadImage(File image) async {
@@ -44,7 +42,12 @@ class AddProductController extends GetxController {
     return downloadUrl;
   }
 
+  void setSelectedCategory(String category) {
+    selectedCategory.value = category;
+  }
+
   Future<void> addProduct() async {
+    // Retrieve the input values
     final String name = nameController.text;
     final double price = double.tryParse(priceController.text) ?? 0.0;
     final String description = descriptionController.text;
@@ -68,8 +71,15 @@ class AddProductController extends GetxController {
 
     final CollectionReference productsCollection =
         FirebaseFirestore.instance.collection('products');
+    final CollectionReference categoryCollection =
+        FirebaseFirestore.instance.collection(selectedCategory.value);
 
-    await productsCollection.add({
+    // Create a new document ID
+    final newProductDoc = productsCollection.doc();
+
+    // Add the product to the general "products" collection
+    await newProductDoc.set({
+      'id': newProductDoc.id, // Add the document ID as a field
       'name': name,
       'username': GetStorage().read('username'),
       'price': price,
@@ -79,6 +89,18 @@ class AddProductController extends GetxController {
       'expiry': expiryController.text,
     });
 
+    // Add the product to the category collection
+    await categoryCollection.doc(newProductDoc.id).set({
+      'name': name,
+      'username': GetStorage().read('username'),
+      'price': price,
+      'images': imageUrllist,
+      'description': description,
+      'isFavorite': false,
+      'expiry': expiryController.text,
+    });
+
+    // Clear input fields and selected images
     nameController.clear();
     priceController.clear();
     descriptionController.clear();
