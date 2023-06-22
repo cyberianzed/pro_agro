@@ -162,6 +162,9 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     CustomBackButton(
                         onPressed: () => _pdetailcontroller.back()),
                     const Spacer(),
+                    CustomDeleteButton(
+                        onPressed: () => _pdetailcontroller.onDeleteProduct()),
+                    const SizedBox(width: 15),
                     _FavoriteButton(
                       initial: product.isFavorite,
                       onChanged: (favorite) {

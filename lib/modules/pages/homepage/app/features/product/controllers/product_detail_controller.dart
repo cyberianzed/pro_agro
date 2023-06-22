@@ -7,7 +7,7 @@ class ProductDetailController extends GetxController {
   final scroll = ScrollController();
   final opacityActionButton = 1.0.obs;
   final isVisibleActionButton = true.obs;
-  
+
   final RxList<Product> favoriteProducts = <Product>[].obs;
   final Rx<Product?> data = Rx(null);
   final Rx<User?> dataUser = Rx(null);
@@ -17,7 +17,7 @@ class ProductDetailController extends GetxController {
     super.onInit();
     data.value = await _getProduct();
     dataUser.value = _getUser();
-    
+
     scroll.addListener(onScroll);
   }
 
@@ -59,5 +59,32 @@ class ProductDetailController extends GetxController {
 
   void back() => Get.back();
 
+  void onDeleteProduct() async {
+    // Get the current product ID
+    final String productId = data.value?.id ?? '';
 
+    // Delete the product document from the Firestore collection
+    await ProductService().deleteProduct(productId);
+
+    // Show a success message
+    Get.snackbar(
+      'Delete Image',
+      "Delete Image Successful",
+      colorText: Colors.white,
+      backgroundColor: Colors.brown,
+    );
+    // Navigate back to the previous screen
+    Get.back();
+    Get.defaultDialog(
+      title: 'Success',
+      middleText: 'Product Deleted successfully!',
+      textConfirm: 'OK',
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+        // Refresh ExploreScreen after deleting the product
+        Get.offAndToNamed('/explore');
+      },
+    );
+  }
 }

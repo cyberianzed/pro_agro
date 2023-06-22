@@ -62,7 +62,6 @@ class ExploreController extends GetxController {
   void removeFromCart(int index) {
     cartProducts.removeAt(index);
     cartQuantities.removeAt(index);
-
     refresh();
   }
 

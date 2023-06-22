@@ -74,4 +74,11 @@ class ProductService {
     // Fetch and filter products accordingly
     return hotDeals;
   }
+
+  Future<void> deleteProduct(String productId) async {
+    await FirebaseFirestore.instance
+        .collection('products')
+        .doc(productId)
+        .delete();
+  }
 }

@@ -24,7 +24,7 @@ class AddProductController extends GetxController {
       selectedImages.value =
           imageList.map((XFile image) => File(image.path)).toList();
     } else {
-      Get.snackbar('Add image', "no image added");
+      
     }
   }
 
@@ -75,7 +75,7 @@ class AddProductController extends GetxController {
       'price': price,
       'images': imageUrllist,
       'description': description,
-      'isorite': false,
+      'isFavorite': false,
       'expiry': expiryController.text,
     });
 

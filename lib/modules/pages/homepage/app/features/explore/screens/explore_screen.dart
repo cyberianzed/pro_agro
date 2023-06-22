@@ -66,21 +66,20 @@ class ExploreScreen extends GetView<ExploreController> {
           },
           body: _TabBarContent(
             tabs: const [
-              Text("Hot Deals"),
               Text("All"),
+              Text("Hot Deals"),
               Text("Agro Produce"),
               Text("Livestock"),
               Text("Farm Machinery"),
-              Text("Sporting Goods"),
-              Text("Home & Garden"),
+              // Text("Home & Garden"),
             ],
             children: [
               _ProductContent(
-                _controller.getHotDeals(),
+                _controller.getAllProduct(),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               _ProductContent(
-                _controller.getAllProduct(),
+                _controller.getHotDeals(),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               _ProductContent(
@@ -89,8 +88,7 @@ class ExploreScreen extends GetView<ExploreController> {
               ),
               const Center(child: Text("Agro Produce")),
               const Center(child: Text("Agro Produce")),
-              const Center(child: Text("Agro Produce")),
-              const Center(child: Text("Agro Produce")),
+              // const Center(child: Text("Agro Produce")),
             ],
           ),
         ),
