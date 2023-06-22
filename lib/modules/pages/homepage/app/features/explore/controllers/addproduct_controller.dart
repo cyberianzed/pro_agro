@@ -86,6 +86,7 @@ class AddProductController extends GetxController {
       'description': description,
       'isFavorite': false,
       'expiry': expiryController.text,
+      'category': selectedCategory.value,
     });
 
 // Add the product to the category collection
@@ -97,6 +98,7 @@ class AddProductController extends GetxController {
       'description': description,
       'isFavorite': false,
       'expiry': expiryController.text,
+      'category': selectedCategory.value,
     });
 
     // Clear input fields and selected images
