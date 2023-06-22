@@ -83,6 +83,7 @@ class ProductService {
     }
     return products;
   }
+
   Future<List<Product>> getLiveStock() async {
     final QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection('cat2').get();
@@ -152,10 +153,16 @@ class ProductService {
     return products;
   }
 
-  Future<void> deleteProduct(String productId) async {
-    await FirebaseFirestore.instance
-        .collection('products')
-        .doc(productId)
-        .delete();
+  Future<void> deleteProduct(String productId, String category) async {
+    final CollectionReference productsCollection =
+        FirebaseFirestore.instance.collection('products');
+    final CollectionReference categoryCollection =
+        FirebaseFirestore.instance.collection(category);
+
+    // Delete the product document from the "products" collection
+    await productsCollection.doc(productId).delete();
+
+    // Delete the product document from the respective category collection
+    await categoryCollection.doc(productId).delete();
   }
 }

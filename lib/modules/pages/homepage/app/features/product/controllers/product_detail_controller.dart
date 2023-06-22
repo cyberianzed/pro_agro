@@ -58,33 +58,47 @@ class ProductDetailController extends GetxController {
   }
 
   void back() => Get.back();
-
   void onDeleteProduct() async {
     // Get the current product ID
     final String productId = data.value?.id ?? '';
 
-    // Delete the product document from the Firestore collection
-    await ProductService().deleteProduct(productId);
+    // Fetch the product document to get the category value
+    final DocumentSnapshot productSnapshot = await FirebaseFirestore.instance
+        .collection('products')
+        .doc(productId)
+        .get();
 
-    // Show a success message
-    Get.snackbar(
-      'Delete Image',
-      "Delete Image Successful",
-      colorText: Colors.white,
-      backgroundColor: Colors.brown,
-    );
-    // Navigate back to the previous screen
-    Get.back();
-    Get.defaultDialog(
-      title: 'Success',
-      middleText: 'Product Deleted successfully!',
-      textConfirm: 'OK',
-      confirmTextColor: Colors.white,
-      onConfirm: () {
-        Get.back();
-        // Refresh ExploreScreen after deleting the product
-        Get.offAndToNamed('/explore');
-      },
-    );
+    if (productSnapshot.exists) {
+      final String category = productSnapshot.get('category');
+
+      // Delete the product document from the Firestore collection
+      await ProductService().deleteProduct(productId, category);
+
+      // Show a success message
+      Get.snackbar(
+        'Delete Image',
+        "Delete Image Successful",
+        colorText: Colors.white,
+        backgroundColor: Colors.brown,
+      );
+
+      // Navigate back to the previous screen
+      Get.back();
+
+      Get.defaultDialog(
+        title: 'Success',
+        middleText: 'Product Deleted successfully!',
+        textConfirm: 'OK',
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+          // Refresh ExploreScreen after deleting the product
+          Get.offAndToNamed('/explore');
+        },
+      );
+    } else {
+      // Handle the case where the product document doesn't exist
+      // Display an error message or perform appropriate actions
+    }
   }
 }
