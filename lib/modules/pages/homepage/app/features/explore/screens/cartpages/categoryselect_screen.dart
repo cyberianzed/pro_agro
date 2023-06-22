@@ -1,40 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../product/views/screens/product_detail_screen.dart';
+import '../../controllers/explore_controller.dart';
 import '../../controllers/addproduct_controller.dart';
 import 'addproduct_screen.dart';
 
 class CategorySelectPage extends StatelessWidget {
   final AddProductController _aproductcontroller =
       Get.put(AddProductController());
+  final ExploreController _explorecontroller = Get.put(ExploreController());
   CategorySelectPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Category'),
+        elevation: 0,
+        leadingWidth: 150,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            CustomBackButton(onPressed: () => _explorecontroller.back()),
+          ],
+        ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
+      body: Column(
         children: [
-          _buildCategoryCard(
-            categoryName: 'Agro Produce',
-            icon: Icons.category,
-            onTap: () => _navigateToAddProductPage('cat1'),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Select Product Category',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
-          _buildCategoryCard(
-            categoryName: 'Livestock',
-            icon: Icons.category,
-            onTap: () => _navigateToAddProductPage('cat2'),
-          ),
-          _buildCategoryCard(
-              categoryName: 'Farm Machinery',
-              icon: Icons.category,
-              onTap: () => _navigateToAddProductPage('cat3')),
-          _buildCategoryCard(
-            categoryName: 'Deals',
-            icon: Icons.category,
-            onTap: () => _navigateToAddProductPage('cat4'),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: [
+                _buildCategoryCard(
+                  categoryName: 'Agro Produce',
+                  imagePath: 'assets/images/agro_produce.png',
+                  onTap: () => _navigateToAddProductPage('cat1'),
+                ),
+                _buildCategoryCard(
+                  categoryName: 'Livestock',
+                  imagePath: 'assets/images/livestock.png',
+                  onTap: () => _navigateToAddProductPage('cat2'),
+                ),
+                _buildCategoryCard(
+                  categoryName: 'Farm Machinery',
+                  imagePath: 'assets/images/farm_machinery.png',
+                  onTap: () => _navigateToAddProductPage('cat3'),
+                ),
+                _buildCategoryCard(
+                  categoryName: 'Deals',
+                  imagePath: 'assets/images/deals.png',
+                  onTap: () => _navigateToAddProductPage('cat4'),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -43,7 +75,7 @@ class CategorySelectPage extends StatelessWidget {
 
   Widget _buildCategoryCard({
     required String categoryName,
-    required IconData icon,
+    required String imagePath,
     required VoidCallback onTap,
   }) {
     return Card(
@@ -53,9 +85,10 @@ class CategorySelectPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 64.0,
+            Image.asset(
+              imagePath,
+              width: 64.0,
+              height: 64.0,
               color: Colors.green,
             ),
             const SizedBox(height: 8.0),
