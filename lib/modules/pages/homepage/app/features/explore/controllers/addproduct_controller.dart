@@ -68,16 +68,15 @@ class AddProductController extends GetxController {
       String? imageUrl = await uploadImage(image);
       imageUrllist.add(imageUrl);
     }
-
     final CollectionReference productsCollection =
         FirebaseFirestore.instance.collection('products');
     final CollectionReference categoryCollection =
         FirebaseFirestore.instance.collection(selectedCategory.value);
 
-    // Create a new document ID
+// Create a new document ID
     final newProductDoc = productsCollection.doc();
 
-    // Add the product to the general "products" collection
+// Add the product to the general "products" collection
     await newProductDoc.set({
       'id': newProductDoc.id, // Add the document ID as a field
       'name': name,
@@ -89,7 +88,7 @@ class AddProductController extends GetxController {
       'expiry': expiryController.text,
     });
 
-    // Add the product to the category collection
+// Add the product to the category collection
     await categoryCollection.doc(newProductDoc.id).set({
       'name': name,
       'username': GetStorage().read('username'),

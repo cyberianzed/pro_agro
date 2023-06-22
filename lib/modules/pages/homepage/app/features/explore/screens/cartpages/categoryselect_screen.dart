@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/addproduct_controller.dart';
 import 'addproduct_screen.dart';
 
 class CategorySelectPage extends StatelessWidget {
-  const CategorySelectPage({Key? key}) : super(key: key);
+  final AddProductController _aproductcontroller =
+      Get.put(AddProductController());
+  CategorySelectPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +28,9 @@ class CategorySelectPage extends StatelessWidget {
             onTap: () => _navigateToAddProductPage('cat2'),
           ),
           _buildCategoryCard(
-            categoryName: 'Farm Machinery',
-            icon: Icons.category,
-            onTap: () => _navigateToAddProductPage('cat3'),
-          ),
+              categoryName: 'Farm Machinery',
+              icon: Icons.category,
+              onTap: () => _navigateToAddProductPage('cat3')),
           _buildCategoryCard(
             categoryName: 'Deals',
             icon: Icons.category,
@@ -72,5 +74,6 @@ class CategorySelectPage extends StatelessWidget {
 
   void _navigateToAddProductPage(String selectedCategory) {
     Get.to(() => AddProductPage(category: selectedCategory));
+    _aproductcontroller.setSelectedCategory(selectedCategory);
   }
 }

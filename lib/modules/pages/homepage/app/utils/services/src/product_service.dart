@@ -62,17 +62,94 @@ class ProductService {
   }
 
   Future<List<Product>> getAgroProduce() async {
-    // Implementation similar to getAll() but with specific conditions/filtering
-    final List<Product> agroProduce = [];
-    // Fetch and filter products accordingly
-    return agroProduce;
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection('cat1').get();
+    final List<Product> products = [];
+    for (final doc in snapshot.docs) {
+      final data = doc.data();
+      final product = Product(
+        id: doc.id,
+        idUser: Random().nextBool() ? 'fwg123' : 'fwg345',
+        images: List<String>.from(data['images']),
+        name: data['name'],
+        price: data['price'].toDouble(),
+        isFavorite: data['isFavorite'],
+        description: data['description'],
+        totalViews: Random().nextInt(100),
+        totalReview: Random().nextInt(30),
+        rating: (Random().nextDouble() * 5).toPrecision(1),
+      );
+      products.add(product);
+    }
+    return products;
+  }
+  Future<List<Product>> getLiveStock() async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection('cat2').get();
+    final List<Product> products = [];
+    for (final doc in snapshot.docs) {
+      final data = doc.data();
+      final product = Product(
+        id: doc.id,
+        idUser: Random().nextBool() ? 'fwg123' : 'fwg345',
+        images: List<String>.from(data['images']),
+        name: data['name'],
+        price: data['price'].toDouble(),
+        isFavorite: data['isFavorite'],
+        description: data['description'],
+        totalViews: Random().nextInt(100),
+        totalReview: Random().nextInt(30),
+        rating: (Random().nextDouble() * 5).toPrecision(1),
+      );
+      products.add(product);
+    }
+    return products;
+  }
+
+  Future<List<Product>> getFarmMachinery() async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection('cat3').get();
+    final List<Product> products = [];
+    for (final doc in snapshot.docs) {
+      final data = doc.data();
+      final product = Product(
+        id: doc.id,
+        idUser: Random().nextBool() ? 'fwg123' : 'fwg345',
+        images: List<String>.from(data['images']),
+        name: data['name'],
+        price: data['price'].toDouble(),
+        isFavorite: data['isFavorite'],
+        description: data['description'],
+        totalViews: Random().nextInt(100),
+        totalReview: Random().nextInt(30),
+        rating: (Random().nextDouble() * 5).toPrecision(1),
+      );
+      products.add(product);
+    }
+    return products;
   }
 
   Future<List<Product>> getHotDeals() async {
-    // Implementation similar to getAll() but with specific conditions/filtering
-    final List<Product> hotDeals = [];
-    // Fetch and filter products accordingly
-    return hotDeals;
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection('cat4').get();
+    final List<Product> products = [];
+    for (final doc in snapshot.docs) {
+      final data = doc.data();
+      final product = Product(
+        id: doc.id,
+        idUser: Random().nextBool() ? 'fwg123' : 'fwg345',
+        images: List<String>.from(data['images']),
+        name: data['name'],
+        price: data['price'].toDouble(),
+        isFavorite: data['isFavorite'],
+        description: data['description'],
+        totalViews: Random().nextInt(100),
+        totalReview: Random().nextInt(30),
+        rating: (Random().nextDouble() * 5).toPrecision(1),
+      );
+      products.add(product);
+    }
+    return products;
   }
 
   Future<void> deleteProduct(String productId) async {

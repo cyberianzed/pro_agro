@@ -18,7 +18,12 @@ class ExploreController extends GetxController {
   Future<List<Product>> getAgroProduce() async {
     return productService.getAgroProduce();
   }
-
+  Future<List<Product>> getLiveStock() async {
+    return productService.getLiveStock();
+  }
+  Future<List<Product>> getFarmMachinery() async {
+    return productService.getFarmMachinery();
+  }
   Future<List<Product>> getHotDeals() async {
     return productService.getHotDeals();
   }

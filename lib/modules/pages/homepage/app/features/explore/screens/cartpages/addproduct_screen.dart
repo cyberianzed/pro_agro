@@ -25,7 +25,6 @@ class AddProductPage extends GetView<AddProductController> {
 
   @override
   Widget build(BuildContext context) {
-    _aproductcontroller.setSelectedCategory(category);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Product'),

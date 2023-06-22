@@ -12,7 +12,6 @@ import '../../../shared_components/product_card.dart';
 import '../../../shared_components/search_field.dart';
 import '../../../utils/services/model/product.dart';
 import '../controllers/explore_controller.dart';
-import 'cartpages/addproduct_screen.dart';
 import 'cartpages/cart_screen.dart';
 import 'cartpages/categoryselect_screen.dart';
 
@@ -87,15 +86,20 @@ class ExploreScreen extends GetView<ExploreController> {
                 _controller.getAgroProduce(),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
-              const Center(child: Text("Agro Produce")),
-              const Center(child: Text("Agro Produce")),
-              // const Center(child: Text("Agro Produce")),
+              _ProductContent(
+                _controller.getLiveStock(),
+                onPressed: (product) => _controller.goToDetailProduct(product),
+              ),
+              _ProductContent(
+                _controller.getFarmMachinery(),
+                onPressed: (product) => _controller.goToDetailProduct(product),
+              ),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Get.to(() => const CategorySelectPage());
+            Get.to(() => CategorySelectPage());
           },
           label: const Text('Post'),
           icon: const Icon(Icons.edit),
