@@ -44,6 +44,3 @@ flutter:
   assets:
     - assets/images/
     - assets/
-    # - assets/images/google_pay.png
-    # - assets/images/visa.png
-    # - assets/images/qr_code.png
