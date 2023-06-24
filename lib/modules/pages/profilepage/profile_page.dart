@@ -21,7 +21,8 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              const Align(
+              GetStorage().read('isadmin')==true
+              ?const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Admin',
@@ -31,7 +32,9 @@ class ProfilePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-              ),
+              )
+              :SizedBox(),
+            
               const CircleAvatar(
                 radius: 80,
                 backgroundImage: AssetImage('assets/profile.png'),
