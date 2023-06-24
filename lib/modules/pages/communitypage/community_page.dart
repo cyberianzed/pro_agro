@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/communitypage/article_details.dart';
 import '../../../utils/color_constants.dart';
 import 'article_controller.dart';
@@ -11,19 +12,24 @@ class CommunityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: const Text(
-          'Articles',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        leading: const Padding(
-          padding: EdgeInsets.only(top: 20, left: 10),
-        ),
-      ),
+       appBar: AppBar(
+            backgroundColor: const Color(0xfff0f4f7),
+            elevation: 0,
+            leadingWidth: 250,
+           
+            leading: const Padding(
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 15,
+              ),
+              child: Text(
+                'Articles',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 69, 51, 51),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+            )),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -168,14 +174,16 @@ class ArticleCard extends StatelessWidget {
                             },
                             icon: const Icon(Icons.share),
                           ),
-                          IconButton(
-                            onPressed: () {
+                         GetStorage().read('isadmin')==true
+                         ?IconButton(
+                           onPressed: () {
                               final articleController =
                                   Get.find<ArticleController>();
                               articleController.deleteArticle(article);
                             },
                             icon: const Icon(Icons.delete),
-                          ),
+                         )
+                         : SizedBox(),
                           IconButton(
                             onPressed: () {
                               // Handle share action

@@ -41,10 +41,24 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Event Calendar'),
-        ),
+       appBar: AppBar(
+            backgroundColor: const Color(0xfff0f4f7),
+            elevation: 0,
+            leadingWidth: 250,
+           
+            leading: const Padding(
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 15,
+              ),
+              child: Text(
+                'Events Calender',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 69, 51, 51),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+            )),
         body: Column(
           children: [
             Obx(() => TableCalendar(
