@@ -27,23 +27,23 @@ class CheckoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xfff0f4f7),
         elevation: 0,
         leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(
+            Icons.arrow_back,
             color: Colors.black,
-            iconSize: 16),
-        title: Padding(
-          padding: const EdgeInsets.only(right: 50),
-          child: Center(
-            child: Text(
-              'Payment',
-             style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,)
-            ),
           ),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous page
+          },
         ),
+         title: Text(
+          "Payment",
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        )
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

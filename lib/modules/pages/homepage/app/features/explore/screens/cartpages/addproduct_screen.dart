@@ -27,7 +27,23 @@ class AddProductPage extends GetView<AddProductController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Product'),
+        backgroundColor: const Color(0xfff0f4f7),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous page
+          },
+        ),
+         title: Text(
+          "Add Products",
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        )
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

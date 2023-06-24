@@ -27,13 +27,14 @@ class ProfilePage extends StatelessWidget {
                 child: Text(
                   'Admin',
                   style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 24.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 21, 76, 51),
                   ),
                 ),
               )
               :SizedBox(),
+                
             
               const CircleAvatar(
                 radius: 80,
