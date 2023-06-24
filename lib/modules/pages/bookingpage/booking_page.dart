@@ -187,7 +187,8 @@ class BookingPage extends StatelessWidget {
               onPressed: () {
                 final produce = Produce(
                     name: name,
-                    rating: (Random().nextDouble() * 5).toPrecision(1),
+                    rating:
+                        (Random().nextDouble() * (5 - 3) + 3).toPrecision(1),
                     community: community,
                     sowingMonth: sowingMonth,
                     harvestingMonth: harvestingMonth,

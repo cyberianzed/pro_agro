@@ -77,7 +77,7 @@ class ProductService {
         description: data['description'],
         totalViews: Random().nextInt(100),
         totalReview: Random().nextInt(30),
-        rating: (Random().nextDouble() * 5).toPrecision(1),
+        rating: (Random().nextDouble() * (5 - 3) + 3).toPrecision(1),
       );
       products.add(product);
     }
