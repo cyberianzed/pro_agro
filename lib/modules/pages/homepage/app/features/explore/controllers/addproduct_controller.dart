@@ -90,7 +90,7 @@ class AddProductController extends GetxController {
     });
 
 // Add the product to the category collection
-    await categoryCollection.doc('${newProductDoc.id}cat').set({
+    await categoryCollection.doc(newProductDoc.id).set({
       'name': name,
       'username': GetStorage().read('username'),
       'price': price,

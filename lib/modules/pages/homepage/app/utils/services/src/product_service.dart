@@ -1,8 +1,7 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../model/product.dart';
 
 class ProductService {
@@ -15,6 +14,7 @@ class ProductService {
   ProductService._internal();
 
   Future<Product?> getProductByID(String id) async {
+    debugPrint('id$id');
     final DocumentSnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection('products').doc(id).get();
     if (snapshot.exists) {
@@ -77,7 +77,7 @@ class ProductService {
         description: data['description'],
         totalViews: Random().nextInt(100),
         totalReview: Random().nextInt(30),
-        rating: (Random().nextDouble() * 5).toPrecision(1),
+        rating: (Random().nextDouble() * (5 - 3) + 3).toPrecision(1),
       );
       products.add(product);
     }

@@ -32,15 +32,15 @@ class AuthController extends GetxController {
     // Initialize GetStorage
     GetStorage.init().then((_) {
       // Check for logged in user
-      final box = GetStorage();
-      final isLoggedIn = box.read('isLoggedIn') ?? false;
+      // final box = GetStorage();
+      // final isLoggedIn = box.read('isLoggedIn') ?? false;
 
-      if (isLoggedIn) {
-        // final email = box.read('email');
-        Get.offAll(() => PersistentBottomView());
-      } else {
-        // Get.offAll(() => const BoardingScreen());
-      }
+      // if (isLoggedIn) {
+      // final email = box.read('email');
+      // Get.offAll(() => PersistentBottomView());
+      // } else {
+      // Get.offAll(() => const BoardingScreen());
+      // }
     });
   }
 
@@ -55,6 +55,7 @@ class AuthController extends GetxController {
     } else {
       // If user is logged in, navigate to home screen
       debugPrint("Login Success");
+      Get.offAll(() => PersistentBottomView());
       await userDetailController.getCurrentUser().then((userId) {
         if (userId != null) {
           userDetailController.getUserDetail(userId).then((userDetail) {

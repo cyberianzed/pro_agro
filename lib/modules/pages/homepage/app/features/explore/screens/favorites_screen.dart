@@ -48,7 +48,6 @@ class Favorites extends GetView<FavoritesController> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(_favoritesController.favoriteProducts.toString());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
