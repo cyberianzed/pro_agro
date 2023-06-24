@@ -43,24 +43,6 @@ class AuthController extends GetxController {
       }
     });
   }
-  // _initialPage(User? user) {
-  //   if (user == null) {
-  //     // If no user, navigate to login page
-  //     print("Login Page");
-  //     // Get.offAll(() => const BoardingScreen());
-  //   } else {
-  //     // If user is logged in, navigate to home screen
-  //     print("Login Success");
-  //     // Get.offAll(() => PersistentBottomView(
-  //     //     // email: user.email ?? "email null",
-  //     //     ));
-  //     print('email = ${user.email}');
-  //     // Save user information for persistence
-  //     final box = GetStorage();
-  //     box.write('isLoggedIn', true);
-  //     box.write('email', user.email);
-  //   }
-  // }
 
   // Function to handle routing based on user status
   _initialPage(User? user) async {
