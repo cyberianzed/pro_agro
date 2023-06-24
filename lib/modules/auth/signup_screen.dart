@@ -79,7 +79,7 @@ class SignUp extends StatelessWidget {
               backgroundcolor: ColorConstants.mainColor,
               textcolor: Colors.white,
               function: () {
-                Get.to(LoginScreen());
+                 Get.to(()=>LoginScreen());
               }),
         ],
       ).extendPadding(),

@@ -55,7 +55,6 @@ class AuthController extends GetxController {
     } else {
       // If user is logged in, navigate to home screen
       debugPrint("Login Success");
-      Get.offAll(() => PersistentBottomView());
       await userDetailController.getCurrentUser().then((userId) {
         if (userId != null) {
           userDetailController.getUserDetail(userId).then((userDetail) {
@@ -128,7 +127,8 @@ class AuthController extends GetxController {
     try {
       // Sign in with email and password
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      // _user.value = auth.currentUser;
+      _user.value = auth.currentUser;
+      Get.offAll(() => PersistentBottomView());
     } catch (e) {
       // Show snackbar with error message
       Get.snackbar(
