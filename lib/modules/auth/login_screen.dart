@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                     const Dividers(),
 // Signup button that navigates to the SignUp page
                     SignUpText(function: () {
-                      Get.to(SignUp());
+                       Get.to(()=>SignUp());
                     }),
                   ],
                 ),

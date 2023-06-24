@@ -47,7 +47,7 @@ class BoardingScreen extends StatelessWidget {
                 textColor: Colors.white,
                 label: "Login",
                 function: () {
-                  Get.to(LoginScreen());
+                  Get.to(()=>LoginScreen());
                 },
                 backgroundColor: ColorConstants.mainColor),
           ],
