@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pro_agro/modules/pages/homepage/app/features/filter/ProductFilterPage.dart';
+import 'package:pro_agro/modules/pages/homepage/app/features/filter/filterproduct_page.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../../../constans/app_constants.dart';
 import '../../../shared_components/filter_button.dart';
@@ -49,7 +49,7 @@ class ExploreScreen extends GetView<ExploreController> {
                     FilterSizeButton(
                       icon: FontAwesomeIcons.slidersH,
                       onPressed: () {
-                        Get.to(() => ProductFilterPage());
+                        Get.to(() => const ProductFilterPage());
                       },
                     ),
                     const SizedBox(width: 5),

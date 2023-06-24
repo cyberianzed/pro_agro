@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductFilterPage extends StatefulWidget {
+  const ProductFilterPage({super.key});
+
   @override
   _ProductFilterPageState createState() => _ProductFilterPageState();
 }
@@ -13,10 +15,10 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
   void _applyFilters() {
     // Apply filters based on _minPrice, _maxPrice, and _expiryDate
     // You can perform any desired filtering logic here
-    print('Applied Filters:');
-    print('Min Price: $_minPrice');
-    print('Max Price: $_maxPrice');
-    print('Expiry Date: $_expiryDate');
+    // print('Applied Filters:');
+    // print('Min Price: $_minPrice');
+    // print('Max Price: $_maxPrice');
+    // print('Expiry Date: $_expiryDate');
   }
 
   void _resetFilters() {
@@ -31,14 +33,14 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Filter'),
+        title: const Text('Product Filter'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Min Price:'),
+            const Text('Min Price:'),
             Slider(
               min: 0.0,
               max: 1000.0,
@@ -55,8 +57,8 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
             ),
             Text(
                 '₹${_minPrice.toStringAsFixed(2)}'), // Updated currency symbol to ₹
-            SizedBox(height: 16.0),
-            Text('Max Price:'),
+            const SizedBox(height: 16.0),
+            const Text('Max Price:'),
             Slider(
               min: _minPrice,
               max: 1000.0,
@@ -70,11 +72,11 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
             ),
             Text(
                 '₹${_maxPrice.toStringAsFixed(2)}'), // Updated currency symbol to ₹
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               children: [
-                Text('Expiry Date:'),
-                SizedBox(width: 8.0),
+                const Text('Expiry Date:'),
+                const SizedBox(width: 8.0),
                 Expanded(
                   child: ElevatedButton(
                     child: Text(
@@ -100,14 +102,14 @@ class _ProductFilterPageState extends State<ProductFilterPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
-              child: Text('Apply Filters'),
               onPressed: _applyFilters,
+              child: const Text('Apply Filters'),
             ),
             ElevatedButton(
-              child: Text('Reset Filters'),
               onPressed: _resetFilters,
+              child: const Text('Reset Filters'),
             ),
           ],
         ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 class ArticleController extends GetxController {
   final articleList = <Article>[].obs;
 
+  @override
   void onInit() {
     super.onInit();
     fetchArticleData();
