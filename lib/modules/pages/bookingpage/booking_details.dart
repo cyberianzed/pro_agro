@@ -21,22 +21,19 @@ class DetailedBookingPage extends StatelessWidget {
             Navigator.pop(context); // Navigate back to the previous page
           },
         ),
+         title: Text(
+          produce.name,
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        )
       ),
       body: Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                produce.name,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            
             const SizedBox(height: 8.0),
             Padding(
               padding: const EdgeInsets.all(16.0),
