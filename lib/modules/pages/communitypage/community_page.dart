@@ -12,24 +12,23 @@ class CommunityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-       appBar: AppBar(
-            backgroundColor: const Color(0xfff0f4f7),
-            elevation: 0,
-            leadingWidth: 250,
-           
-            leading: const Padding(
-              padding: EdgeInsets.only(
-                top: 20,
-                left: 15,
-              ),
-              child: Text(
-                'Articles',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 69, 51, 51),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-            )),
+      appBar: AppBar(
+          backgroundColor: const Color(0xfff0f4f7),
+          elevation: 0,
+          leadingWidth: 250,
+          leading: const Padding(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 15,
+            ),
+            child: Text(
+              'Articles',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 69, 51, 51),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+          )),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -174,16 +173,16 @@ class ArticleCard extends StatelessWidget {
                             },
                             icon: const Icon(Icons.share),
                           ),
-                         GetStorage().read('isadmin')==true
-                         ?IconButton(
-                           onPressed: () {
-                              final articleController =
-                                  Get.find<ArticleController>();
-                              articleController.deleteArticle(article);
-                            },
-                            icon: const Icon(Icons.delete),
-                         )
-                         : SizedBox(),
+                          GetStorage().read('isadmin') == true
+                              ? IconButton(
+                                  onPressed: () {
+                                    final articleController =
+                                        Get.find<ArticleController>();
+                                    articleController.deleteArticle(article);
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                )
+                              : SizedBox(),
                           IconButton(
                             onPressed: () {
                               // Handle share action
@@ -208,6 +207,7 @@ void _showAddArticleBottomSheet(BuildContext context) {
   final contentController = TextEditingController();
   final genreController = TextEditingController();
   final dateController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   showModalBottomSheet(
     context: context,
@@ -247,6 +247,13 @@ void _showAddArticleBottomSheet(BuildContext context) {
               ),
               const SizedBox(height: 8.0),
               TextField(
+                controller: descriptionController,
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              TextField(
                 controller: contentController,
                 decoration: const InputDecoration(
                   labelText: 'Content',
@@ -277,6 +284,7 @@ void _showAddArticleBottomSheet(BuildContext context) {
                   final content = contentController.text;
                   final genre = genreController.text;
                   final date = dateController.text;
+                  final description = descriptionController.text;
 
                   // Create a new article object
                   final newArticle = Article(
@@ -285,6 +293,7 @@ void _showAddArticleBottomSheet(BuildContext context) {
                     content: content,
                     genre: genre,
                     date: date,
+                    description: description,
                   );
 
                   // Access the ArticleController and add the new article
