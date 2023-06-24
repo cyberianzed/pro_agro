@@ -23,6 +23,7 @@ class ProductDetailController extends GetxController {
 
   Future<Product?> _getProduct() async {
     String? id = Get.parameters['id'];
+    debugPrint('idccc$id');
     Product? product;
     if (id != null) {
       product = await productService.getProductByID(id);

@@ -44,11 +44,18 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    // debugPrint(_pdetailcontroller.toString());
     return Scaffold(
       body: Obx(
         () => (_pdetailcontroller.data.value == null ||
                 _pdetailcontroller.dataUser.value == null)
-            ? const Center(child: Text("Product or User Not Found"))
+            ? Column(
+                children: [
+                  const Center(child: Text("Product or User Not Found")),
+                  CustomDeleteButton(
+                      onPressed: () => _pdetailcontroller.onDeleteProduct()),
+                ],
+              )
             : _buildProductDetail(
                 product: _pdetailcontroller.data.value!,
                 user: _pdetailcontroller.dataUser.value!,
