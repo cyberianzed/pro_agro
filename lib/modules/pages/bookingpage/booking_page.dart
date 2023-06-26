@@ -1,58 +1,202 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:pro_agro/modules/pages/bookingpage/booking_controller.dart';
+import 'booking_controller.dart';
 import 'booking_details.dart';
 
 class BookingPage extends StatelessWidget {
-  final ProduceController produceController = Get.put(ProduceController());
-  final String localAdmin = '82837473292';
-
   BookingPage({super.key});
+  final ProduceController _produceController = Get.put(ProduceController());
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // backgroundColor: Color(0xfff0f4f7),
-        appBar: AppBar(
-            backgroundColor: const Color(0xfff0f4f7),
-            elevation: 0,
-            leadingWidth: 250,
-            actions: [Center(child: _monthFilterButtons())],
-            leading: const Padding(
-              padding: EdgeInsets.only(
-                top: 20,
-                left: 15,
-              ),
-              child: Text(
-                'Bookings',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 69, 51, 51),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-            )),
-        body: Column(
-          children: [
-            // _monthFilterButtons(),
-            Expanded(child: Obx(() => _buildProduceList())),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _createBooking(context);
-          },
-          child: const Icon(Icons.add),
-        ),
-        // floatingActionButton: GetStorage().read('isadmin') == true
-        //     ? FloatingActionButton(
-        //         onPressed: () {
-        //           _createBooking(context);
-        //         },
-        //         child: const Icon(Icons.add))
-        //     : SizedBox()
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: const Color(0xfff0f4f7),
+          elevation: 0,
+          leadingWidth: 250,
+          actions: [Center(child: _monthFilterButtons())],
+          leading: const Padding(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 15,
+            ),
+            child: Text(
+              'Bookings',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 69, 51, 51),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+          )),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('booking').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const CircularProgressIndicator();
+          }
+
+          List<Produce> produceList = [];
+          for (var doc in snapshot.data!.docs) {
+            Produce produce = Produce.fromSnapshot(doc);
+            produceList.add(produce);
+          }
+
+          // Apply filter based on selected harvest month
+          List<Produce> filteredProduceList = produceList;
+          int selectedMonthIndex =
+              _produceController.selectedFilterOption.value;
+          if (selectedMonthIndex > 0 &&
+              selectedMonthIndex < monthNames.length) {
+            String selectedMonth = monthNames[selectedMonthIndex];
+            filteredProduceList = produceList
+                .where((produce) => produce.harvestingMonth == selectedMonth)
+                .toList();
+          }
+
+          return ListView.builder(
+            itemCount: filteredProduceList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(filteredProduceList[index].name),
+                subtitle: Text(filteredProduceList[index].community),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return DetailedBookingPage(
+                            produce: filteredProduceList[index]);
+                      },
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              TextEditingController nameController = TextEditingController();
+              TextEditingController communityController =
+                  TextEditingController();
+              TextEditingController sowingMonthController =
+                  TextEditingController();
+              TextEditingController harvestingMonthController =
+                  TextEditingController();
+              TextEditingController harvestingProduceWeightController =
+                  TextEditingController();
+              TextEditingController farmerNameController =
+                  TextEditingController();
+              TextEditingController farmerContactController =
+                  TextEditingController();
+              TextEditingController adminContactController =
+                  TextEditingController();
+              TextEditingController descriptionController =
+                  TextEditingController();
+              TextEditingController adminNameController =
+                  TextEditingController();
+
+              return AlertDialog(
+                title: const Text('Create Booking'),
+                content: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: nameController,
+                        decoration: const InputDecoration(labelText: 'Name'),
+                      ),
+                      TextField(
+                        controller: communityController,
+                        decoration:
+                            const InputDecoration(labelText: 'Community'),
+                      ),
+                      TextField(
+                        controller: sowingMonthController,
+                        decoration:
+                            const InputDecoration(labelText: 'Sowing Month'),
+                      ),
+                      TextField(
+                        controller: harvestingMonthController,
+                        decoration: const InputDecoration(
+                            labelText: 'Harvesting Month'),
+                      ),
+                      TextField(
+                        controller: harvestingProduceWeightController,
+                        decoration: const InputDecoration(
+                            labelText: 'Harvesting Produce Weight'),
+                      ),
+                      TextField(
+                        controller: farmerNameController,
+                        decoration:
+                            const InputDecoration(labelText: 'Farmer Name'),
+                      ),
+                      TextField(
+                        controller: farmerContactController,
+                        decoration:
+                            const InputDecoration(labelText: 'Farmer Contact'),
+                      ),
+                      TextField(
+                        controller: adminContactController,
+                        decoration:
+                            const InputDecoration(labelText: 'Admin Contact'),
+                      ),
+                      TextField(
+                        controller: descriptionController,
+                        decoration:
+                            const InputDecoration(labelText: 'Description'),
+                      ),
+                      TextField(
+                        controller: adminNameController,
+                        decoration:
+                            const InputDecoration(labelText: 'Admin Name'),
+                      ),
+                    ],
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Save'),
+                    onPressed: () {
+                      // Save the produce data to Firestore
+                      Produce produce = Produce(
+                        name: nameController.text,
+                        adminName: adminNameController.text,
+                        community: communityController.text,
+                        sowingMonth: sowingMonthController.text,
+                        harvestingMonth: harvestingMonthController.text,
+                        harvestingProduceWeight:
+                            harvestingProduceWeightController.text,
+                        farmerName: farmerNameController.text,
+                        farmerContact: farmerContactController.text,
+                        adminContact: adminContactController.text,
+                        rating: (Random().nextDouble() * 5).toPrecision(1),
+                        description: descriptionController.text,
+                      );
+                      FirebaseFirestore.instance
+                          .collection('booking')
+                          .add(produce.toMap());
+
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -89,7 +233,7 @@ class BookingPage extends StatelessWidget {
                       return ListTile(
                         title: Text(monthName),
                         onTap: () {
-                          produceController.selectFilterOption(index);
+                          _produceController.selectFilterOption(index);
                           Get.back();
                         },
                       );
@@ -99,201 +243,12 @@ class BookingPage extends StatelessWidget {
               },
             );
           },
-          child: const Text('Filter by Month',
-              style: TextStyle(color: Colors.blue)),
+          child: const Text(
+            'Filter by Month',
+            style: TextStyle(color: Colors.blue),
+          ),
         ),
       ],
-    );
-  }
-
-  Widget _buildProduceList() {
-    return ListView.builder(
-      itemCount: produceController.filteredProduces.length,
-      itemBuilder: (context, index) {
-        final produce = produceController.filteredProduces[index];
-        return ProduceCard(
-          produce: produce,
-          onDelete: () {
-            produceController.removeProduce(produce);
-          },
-        );
-      },
-    );
-  }
-
-  void _createBooking(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        String name = '';
-        String community = '';
-        String sowingMonth = '';
-        String harvestingMonth = '';
-        String harvestingProduceWeight = '';
-        String contactNo = '';
-        String description = '';
-
-        return AlertDialog(
-          title: const Text('Create Booking'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                onChanged: (value) => name = value,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => community = value,
-                decoration: const InputDecoration(
-                  labelText: 'Community',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => sowingMonth = value,
-                decoration: const InputDecoration(
-                  labelText: 'Sowing Month',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => harvestingMonth = value,
-                decoration: const InputDecoration(
-                  labelText: 'Harvesting Month',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => harvestingProduceWeight = value,
-                decoration: const InputDecoration(
-                  labelText: 'Harvesting Produce Weight',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => contactNo = value,
-                decoration: const InputDecoration(
-                  labelText: 'Contact Number ',
-                ),
-              ),
-              TextField(
-                onChanged: (value) => description = value,
-                decoration: const InputDecoration(
-                  labelText: 'Description of the Product',
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                final produce = Produce(
-                    name: name,
-                    rating:
-                        (Random().nextDouble() * (5 - 3) + 3).toPrecision(1),
-                    community: community,
-                    sowingMonth: sowingMonth,
-                    harvestingMonth: harvestingMonth,
-                    harvestingProduceWeight: harvestingProduceWeight,
-                    adminContact: localAdmin,
-                    farmerName: GetStorage().read('username'),
-                    farmerContact: contactNo,
-                    description: description, 
-                    adminName: '');
-                produceController.addProduce(produce);
-                Navigator.of(context).pop();
-              },
-              child: const Text('Create'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class ProduceCard extends StatelessWidget {
-  final Produce produce;
-  final VoidCallback onDelete;
-
-  const ProduceCard({super.key, required this.produce, required this.onDelete});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailedBookingPage(produce: produce),
-          ),
-        );
-      },
-      child: Card(
-        elevation: 2.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    produce.name,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  GetStorage().read('isadmin') == true
-                      ? IconButton(
-                          onPressed: onDelete,
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.grey,
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Community: ${produce.community}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Sowing Month: ${produce.sowingMonth}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              Text(
-                'Harvesting Month: ${produce.harvestingMonth}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              Text(
-                'Harvesting Produce Weight: ${produce.harvestingProduceWeight}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
