@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'booking_controller.dart';
 import 'booking_details.dart';
 
@@ -43,35 +44,92 @@ class BookingPage extends StatelessWidget {
             produceList.add(produce);
           }
 
-          // Apply filter based on selected harvest month
-          List<Produce> filteredProduceList = produceList;
+          // Apply filter based on selected month
           int selectedMonthIndex =
               _produceController.selectedFilterOption.value;
-          if (selectedMonthIndex > 0 &&
-              selectedMonthIndex < monthNames.length) {
-            String selectedMonth = monthNames[selectedMonthIndex];
-            filteredProduceList = produceList
+          if (selectedMonthIndex > 0) {
+            final selectedMonth = monthNames[selectedMonthIndex];
+            produceList = produceList
                 .where((produce) => produce.harvestingMonth == selectedMonth)
                 .toList();
           }
 
           return ListView.builder(
-            itemCount: filteredProduceList.length,
+            itemCount: produceList.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(filteredProduceList[index].name),
-                subtitle: Text(filteredProduceList[index].community),
+              return GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return DetailedBookingPage(
-                            produce: filteredProduceList[index]);
+                        return DetailedBookingPage(produce: produceList[index]);
                       },
                     ),
                   );
                 },
+                child: Card(
+                  elevation: 2.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              produceList[index].name,
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            GetStorage().read('isadmin') == true
+                                ? IconButton(
+                                    // onPressed: onDelete,
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.grey,
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          'Community: ${produceList[index].community}',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          'Sowing Month: ${produceList[index].sowingMonth}',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Text(
+                          'Harvesting Month: ${produceList[index].harvestingMonth}',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Text(
+                          'Harvesting Produce Weight: ${produceList[index].harvestingProduceWeight}',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               );
             },
           );

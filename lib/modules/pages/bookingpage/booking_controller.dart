@@ -33,7 +33,7 @@ class ProduceController extends GetxController {
 
   void selectFilterOption(int index) {
     selectedFilterOption.value = index;
-    // refresh();
+    update();
   }
 
   List<Produce> getFilteredProduces() {
