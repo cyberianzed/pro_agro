@@ -11,30 +11,21 @@ class DetailedBookingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xfff0f4f7),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
-          },
-        ),
-         title: Text(
-          produce.name,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        )
-      ),
+          backgroundColor: const Color(0xfff0f4f7),
+          elevation: 0,
+          leading:
+              CustomBackButton(onPressed: () => Navigator.of(context).pop()),
+          title: Text(
+            produce.name,
+            style: const TextStyle(
+              color: Colors.black,
+            ),
+          )),
       body: Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
             const SizedBox(height: 8.0),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -55,9 +46,8 @@ class DetailedBookingPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Rating(produce.rating)
-            ),
+                padding: const EdgeInsets.all(16.0),
+                child: Rating(produce.rating)),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
