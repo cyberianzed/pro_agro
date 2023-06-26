@@ -196,7 +196,8 @@ class BookingPage extends StatelessWidget {
                     adminContact: localAdmin,
                     farmerName: GetStorage().read('username'),
                     farmerContact: contactNo,
-                    description: description);
+                    description: description, 
+                    adminName: '');
                 produceController.addProduce(produce);
                 Navigator.of(context).pop();
               },

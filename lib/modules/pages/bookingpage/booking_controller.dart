@@ -25,7 +25,9 @@ class ProduceController extends GetxController {
           farmerName: 'Mathew Abaraham',
           farmerContact: '8392482946',
           rating: 3,
-          description: 'Tomato'),
+          description:
+              'The tomato (/təmeɪtoʊ/ or /təmɑːtoʊ/) is the edible berry of the plant Solanum lycopersicum,[1][2] commonly known as the tomato plant. The species originated in western South America, Mexico, and Central America.[2][3] The Nahuatl word tomatl gave rise to the Spanish word tomate, from which the English word tomato derived.[3][4] Its domestication and use as a cultivated food may have originated with the indigenous peoples of Mexico.[2][5] The Aztecs used tomatoes in their cooking at the time of the Spanish conquest of the Aztec Empire, and after the Spanish encountered the tomato for the first time after their contact with the Aztecs, they brought the plant to Europe, in a widespread transfer of plants known as the Columbian exchange. From there, the tomato was introduced to other parts of the European-colonized world during the 16th century.[2]',
+          adminName: 'ja'),
 
       Produce(
         name: 'Carrot',
@@ -38,6 +40,7 @@ class ProduceController extends GetxController {
         farmerContact: '9038504702',
         rating: 4.4,
         description: 'Carrots',
+        adminName: 's',
       ),
 
       Produce(
@@ -50,7 +53,8 @@ class ProduceController extends GetxController {
           farmerContact: '9364036254',
           adminContact: localAdmin,
           rating: 2.8,
-          description: 'Carrots'),
+          description: 'Carrots',
+          adminName: 'afs'),
       // Add more produce data as needed
     ];
 
@@ -140,9 +144,11 @@ class Produce {
   final String adminContact;
   final double rating;
   final String description;
+  final String adminName;
 
   Produce(
       {required this.name,
+      required this.adminName,
       required this.community,
       required this.sowingMonth,
       required this.harvestingMonth,

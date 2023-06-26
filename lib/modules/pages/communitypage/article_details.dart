@@ -96,7 +96,7 @@ class ArticleDetailsPage extends StatelessWidget {
                   Text(
                     article.content,
                     style: const TextStyle(
-                        fontSize: 17,
+                        fontSize: 16.5,
                         color: Color.fromARGB(255, 101, 93, 93),
                         height: 1.5),
                   ),
