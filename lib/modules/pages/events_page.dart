@@ -30,7 +30,7 @@ class _EventsPageState extends State<EventsPage> {
     _mySelectedEvents.value = {
       // Initialize the map with your desired events
       '2023-06-30': [
-        {'eventTitle': 'Local Diary Famer Meeting', 'eventDescp': 'The Local Meeting for Dairy farmers will be held at the Panchayath office to address the problems and difficulties faced by the diary farmers'}
+        {'eventTitle': 'Local Diary Farmer Meeting', 'eventDescp': 'The Local Meeting for Dairy farmers will be held at the Panchayath office to address the problems and difficulties faced by the diary farmers'}
       ],
       '2023-07-18': [
         {'eventTitle': ' 50% Subsidy for Agricultural Power Tools', 'eventDescp': 'The government has taken the initiative to provide machine subsidies. Under this scheme, up to 50 percent subsidy is given to farmers to buy agricultural machinery'}
@@ -46,14 +46,14 @@ class _EventsPageState extends State<EventsPage> {
         {
           'eventTitle': 'Krishibhavan Sapling Distribution',
           'eventDescp':
-              'It has been decided to conduct the Sapling distribution on 14th of July from 10am to 12pm at the Krishibhavan Office.'
+              'It has been decided to conduct the Sapling distribution on 3rd of July from 10am to 12pm at the Krishibhavan Office.'
         }
        ],
        '2023-07-01': [
         {
           'eventTitle': 'Panchayath level Seed Distribution',
           'eventDescp':
-              'The Panchyath Level Seed Distribution will take place on 16th of July from 11am to 12pm at the corresponding Panchayath offices.'
+              'The Panchyath Level Seed Distribution will take place on 1st of July from 11am to 12pm at the corresponding Panchayath offices.'
         }
        ],
     };
