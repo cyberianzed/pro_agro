@@ -29,27 +29,27 @@ class _EventsPageState extends State<EventsPage> {
   void _initializeEvents() {
     _mySelectedEvents.value = {
       // Initialize the map with your desired events
-      '2023-05-31': [
-        {'eventTitle': 'Event 1', 'eventDescp': 'Description for Event 1'}
+      '2023-06-30': [
+        {'eventTitle': 'Local Diary Famer Meeting', 'eventDescp': 'The Local Meeting for Dairy farmers will be held at the Panchayath office to address the problems and difficulties faced by the diary farmers'}
       ],
-      '2023-06-01': [
-        {'eventTitle': 'Event 2', 'eventDescp': 'Description for Event 2'}
+      '2023-07-18': [
+        {'eventTitle': ' 50% Subsidy for Agricultural Power Tools', 'eventDescp': 'The government has taken the initiative to provide machine subsidies. Under this scheme, up to 50 percent subsidy is given to farmers to buy agricultural machinery'}
       ],
-      '2023-07-03': [
+      '2023-07-14': [
         {
-          'eventTitle': 'National Conference on Agriculture and Food Sciences',
+          'eventTitle': ' Thirunelly Seed Festival',
           'eventDescp':
-              'The National Conference on Agriculture and Food Sciences (NCAFS) is a platform for academics and industry experts in Smart Energy Systems to collaborate. The event will take place in Ooty, India.'
+              'At the Thirunelly Seed Festival on July 14 to 16, 2023, one could learn all about 350 rice varieties, 70 millets, 243 banana plants, 138 tubers, 60 leafy vegetables and handloom clothes made of organic cotton displayed in different stalls.'
         }
       ],
-       '2023-07-14': [
+       '2023-07-03': [
         {
           'eventTitle': 'Krishibhavan Sapling Distribution',
           'eventDescp':
               'It has been decided to conduct the Sapling distribution on 14th of July from 10am to 12pm at the Krishibhavan Office.'
         }
        ],
-       '2023-07-18': [
+       '2023-07-01': [
         {
           'eventTitle': 'Panchayath level Seed Distribution',
           'eventDescp':
