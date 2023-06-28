@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CheckoutPage extends StatelessWidget {
@@ -26,25 +24,24 @@ class CheckoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-        backgroundColor: const Color(0xfff0f4f7),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+      appBar: AppBar(
+          backgroundColor: const Color(0xfff0f4f7),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context); // Navigate back to the previous page
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
-          },
-        ),
-         title: Text(
-          "Payment",
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        )
-      ),
+          title: const Text(
+            "Payment",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(

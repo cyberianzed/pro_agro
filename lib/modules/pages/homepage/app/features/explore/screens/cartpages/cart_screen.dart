@@ -60,26 +60,25 @@ class CartPage extends GetView<ExploreController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  elevation: 0,
-  leadingWidth: 150,
-  leading: Row(
-    children: [
-      const SizedBox(
-        width: 20,
+        elevation: 0,
+        leadingWidth: 150,
+        leading: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            CustomBackButton(onPressed: () => _explorecontroller.back()),
+          ],
+        ),
+        title: const Text(
+          'Cart',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      CustomBackButton(onPressed: () => _explorecontroller.back()),
-    ],
-  ),
-  title: Text(
-    'Cart',
-    style: TextStyle(
-      color: Colors.black,
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
-),
-
       body: Obx(
         () => ListView.builder(
           itemCount: _explorecontroller.cartProducts.length,

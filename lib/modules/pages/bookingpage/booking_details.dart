@@ -33,7 +33,7 @@ class DetailedBookingPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -99,10 +99,10 @@ class DetailedBookingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 50,
+                  const SizedBox(
+                    height: 40,
                     width: 30,
-                    child: const VerticalDivider(
+                    child: VerticalDivider(
                       thickness: 1,
                       color: Colors.black54,
                     ),
@@ -334,7 +334,7 @@ class DetailedBookingPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 18.0, color: Colors.black54),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -345,17 +345,17 @@ class DetailedBookingPage extends StatelessWidget {
                     // Handle Show Interest button press
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                       side: const BorderSide(color: Colors.blue),
                     ),
                   ),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.thumb_up,
                     color: Colors.blue,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Show Interest',
                     style: TextStyle(
                       color: Colors.blue,
@@ -363,23 +363,23 @@ class DetailedBookingPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 ElevatedButton.icon(
                   onPressed: () {
                     // Handle Book Now button press
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                       side: const BorderSide(color: Colors.green),
                     ),
                   ),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.book,
                     color: Colors.green,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Book Now',
                     style: TextStyle(
                       color: Colors.green,

@@ -182,7 +182,7 @@ class ArticleCard extends StatelessWidget {
                                   },
                                   icon: const Icon(Icons.delete),
                                 )
-                              : SizedBox(),
+                              : const SizedBox(),
                           IconButton(
                             onPressed: () {
                               // Handle share action

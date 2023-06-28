@@ -21,21 +21,19 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              GetStorage().read('isadmin')==true
-              ?const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Admin',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 21, 76, 51),
-                  ),
-                ),
-              )
-              :SizedBox(),
-                
-            
+              GetStorage().read('isadmin') == true
+                  ? const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Admin',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 21, 76, 51),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
               const CircleAvatar(
                 radius: 80,
                 backgroundImage: AssetImage('assets/profile.png'),

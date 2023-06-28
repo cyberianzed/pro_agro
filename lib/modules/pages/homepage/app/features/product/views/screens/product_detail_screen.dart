@@ -171,10 +171,11 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     CustomBackButton(
                         onPressed: () => _pdetailcontroller.back()),
                     const Spacer(),
-                    GetStorage().read('isadmin')==true?
-                    CustomDeleteButton(
-                        onPressed: () => _pdetailcontroller.onDeleteProduct())
-                        :SizedBox(),
+                    GetStorage().read('isadmin') == true
+                        ? CustomDeleteButton(
+                            onPressed: () =>
+                                _pdetailcontroller.onDeleteProduct())
+                        : const SizedBox(),
                     const SizedBox(width: 15),
                     _FavoriteButton(
                       initial: product.isFavorite,
