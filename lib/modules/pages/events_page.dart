@@ -35,17 +35,37 @@ class _EventsPageState extends State<EventsPage> {
       '2023-06-01': [
         {'eventTitle': 'Event 2', 'eventDescp': 'Description for Event 2'}
       ],
+      '2023-07-03': [
+        {
+          'eventTitle': 'National Conference on Agriculture and Food Sciences',
+          'eventDescp':
+              'The National Conference on Agriculture and Food Sciences (NCAFS) is a platform for academics and industry experts in Smart Energy Systems to collaborate. The event will take place in Ooty, India.'
+        }
+      ],
+       '2023-07-14': [
+        {
+          'eventTitle': 'Krishibhavan Sapling Distribution',
+          'eventDescp':
+              'It has been decided to conduct the Sapling distribution on 14th of July from 10am to 12pm at the Krishibhavan Office.'
+        }
+       ],
+       '2023-07-18': [
+        {
+          'eventTitle': 'Panchayath level Seed Distribution',
+          'eventDescp':
+              'The Panchyath Level Seed Distribution will take place on 16th of July from 11am to 12pm at the corresponding Panchayath offices.'
+        }
+       ],
     };
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+        appBar: AppBar(
             backgroundColor: const Color(0xfff0f4f7),
             elevation: 0,
             leadingWidth: 250,
-           
             leading: const Padding(
               padding: EdgeInsets.only(
                 top: 20,
