@@ -38,119 +38,122 @@ class BookingPage extends GetView<ProduceController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('booking').snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
-          }
+      body: GetBuilder<ProduceController>(
+          id: 22,
+          builder: (controller) {
+            return StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('booking').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
 
-          _produceController.produceList.clear();
-          for (var doc in snapshot.data!.docs) {
-            Produce produce = Produce.fromSnapshot(doc);
-            _produceController.produceList.add(produce);
-          }
-          // Apply filter based on selected month
-          int selectedMonthIndex =
-              _produceController.selectedFilterOption.value;
-          if (selectedMonthIndex > 0) {
-            final selectedMonth = monthNames[selectedMonthIndex];
-            _produceController.produceList.assignAll(_produceController
-                .produceList
-                .where((produce) => produce.harvestingMonth == selectedMonth)
-                .toList());
-          } else if (selectedMonthIndex == 0) {
-            _produceController.produceList.assignAll(snapshot.data!.docs
-                .map((doc) => Produce.fromSnapshot(doc))
-                .toList());
-          }
+                _produceController.produceList.clear();
+                for (var doc in snapshot.data!.docs) {
+                  Produce produce = Produce.fromSnapshot(doc);
+                  _produceController.produceList.add(produce);
+                }
+                // Apply filter based on selected month
+                int selectedMonthIndex =
+                    _produceController.selectedFilterOption.value;
+                if (selectedMonthIndex > 0) {
+                  final selectedMonth = monthNames[selectedMonthIndex];
+                  _produceController.produceList.assignAll(_produceController
+                      .produceList
+                      .where(
+                          (produce) => produce.harvestingMonth == selectedMonth)
+                      .toList());
+                } else if (selectedMonthIndex == 0) {
+                  _produceController.produceList.assignAll(snapshot.data!.docs
+                      .map((doc) => Produce.fromSnapshot(doc))
+                      .toList());
+                }
 
-          return Obx(
-            () => ListView.builder(
-              itemCount: _produceController.produceList.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DetailedBookingPage(
-                            produce: _produceController.produceList[index],
-                          );
-                        },
+                return ListView.builder(
+                  itemCount: controller.produceList.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return DetailedBookingPage(
+                                produce: controller.produceList[index],
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      child: Card(
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    controller.produceList[index].name,
+                                    style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  if (GetStorage().read('isadmin') == true)
+                                    IconButton(
+                                      onPressed: () {
+                                        _deleteBooking(controller
+                                            .produceList[index].adminContact);
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                'Community: ${controller.produceList[index].community}',
+                                style: const TextStyle(fontSize: 16.0),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                'Sowing Month: ${controller.produceList[index].sowingMonth}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Text(
+                                'Harvesting Month: ${controller.produceList[index].harvestingMonth}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Text(
+                                'Harvesting Produce Weight: ${controller.produceList[index].harvestingProduceWeight}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   },
-                  child: Card(
-                    elevation: 2.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                _produceController.produceList[index].name,
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              if (GetStorage().read('isadmin') == true)
-                                IconButton(
-                                  onPressed: () {
-                                    _deleteBooking(_produceController
-                                        .produceList[index].adminContact);
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                            ],
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Community: ${_produceController.produceList[index].community}',
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Sowing Month: ${_produceController.produceList[index].sowingMonth}',
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Harvesting Month: ${_produceController.produceList[index].harvestingMonth}',
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Harvesting Produce Weight: ${_produceController.produceList[index].harvestingProduceWeight}',
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 );
               },
-            ),
-          );
-        },
-      ),
+            );
+          }),
       floatingActionButton: const _BookingFAB(),
     );
   }
@@ -175,7 +178,7 @@ class BookingPage extends GetView<ProduceController> {
       children: [
         IconButton(
           onPressed: () {
-            _produceController.update();
+            _produceController.updates();
           },
           icon: const Icon(Icons.refresh_rounded),
           color: Colors.transparent,

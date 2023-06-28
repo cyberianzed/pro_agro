@@ -38,7 +38,7 @@ class ProduceController extends GetxController {
   }
 
   void updates() {
-    update();
+    update([22]);
   }
 
   List<Produce> getFilteredProduces() {
