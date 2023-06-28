@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/communitypage/article_details.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../utils/color_constants.dart';
 import 'article_controller.dart';
 
@@ -42,7 +43,7 @@ class CommunityPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 Text(
-                  'Choondacherry',
+                  'PALA',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
@@ -84,6 +85,15 @@ class CommunityPage extends StatelessWidget {
 
 class ArticleCard extends StatelessWidget {
   final Article article;
+  void _showShareOptions() {
+    final shareText = 'Check out this article:\n'
+        'Title: ${article.title}\n'
+        'Author: ${article.author}\n'
+        'Content: ${article.content}';
+
+    Share.share(shareText);
+  }
+
   const ArticleCard({super.key, required this.article});
   @override
   Widget build(BuildContext context) {
@@ -169,7 +179,7 @@ class ArticleCard extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {
-                              // Handle share action
+                              _showShareOptions();
                             },
                             icon: const Icon(Icons.share),
                           ),
@@ -184,9 +194,7 @@ class ArticleCard extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           IconButton(
-                            onPressed: () {
-                              // Handle share action
-                            },
+                            onPressed: () {},
                             icon: const Icon(Icons.edit),
                           ),
                         ],
@@ -207,7 +215,6 @@ void _showAddArticleBottomSheet(BuildContext context) {
   final contentController = TextEditingController();
   final genreController = TextEditingController();
   final dateController = TextEditingController();
-  final descriptionController = TextEditingController();
 
   showModalBottomSheet(
     context: context,
@@ -247,22 +254,6 @@ void _showAddArticleBottomSheet(BuildContext context) {
               ),
               const SizedBox(height: 8.0),
               TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  labelText: 'Description',
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
-                controller: contentController,
-                decoration: const InputDecoration(
-                  labelText: 'Content',
-                ),
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
                 controller: genreController,
                 decoration: const InputDecoration(
                   labelText: 'Genre',
@@ -275,6 +266,15 @@ void _showAddArticleBottomSheet(BuildContext context) {
                   labelText: 'Date',
                 ),
               ),
+              const SizedBox(height: 8.0),
+              TextField(
+                controller: contentController,
+                decoration: const InputDecoration(
+                  labelText: 'Content',
+                ),
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+              ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
@@ -284,7 +284,6 @@ void _showAddArticleBottomSheet(BuildContext context) {
                   final content = contentController.text;
                   final genre = genreController.text;
                   final date = dateController.text;
-                  final description = descriptionController.text;
 
                   // Create a new article object
                   final newArticle = Article(
@@ -293,7 +292,6 @@ void _showAddArticleBottomSheet(BuildContext context) {
                     content: content,
                     genre: genre,
                     date: date,
-                    description: description,
                   );
 
                   // Access the ArticleController and add the new article

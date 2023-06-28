@@ -33,7 +33,6 @@ class DetailedBookingPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -342,7 +341,23 @@ class DetailedBookingPage extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Handle Show Interest button press
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Success'),
+                          content: const Text('Interest shown successfully'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -366,7 +381,24 @@ class DetailedBookingPage extends StatelessWidget {
                 const SizedBox(width: 16.0),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Handle Book Now button press
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Success'),
+                          content: const Text(
+                              'Your booking is done. Please contact admin for more details.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -389,6 +421,9 @@ class DetailedBookingPage extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

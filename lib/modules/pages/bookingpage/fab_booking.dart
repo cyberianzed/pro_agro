@@ -35,11 +35,31 @@ class _BookingFAB extends StatelessWidget {
                   children: [
                     TextField(
                       controller: nameController,
-                      decoration: const InputDecoration(labelText: 'Name'),
+                      decoration: const InputDecoration(labelText: 'Crop Name'),
                     ),
                     TextField(
                       controller: communityController,
                       decoration: const InputDecoration(labelText: 'Community'),
+                    ),
+                    TextField(
+                      controller: farmerNameController,
+                      decoration:
+                          const InputDecoration(labelText: 'Farmer Name'),
+                    ),
+                    TextField(
+                      controller: farmerContactController,
+                      decoration:
+                          const InputDecoration(labelText: 'Farmer Contact'),
+                    ),
+                    TextField(
+                      controller: adminNameController,
+                      decoration:
+                          const InputDecoration(labelText: 'Admin Name'),
+                    ),
+                    TextField(
+                      controller: adminContactController,
+                      decoration:
+                          const InputDecoration(labelText: 'Admin Contact'),
                     ),
                     TextField(
                       controller: sowingMonthController,
@@ -57,29 +77,9 @@ class _BookingFAB extends StatelessWidget {
                           labelText: 'Harvesting Produce Weight'),
                     ),
                     TextField(
-                      controller: farmerNameController,
-                      decoration:
-                          const InputDecoration(labelText: 'Farmer Name'),
-                    ),
-                    TextField(
-                      controller: farmerContactController,
-                      decoration:
-                          const InputDecoration(labelText: 'Farmer Contact'),
-                    ),
-                    TextField(
-                      controller: adminContactController,
-                      decoration:
-                          const InputDecoration(labelText: 'Admin Contact'),
-                    ),
-                    TextField(
                       controller: descriptionController,
                       decoration:
                           const InputDecoration(labelText: 'Description'),
-                    ),
-                    TextField(
-                      controller: adminNameController,
-                      decoration:
-                          const InputDecoration(labelText: 'Admin Name'),
                     ),
                   ],
                 ),

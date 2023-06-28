@@ -12,26 +12,31 @@ class ArticleController extends GetxController {
   void fetchArticleData() {
     final articleData = [
       Article(
-        date: 'April 17, 2023',
-        genre: 'Farming',
-        title: 'Sustainable Practices for Rice Cultivation in Kerala',
+        date: 'June 8',
+        genre: 'Meeting',
+        title: 'Gathering of Nutmeg Farmers',
         author: 'Rebecca Thomas',
         content:
-            'Rice cultivation plays a vital role in Kerala\'s agricultural landscape. Adopting sustainable practices can enhance productivity and ensure environmental conservation. One such practice is System of Rice Intensification (SRI), which focuses on optimizing seedlings, water management, and organic inputs. Implementing SRI has shown significant increases in rice yield, reduced water usage, and minimized greenhouse gas emissions. Additionally, integrated pest management and organic fertilizers promote natural pest control and maintain soil fertility. By embracing sustainable rice cultivation practices, Kerala farmers can achieve long-term agricultural sustainability and contribute to a greener future.',
+            'Under the leadership of Santhom Farmers Producer Company of Pala Social Welfare Society, a gathering of nutmeg farmers and a training program for them was conducted at Pala. The gathering was addressed with various issues faced by nutmeg farmers including scientific nutmeg growing techniques, different nutmeg storage ideas, production possibilities of value added products of nutmeg and various methods of sale of these nutmeg products. This program was conducted at Agrima Market Hall, Pala under the guidence of Mr. Joseph Sebastian.',
         isBookmarked: false,
-        description:
-            'Explore sustainable practices for rice cultivation in Kerala.',
       ),
       Article(
-        date: 'April 16, 2023',
+        date: 'June 7',
         genre: 'Farming',
-        title: 'Revitalizing Traditional Farming Methods in Kerala',
-        author: 'Anoop Menon',
+        title: 'Bud Of New Life',
+        author: 'TJ Philip',
         content:
-            'Kerala has a rich heritage of traditional farming methods that have sustained communities for centuries. It is crucial to preserve and revitalize these practices to ensure sustainable agriculture. Farmers can leverage indigenous knowledge by incorporating techniques such as mixed cropping, organic manure, and natural pest repellents. Additionally, promoting agroforestry systems that integrate trees with crop cultivation enhances biodiversity and provides ecological benefits. Revitalizing traditional farming methods not only preserves cultural heritage but also promotes self-sufficiency, biodiversity conservation, and resilience in the face of climate change.',
+            'Bud of New Life is a program developed recently in the  World Environment Day celebration conducted on 5th June 2023. This program was conducted in coordination with Mar Sleeva Medicity, Pala. One child is born along with a tree. A program where one tree is gifted to the family of a newborn baby was initiated on World Environment Day. This program was officially inaugurated by Pala Diocese Bishop Mar Joseph Kalarangatt. Bud of New Life was blessed with the presence of the managing director of Mar Sleeva Medicity, Fr. Joseph Kaniyodickal. This program was commenced with the support of Agrima Central Nursery run by the Pala Social Welfare Society.   ',
         isBookmarked: false,
-        description:
-            'Discover the importance of revitalizing traditional farming methods in Kerala.',
+      ),
+      Article(
+        date: 'June 24, ',
+        genre: 'Seminar',
+        title: 'Seminar on Jack Fruit value addition By Dr. Shana Harshan',
+        author: 'Rajesh Nair',
+        content:
+            'The seminar was an informative one with discussions on preparation on various food products from Jackfruit. The session concluded at 1.30 p.m. and it was followed by traditional cultural competitions. There was also a band display conducted by Mannackanadu Special School team.',
+        isBookmarked: false,
       ),
       Article(
         date: 'April 15, 2023',
@@ -41,19 +46,6 @@ class ArticleController extends GetxController {
         content:
             'Pests pose a constant challenge for farmers in Kerala. Embracing organic pest control solutions offers effective and eco-friendly alternatives to synthetic pesticides. Integrated pest management techniques, such as biological control, trap crops, and pheromone traps, help maintain pest populations at manageable levels. Beneficial insects like ladybugs and parasitic wasps can be introduced to control pests naturally. Additionally, cultural practices like crop rotation, intercropping, and maintaining proper plant hygiene contribute to pest prevention. By adopting organic pest control solutions, Kerala farmers can protect their crops, safeguard the environment, and ensure safer food production.',
         isBookmarked: false,
-        description:
-            'Learn about organic pest control solutions for farms in Kerala.',
-      ),
-      Article(
-        date: 'April 14, 2023',
-        genre: 'Farming',
-        title: 'Maximizing Banana Plantations in Kerala: Tips and Techniques',
-        author: 'Rajesh Nair',
-        content:
-            'Banana cultivation thrives in Keralas tropical climate and holds significant economic potential. To maximize banana plantations, farmers should focus on proper land preparation, selecting suitable banana varieties, and implementing efficient irrigation systems. Providing adequate organic fertilizers, managing pests and diseases, and adopting good agricultural practices contribute to optimal growth and yield. Additionally, post-harvest techniques like proper storage, packaging, and marketing strategies help preserve quality and fetch better prices. By adopting scientific techniques and staying updated with market trends, Kerala farmers can unlock the full potential of banana cultivation and enhance profitability.',
-        isBookmarked: false,
-        description:
-            'Discover tips and techniques for maximizing banana plantations in Kerala.',
       ),
       Article(
         date: 'April 13, 2023',
@@ -64,8 +56,6 @@ class ArticleController extends GetxController {
             'Dairy farming offers a lucrative opportunity for sustainable livelihoods in Kerala. Establishing well-managed dairy farms requires careful planning, breed selection, and optimal nutrition management for cows. Adequate housing, proper sanitation, and regular veterinary care ensure the well-being of the animals. Keralas abundant fodder resources enable sustainable feed production, description: '
             ' for dairy cattle. Implementing modern milking techniques, hygienic milk handling, and value addition through dairy products enhance profitability. By adopting sustainable dairy farming practices, Kerala farmers can create a reliable income source, contribute to the dairy industry, and meet the growing demand for quality milk and dairy products.',
         isBookmarked: false,
-        description:
-            'Explore the potential of dairy farming for sustainable livelihoods in Kerala.',
       ),
     ];
     articleList.value = articleData;
@@ -93,7 +83,6 @@ class Article {
   String author;
   String content;
   RxBool isBookmarked;
-  String description;
 
   Article({
     required this.date,
@@ -102,6 +91,5 @@ class Article {
     required this.author,
     required this.content,
     bool isBookmarked = false,
-    required this.description,
   }) : isBookmarked = isBookmarked.obs;
 }
