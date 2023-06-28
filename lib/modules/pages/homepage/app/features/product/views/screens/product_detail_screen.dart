@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/explore/controllers/explore_controller.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/custom_icon_button.dart';
@@ -170,8 +171,10 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     CustomBackButton(
                         onPressed: () => _pdetailcontroller.back()),
                     const Spacer(),
+                    GetStorage().read('isadmin')==true?
                     CustomDeleteButton(
-                        onPressed: () => _pdetailcontroller.onDeleteProduct()),
+                        onPressed: () => _pdetailcontroller.onDeleteProduct())
+                        :SizedBox(),
                     const SizedBox(width: 15),
                     _FavoriteButton(
                       initial: product.isFavorite,

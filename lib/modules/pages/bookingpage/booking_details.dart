@@ -4,34 +4,58 @@ import 'booking_controller.dart';
 
 class DetailedBookingPage extends StatelessWidget {
   final Produce produce;
-  const DetailedBookingPage({super.key, required this.produce});
+  const DetailedBookingPage({Key? key, required this.produce})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xfff0f4f7),
-          elevation: 0,
-          leading:
-              CustomBackButton(onPressed: () => Navigator.of(context).pop()),
-          title: Text(
-            produce.name,
-            style: const TextStyle(
-              color: Colors.black,
-            ),
-          )),
+        backgroundColor: const Color(0xfff0f4f7),
+        elevation: 0,
+        leading: CustomBackButton(onPressed: () => Navigator.of(context).pop()),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8.0),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Farmer Name : ${produce.farmerName}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
+              padding: const EdgeInsets.only(
+                  left: 32, right: 32, top: 16, bottom: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    produce.name,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Quantity',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        produce.harvestingProduceWeight,
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Container(
@@ -49,7 +73,8 @@ class DetailedBookingPage extends StatelessWidget {
                 ],
               ),
               margin: const EdgeInsets.all(16.0),
-              padding: const EdgeInsets.all(16.0),
+              padding:
+                  const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -74,8 +99,13 @@ class DetailedBookingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Divider(
-                    thickness: 10,
+                  SizedBox(
+                    height: 50,
+                    width: 30,
+                    child: const VerticalDivider(
+                      thickness: 1,
+                      color: Colors.black54,
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,27 +124,6 @@ class DetailedBookingPage extends StatelessWidget {
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 36, 173, 40),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Quantity',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        produce.harvestingProduceWeight,
-                        style: const TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -142,7 +151,7 @@ class DetailedBookingPage extends StatelessWidget {
               height: 8,
             ),
             Container(
-              height: 225,
+              height: 125,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -162,46 +171,61 @@ class DetailedBookingPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    'Community',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  Text(
-                    produce.community,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2.0),
-                  const Text(
-                    'Admin Name',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  Text(
-                    produce.adminName,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Place :    ',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Text(
+                        produce.community,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 2.0),
-                  const Text(
-                    'Contact',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Admin Name :    ',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Text(
+                        produce.adminName,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    produce.adminContact,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const SizedBox(height: 2.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Contact :    ',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Text(
+                        produce.adminContact,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -220,7 +244,7 @@ class DetailedBookingPage extends StatelessWidget {
               ),
             ),
             Container(
-              height: 225,
+              height: 125,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.0),
@@ -239,38 +263,49 @@ class DetailedBookingPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    'Farmer Name',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  Text(
-                    produce.farmerName,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2.0),
-                  const Text(
-                    'Contact',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  Text(
-                    produce.farmerContact,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2.0),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Rating: ',
+                        'Name :    ',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Text(
+                        produce.farmerName,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 2.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Contact :    ',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      Text(
+                        produce.farmerContact,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 2.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Rating:    ',
                         style: TextStyle(
                           fontSize: 14.0,
                         ),
@@ -298,6 +333,61 @@ class DetailedBookingPage extends StatelessWidget {
                 produce.description,
                 style: const TextStyle(fontSize: 18.0, color: Colors.black54),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Handle Show Interest button press
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.thumb_up,
+                    color: Colors.blue,
+                  ),
+                  label: Text(
+                    'Show Interest',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16.0),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Handle Book Now button press
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Colors.green),
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.book,
+                    color: Colors.green,
+                  ),
+                  label: Text(
+                    'Book Now',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
