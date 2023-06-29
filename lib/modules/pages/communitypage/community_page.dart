@@ -43,7 +43,7 @@ class CommunityPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
                 Text(
-                  'PALA',
+                  'Choondacherry',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
