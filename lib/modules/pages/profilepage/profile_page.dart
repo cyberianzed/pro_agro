@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:pro_agro/controllers/auth_controller.dart';
 import 'package:pro_agro/modules/pages/profilepage/update_profile_screen.dart';
+import '../../../controllers/auth_controller.dart';
+import '../../../widgets/getdialog.dart';
 import '../homepage/app/features/explore/screens/favorites_screen.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -149,7 +150,10 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 10),
               ListTile(
                 onTap: () {
-                  AuthController.instance.logOut();
+                  getConfirmDialog(
+                      'Log Out!',
+                      'Are you sure you want to log out?',
+                      () => AuthController.instance.logOut());
                 },
                 leading: Container(
                   width: 40,

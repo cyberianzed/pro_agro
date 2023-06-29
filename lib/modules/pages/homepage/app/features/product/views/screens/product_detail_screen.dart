@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/explore/controllers/explore_controller.dart';
+import '../../../../../../../../widgets/getdialog.dart';
 import '../../../../constans/app_constants.dart';
 import '../../../../shared_components/custom_icon_button.dart';
 import '../../../../shared_components/indicator.dart';

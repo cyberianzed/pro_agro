@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../widgets/getdialog.dart';
 import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
 import 'article_controller.dart';
 
@@ -123,23 +124,7 @@ class ArticleDetailsPage extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content:
-                                    const Text('Your Message has been sent'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          getDialog('Your Message has been sent');
                         },
                         icon: const Icon(
                           Icons.send,

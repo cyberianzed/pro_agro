@@ -181,7 +181,9 @@ class ArticleCard extends StatelessWidget {
                             onPressed: () {
                               _showShareOptions();
                             },
-                            icon: const Icon(Icons.share),
+                            icon: const Icon(
+                              Icons.share,
+                            ),
                           ),
                           GetStorage().read('isadmin') == true
                               ? IconButton(
@@ -193,10 +195,10 @@ class ArticleCard extends StatelessWidget {
                                   icon: const Icon(Icons.delete),
                                 )
                               : const SizedBox(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.edit),
-                          ),
+                          // IconButton(
+                          //   onPressed: () {},
+                          //   icon: const Icon(Icons.edit),
+                          // ),
                         ],
                       ),
                     ],
