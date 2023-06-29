@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../widgets/getdialog.dart';
 import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
 import 'booking_controller.dart';
 
@@ -341,23 +343,7 @@ class DetailedBookingPage extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Success'),
-                          content: const Text('Interest shown successfully'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    getDialog('Interest request for the produce is sent.');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -381,24 +367,8 @@ class DetailedBookingPage extends StatelessWidget {
                 const SizedBox(width: 16.0),
                 ElevatedButton.icon(
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Success'),
-                          content: const Text(
-                              'Your booking is done. Please contact admin for more details.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    getDialog(
+                        'Your booking request is sent. Please contact admin for more details.');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -421,7 +391,7 @@ class DetailedBookingPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             )
           ],

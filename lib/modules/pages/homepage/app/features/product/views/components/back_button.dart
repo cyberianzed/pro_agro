@@ -33,7 +33,10 @@ class CustomDeleteButton extends StatelessWidget {
         FontAwesomeIcons.trash,
         color: Colors.red,
       ),
-      onPressed: onPressed,
+      onPressed: () {
+        getConfirmDialog('Delete Product !',
+            'Are you sure you want to delete this product ?', onPressed);
+      },
       size: 40,
       borderRadius: 10,
       tooltip: "Back",
