@@ -139,7 +139,7 @@ class BookingPage extends GetView<ProduceController> {
                                 ),
                               ),
                               Text(
-                                'Harvesting Produce Weight: ${controller.produceList[index].harvestingProduceWeight}',
+                                'Expected Quantity : ${controller.produceList[index].harvestingProduceWeight}',
                                 style: const TextStyle(
                                   fontSize: 16.0,
                                 ),
