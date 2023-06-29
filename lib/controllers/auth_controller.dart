@@ -109,6 +109,8 @@ class AuthController extends GetxController {
           'Password': password,
           'admin': false,
         });
+
+        login(email, password);
       }
     } catch (e) {
       // Show snackbar with error message
