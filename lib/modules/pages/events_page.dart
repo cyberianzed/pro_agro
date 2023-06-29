@@ -8,7 +8,7 @@ class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
 
   @override
-  _EventsPageState createState() => _EventsPageState();
+  State<EventsPage> createState() => _EventsPageState();
 }
 
 class _EventsPageState extends State<EventsPage> {
@@ -74,8 +74,7 @@ class _EventsPageState extends State<EventsPage> {
       '2023-06-23': [
         {
           'eventTitle': 'Panchayath Water Tank Subsidy',
-          'eventDescp':
-              'The Panchyath Level Water Tank Subsidy Registration'
+          'eventDescp': 'The Panchyath Level Water Tank Subsidy Registration'
         }
       ],
     };

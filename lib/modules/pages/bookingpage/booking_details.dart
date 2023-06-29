@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../widgets/getdialog.dart';
 import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
 import 'booking_controller.dart';

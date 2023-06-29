@@ -41,13 +41,13 @@ class ExploreScreen extends GetView<ExploreController> {
                     Expanded(
                       child: SearchField(
                         onSearch: (value) {
-                          print("search : $value");
+                          debugPrint("search : $value");
                         },
                       ),
                     ),
                     const SizedBox(width: 5),
                     FilterSizeButton(
-                      icon: FontAwesomeIcons.slidersH,
+                      icon: FontAwesomeIcons.sliders,
                       onPressed: () {
                         Get.to(() => const ProductFilterPage());
                       },

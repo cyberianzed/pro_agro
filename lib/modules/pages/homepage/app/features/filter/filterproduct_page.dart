@@ -4,7 +4,7 @@ class ProductFilterPage extends StatefulWidget {
   const ProductFilterPage({super.key});
 
   @override
-  _ProductFilterPageState createState() => _ProductFilterPageState();
+  State<ProductFilterPage> createState() => _ProductFilterPageState();
 }
 
 class _ProductFilterPageState extends State<ProductFilterPage> {

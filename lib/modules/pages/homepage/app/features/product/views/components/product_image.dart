@@ -23,7 +23,7 @@ class _ProductImage extends StatelessWidget {
               );
             },
             onPageChanged: (value) {
-              print(value);
+              debugPrint(value.toString());
               _index.value = value;
             },
           ),

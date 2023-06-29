@@ -118,8 +118,8 @@ class CheckoutPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     const url = 'https://www.youtube.com/watch?v=xvFZjo5PgG0';
-
-                    launch(url);
+                    final Uri uri = Uri.parse(url);
+                    launchUrl(uri);
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
