@@ -52,6 +52,7 @@ class Favorites extends GetView<FavoritesController> {
       appBar: AppBar(
         elevation: 0,
         leadingWidth: 150,
+        backgroundColor: const Color(0xfff0f4f7),
         leading: Row(
           children: [
             const SizedBox(
@@ -62,7 +63,7 @@ class Favorites extends GetView<FavoritesController> {
               width: 10,
             ),
             const Text(
-              'Favorites',
+              'Favourites',
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
