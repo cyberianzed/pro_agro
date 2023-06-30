@@ -1,11 +1,14 @@
 library product_detail;
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:pro_agro/modules/pages/homepage/app/features/explore/controllers/explore_controller.dart';
 import '../../../../../../../../widgets/getdialog.dart';
 import '../../../../constans/app_constants.dart';
@@ -131,6 +134,8 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                             _ReviewsText("${product.totalReview} Review")
                           ],
                         ),
+                        const SizedBox(height: 10),
+                        getRandomDateWidget(),
                         const SizedBox(height: kSpacing * 2),
                         _DescriptionText(product.description),
                         const SizedBox(height: kSpacing),
@@ -198,6 +203,31 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
           ),
         ),
       ],
+    );
+  }
+
+  List<DateTime> dateList = [
+    DateTime(2023, 1, 1),
+    DateTime(2023, 2, 15),
+    DateTime(2023, 4, 10),
+    DateTime(2023, 6, 30),
+    DateTime(2023, 9, 22),
+    DateTime(2023, 12, 31),
+  ];
+
+  DateTime getRandomDate() {
+    final random = Random();
+    final randomIndex = random.nextInt(dateList.length);
+    return dateList[randomIndex];
+  }
+
+  Widget getRandomDateWidget() {
+    final randomDate = getRandomDate();
+    final formattedDate = DateFormat('dd-MM-yyyy').format(randomDate);
+
+    return Text(
+      'Expiry : $formattedDate',
+      style: const TextStyle(),
     );
   }
 }
