@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../widgets/getdialog.dart';
 import '../homepage/app/features/product/views/screens/product_detail_screen.dart';
 import 'booking_controller.dart';
@@ -366,8 +367,13 @@ class DetailedBookingPage extends StatelessWidget {
                 const SizedBox(width: 16.0),
                 ElevatedButton.icon(
                   onPressed: () {
-                    getDialog(
-                        'Your booking request is sent. Please contact admin for more details.');
+                    getConfirmDialog('Succces',
+                        'Your booking request is sent. Please contact admin for more details.',
+                        () {
+                      Uri phoneno =
+                          Uri.parse('tel:+91 ${produce.adminContact}');
+                      launchUrl(phoneno);
+                    }, false);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

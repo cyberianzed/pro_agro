@@ -41,6 +41,7 @@ part '../components/rating.dart';
 part '../components/review_text.dart';
 part '../components/views_text.dart';
 
+// ignore: must_be_immutable
 class ProductDetailScreen extends GetView<ProductDetailController> {
   ProductDetailScreen({Key? key}) : super(key: key);
   final ProductDetailController _pdetailcontroller =

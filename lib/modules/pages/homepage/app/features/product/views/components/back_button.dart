@@ -35,7 +35,7 @@ class CustomDeleteButton extends StatelessWidget {
       ),
       onPressed: () {
         getConfirmDialog('Delete Product !',
-            'Are you sure you want to delete this product ?', onPressed);
+            'Are you sure you want to delete this product ?', onPressed, true);
       },
       size: 40,
       borderRadius: 10,

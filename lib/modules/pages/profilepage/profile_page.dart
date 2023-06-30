@@ -153,7 +153,8 @@ class ProfilePage extends StatelessWidget {
                   getConfirmDialog(
                       'Log Out!',
                       'Are you sure you want to log out?',
-                      () => AuthController.instance.logOut());
+                      () => AuthController.instance.logOut(),
+                      true);
                 },
                 leading: Container(
                   width: 40,

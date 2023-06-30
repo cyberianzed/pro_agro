@@ -19,7 +19,8 @@ Future<dynamic> getDialog(String text) {
   );
 }
 
-void getConfirmDialog(String title, String middleText, VoidCallback onConfirm) {
+void getConfirmDialog(
+    String title, String middleText, VoidCallback onConfirm, bool val) {
   Get.defaultDialog(
     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
     titlePadding: const EdgeInsets.all(20),
@@ -27,9 +28,9 @@ void getConfirmDialog(String title, String middleText, VoidCallback onConfirm) {
     middleText: middleText,
     confirm: TextButton(
       onPressed: onConfirm,
-      child: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text('OK'),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: val ? const Text('OK') : const Text('Contact Now'),
       ),
     ),
     cancel: TextButton(
@@ -43,4 +44,3 @@ void getConfirmDialog(String title, String middleText, VoidCallback onConfirm) {
     ),
   );
 }
-
