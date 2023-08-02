@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -12,6 +13,8 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
   final Rx<DateTime> _focusedDay = DateTime.now().obs;
   final Rx<DateTime?> _selectedDate = Rx<DateTime?>(null);
   final Rx<Map<String, List<dynamic>>?> _mySelectedEvents =
@@ -80,6 +83,27 @@ class _EventsPageState extends State<EventsPage> {
     };
   }
 
+  void _sendNotification(String title, String body) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      '0',
+      'Events Notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      platformChannelSpecifics,
+      // payload: 'Your notification payload (optional)',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,9 +169,13 @@ class _EventsPageState extends State<EventsPage> {
                   itemBuilder: (context, index) {
                     final event = selectedEvents[index];
                     return ListTile(
-                      leading: const Icon(
-                        Icons.done,
+                      leading: IconButton(
+                        icon: const Icon(Icons.done),
                         color: Colors.green,
+                        onPressed: () {
+                          _sendNotification(
+                              event['eventTitle'], event['eventDescp']);
+                        },
                       ),
                       title: Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
