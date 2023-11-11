@@ -11,6 +11,7 @@ class ExploreController extends GetxController {
   final UserService userService = UserService();
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
+      
   Future<List<Product>> getAllProduct() async {
     return productService.getAll();
   }
@@ -26,6 +27,9 @@ class ExploreController extends GetxController {
   }
   Future<List<Product>> getHotDeals() async {
     return productService.getHotDeals();
+  }
+  Future<List<Product>> searchProducts(String query) async {
+    return productService.searchProducts(query);
   }
 
   void back() {

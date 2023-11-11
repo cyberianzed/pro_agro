@@ -38,6 +38,25 @@ class ProductService {
     return null;
   }
 
+  Future<List<Product>> searchProducts(String query) async {
+    final List<Product> allProducts = await getAll();
+    final List<Product> searchResults = [];
+
+    // Convert the search query to lowercase for case-insensitive comparison
+    final lowerCaseQuery = query.toLowerCase();
+
+    for (final product in allProducts) {
+      // Convert product name to lowercase for case-insensitive comparison
+      final lowerCaseProductName = product.name.toLowerCase();
+
+      // Check if the product name contains the search query
+      if (lowerCaseProductName.contains(lowerCaseQuery)) {
+        searchResults.add(product);
+      }
+    }
+    return searchResults;
+  }
+
   Future<List<Product>> getAll() async {
     final QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection('products').get();

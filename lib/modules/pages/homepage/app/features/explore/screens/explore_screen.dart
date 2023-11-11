@@ -75,7 +75,7 @@ class ExploreScreen extends GetView<ExploreController> {
             ],
             children: [
               _ProductContent(
-                _controller.getAllProduct(),
+                _controller.searchProducts(""),
                 onPressed: (product) => _controller.goToDetailProduct(product),
               ),
               _ProductContent(
