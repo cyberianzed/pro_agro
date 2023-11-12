@@ -14,17 +14,25 @@ import '../../../utils/services/model/product.dart';
 import '../controllers/explore_controller.dart';
 import 'cartpages/cart_screen.dart';
 import 'cartpages/categoryselect_screen.dart';
-
 // binding
 // part '../../bindings/explore_binding.dart';
-
 // component
 part '../views/components/product_content.dart';
 part '../views/components/tab_bar_content.dart';
 
-class ExploreScreen extends GetView<ExploreController> {
-  ExploreScreen({Key? key}) : super(key: key);
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ExploreScreenState createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
   final ExploreController _controller = Get.put(ExploreController());
+  void _rebuildPage() {
+    setState(() {}); // Trigger a rebuild of the entire page
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +49,7 @@ class ExploreScreen extends GetView<ExploreController> {
                     Expanded(
                       child: SearchField(
                         onSearch: (value) {
-                          debugPrint("search : $value");
+                          debugPrint("search : ${value.length}");
                         },
                       ),
                     ),
@@ -49,7 +57,9 @@ class ExploreScreen extends GetView<ExploreController> {
                     FilterSizeButton(
                       icon: FontAwesomeIcons.sliders,
                       onPressed: () {
-                        Get.to(() => const ProductFilterPage());
+                        // Get.to(() => const ProductFilterPage());
+                        _controller.ref();
+                        _rebuildPage();
                       },
                     ),
                     const SizedBox(width: 5),
@@ -75,25 +85,37 @@ class ExploreScreen extends GetView<ExploreController> {
             ],
             children: [
               _ProductContent(
-                _controller.searchProducts(""),
-                onPressed: (product) => _controller.goToDetailProduct(product),
-              ),
+                  fetchData: _controller.searchProducts,
+                  onPressed: (product) =>
+                      _controller.goToDetailProduct(product),
+                  searchQuery: _controller.searchQuery.value,
+                  onSearch: (searchResults, searchQuery) {}),
               _ProductContent(
-                _controller.getHotDeals(),
-                onPressed: (product) => _controller.goToDetailProduct(product),
-              ),
+                  fetchData: _controller.searchProducts,
+                  onPressed: (product) =>
+                      _controller.goToDetailProduct(product),
+                  searchQuery: _controller.searchQuery.value,
+                  onSearch: (searchResults, searchQuery) {}),
               _ProductContent(
-                _controller.getAgroProduce(),
-                onPressed: (product) => _controller.goToDetailProduct(product),
-              ),
+                  fetchData: _controller.searchProducts,
+                  onPressed: (product) =>
+                      _controller.goToDetailProduct(product),
+                  searchQuery: _controller.searchQuery.value,
+                  onSearch: (searchResults, searchQuery) {}),
               _ProductContent(
-                _controller.getLiveStock(),
-                onPressed: (product) => _controller.goToDetailProduct(product),
-              ),
+                  fetchData: _controller.searchProducts,
+                  onPressed: (product) =>
+                      _controller.goToDetailProduct(product),
+                  searchQuery: _controller.searchQuery.value,
+                  onSearch: (searchResults, searchQuery) {}),
               _ProductContent(
-                _controller.getFarmMachinery(),
-                onPressed: (product) => _controller.goToDetailProduct(product),
-              ),
+                  fetchData: _controller.searchProducts,
+                  onPressed: (product) =>
+                      _controller.goToDetailProduct(product),
+                  searchQuery: _controller.searchQuery.value,
+                  onSearch: (searchResults, searchQuery) {}),
+           
+           
             ],
           ),
         ),

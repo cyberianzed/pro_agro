@@ -15,7 +15,9 @@ class SearchField extends StatelessWidget {
   Future<void> _handleSearch() async {
     final String searchQuery = controller.text;
     if (onSearch != null) {
-      final List<Product> searchResults = await _controller.searchProducts(searchQuery);
+      final List<Product> searchResults =
+          await _controller.searchProducts(searchQuery);
+      _controller.searchQuery.value = searchQuery;
       onSearch!(searchResults);
     }
   }
@@ -33,7 +35,8 @@ class SearchField extends StatelessWidget {
         prefixIcon: const Icon(Icons.search),
         hintText: "What are you looking for",
       ),
-      onEditingComplete: _handleSearch, // Call _handleSearch on editing complete
+      onEditingComplete:
+          _handleSearch, // Call _handleSearch on editing complete
       textInputAction: TextInputAction.search,
       style: TextStyle(color: Colors.grey[800]),
     );

@@ -7,11 +7,17 @@ import '../screens/favorites_screen.dart';
 
 class ExploreController extends GetxController {
   final ProductService productService = ProductService();
+  final RxString searchQuery = ''.obs;
 
   final UserService userService = UserService();
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
-      
+
+  // Method to set the search query
+  void setSearchQuery(String query) {
+    searchQuery.value = query;
+  }
+
   Future<List<Product>> getAllProduct() async {
     return productService.getAll();
   }
@@ -19,15 +25,19 @@ class ExploreController extends GetxController {
   Future<List<Product>> getAgroProduce() async {
     return productService.getAgroProduce();
   }
+
   Future<List<Product>> getLiveStock() async {
     return productService.getLiveStock();
   }
+
   Future<List<Product>> getFarmMachinery() async {
     return productService.getFarmMachinery();
   }
+
   Future<List<Product>> getHotDeals() async {
     return productService.getHotDeals();
   }
+
   Future<List<Product>> searchProducts(String query) async {
     return productService.searchProducts(query);
   }
@@ -67,7 +77,9 @@ class ExploreController extends GetxController {
 
     refresh();
   }
-
+ void ref() {
+    refresh();
+  }
   void removeFromCart(int index) {
     cartProducts.removeAt(index);
     cartQuantities.removeAt(index);

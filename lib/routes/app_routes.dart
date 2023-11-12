@@ -17,7 +17,7 @@ class AppRoutes {
     ),
     GetPage(
       name: '/explore',
-      page: () => ExploreScreen(),
+      page: () => const ExploreScreen(),
     ),
     GetPage(
       // ignore: prefer_interpolation_to_compose_strings

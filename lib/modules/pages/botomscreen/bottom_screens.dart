@@ -54,7 +54,7 @@ class PersistentBottomView extends GetView<BottomViewController> {
 
 List<Widget> _buildScreens() {
   return [
-    ExploreScreen(),
+    const ExploreScreen(),
     const EventsPage(),
     BookingPage(),
     CommunityPage(),
